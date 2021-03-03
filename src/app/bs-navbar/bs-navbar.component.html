@@ -1,0 +1,97 @@
+<!--  -->
+<nav class="navbar navbar-expand-sm fixed-top o-navbar">
+  <div class="container-fluid">
+    <a 
+      class="navbar-brand"
+      (click)="isMenuCollapsed = true"
+      (mousedown)="isDropdownCollapsed = true"
+      routerLink="/">
+      O-shop
+    </a>
+    <button 
+      (click)="handleMenuCollapse()"
+      [class.nav-item-selected]="!isMenuCollapsed"
+      class="o-navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+      aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <span class="nav-toggle-icon" *ngIf="isMenuCollapsed">&#x25B2;</span>
+      <span class="nav-toggle-icon" *ngIf="!isMenuCollapsed">&#x25BC;</span>
+    </button>
+    <div
+      class="collapse navbar-collapse"
+      [class.show]="!isMenuCollapsed"
+      id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a 
+            class="nav-link"
+            (click)="handleMenuCollapse()"
+            (mousedown)="isDropdownCollapsed = true"
+            routerLink="/shopping-cart"
+            routerLinkActive="active-link">
+            Shopping Cart
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <div 
+            class="nav-link dropdown-toggle"
+            (click)="handleDropdownCollapse()"
+            [class.nav-item-selected]="!isDropdownCollapsed"
+            [class.active-link]="isMyOrdersLinkActive.isActive||isManageOrdersLinkActive.isActive||isManageProductsLinkActive.isActive"
+            id="navbarDropdownMenuLink" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            User Name
+            <span class="nav-toggle-icon" *ngIf="isDropdownCollapsed">&#x25B2;</span>
+            <span class="nav-toggle-icon" *ngIf="!isDropdownCollapsed">&#x25BC;</span>
+          </div>
+          <ul 
+            class="dropdown-menu"
+            [class.show]="!isDropdownCollapsed"
+            aria-labelledby="navbarDropdownMenuLink">
+            <li>
+              <a 
+                (click)="handleMenuCollapse()"
+                (mouseup)="handleDropdownCollapse()"
+                class="dropdown-item" routerLink="/my/orders"
+                routerLinkActive="active-dropdown-link"
+                #isMyOrdersLinkActive="routerLinkActive">
+                My Orders
+              </a>
+            </li>
+            <li>
+              <a 
+                (click)="handleMenuCollapse()"
+                (mouseup)="handleDropdownCollapse()"
+                class="dropdown-item" routerLink="/admin/orders"
+                routerLinkActive="active-dropdown-link"
+                #isManageOrdersLinkActive="routerLinkActive">
+                Manage Orders
+              </a>
+            </li>
+            <li>
+              <a
+                (click)="handleMenuCollapse()"
+                (mouseup)="handleDropdownCollapse()"
+                class="dropdown-item" routerLink="/admin/products"
+                routerLinkActive="active-dropdown-link"
+                #isManageProductsLinkActive="routerLinkActive">
+                Manage Products
+              </a>
+            </li>
+            <li>
+              <a 
+                (click)="handleMenuCollapse()"
+                (mouseup)="handleDropdownCollapse()"
+                class="dropdown-item">
+                Log Out
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="avocado"></div>
+</nav>
+<!--  -->

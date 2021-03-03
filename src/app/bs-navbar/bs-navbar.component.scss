@@ -1,0 +1,99 @@
+@import '../../scss/variables.scss';
+
+// navbar 
+.o-navbar {
+  background-color: $lightGreen;
+  padding: 0.25rem 1rem;
+  
+  .navbar-brand  {
+    user-select: none;
+    color: $darkGreen;
+    background-color: $tanish;
+    font-weight: bolder;
+    display: flex;
+    border: 5px solid;
+    border-radius: 24px;
+    height: 2rem;
+    align-items: center;
+    padding: 0rem 0.5rem 0.25rem 0.5rem;
+  }
+  
+  .nav-link {
+    user-select: none;
+    color: $tanish;
+    transition: 0.2s;
+    
+    &:hover {
+      color: $darkGreen;
+    }
+    
+    &.active-link {
+      color: $darkGreen;
+    }
+  }
+  
+  .nav-item-selected {
+    color: $darkGreen;
+  }
+
+  .dropdown-toggle::after {
+    display: none;
+  }
+  
+  .nav-toggle-icon {
+    font-size: 0.75rem;
+    margin: auto 0rem auto 0.25rem;
+  }
+  
+  .dropdown-menu {
+    background-color: $tanish;
+    
+    .dropdown-item {
+      color: $darkGreen;
+      font-weight: 500;
+      
+      &:hover {
+        background-color: $tanish-hov;
+      }
+      
+      &.active-dropdown-link {
+        background-color: $tanish-hov;
+      }
+    }
+  }
+  
+  .o-navbar-toggler {
+    margin-right: auto;
+    padding: 0.5rem;
+    background: transparent;
+    border: none;
+    font-weight: 500;
+    color: $tanish;
+    
+    @media (min-width: 576px) {
+      display: none!important;
+    }
+    
+    .nav-toggle-icon {
+      font-size: 0.75rem;
+      margin: auto 0rem auto 0.25rem;
+    }
+    
+    &.nav-item-selected {
+      color: $darkGreen;
+    }
+  }
+  
+  
+  .avocado {
+    background-image: url('../../assets/images/avocado.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80px;
+    width: 80px;
+    position: fixed;
+    right: 1rem;
+    top: 0.75rem;
+  }
+}
+// end navbar 
