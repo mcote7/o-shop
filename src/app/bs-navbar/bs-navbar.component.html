@@ -5,12 +5,14 @@
       class="navbar-brand"
       (click)="isMenuCollapsed = true"
       (mousedown)="isDropdownCollapsed = true"
+      routerLinkActive
+      #isHomeActive="routerLinkActive"
       routerLink="/">
       O-shop
     </a>
     <button 
       (click)="handleMenuCollapse()"
-      [class.nav-item-selected]="!isMenuCollapsed"
+      [class.nav-item-selected]="!isMenuCollapsed||isShoppingCartActive.isActive||isMyOrdersLinkActive.isActive||isManageOrdersLinkActive.isActive||isManageProductsLinkActive.isActive"
       class="o-navbar-toggler" type="button" data-bs-toggle="collapse"
       data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
       aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +31,8 @@
             (click)="handleMenuCollapse()"
             (mousedown)="isDropdownCollapsed = true"
             routerLink="/shopping-cart"
-            routerLinkActive="active-link">
+            routerLinkActive="active-link"
+            #isShoppingCartActive="routerLinkActive">
             Shopping Cart
           </a>
         </li>
@@ -37,8 +40,7 @@
           <div 
             class="nav-link dropdown-toggle"
             (click)="handleDropdownCollapse()"
-            [class.nav-item-selected]="!isDropdownCollapsed"
-            [class.active-link]="isMyOrdersLinkActive.isActive||isManageOrdersLinkActive.isActive||isManageProductsLinkActive.isActive"
+            [class.nav-item-selected]="!isDropdownCollapsed||isMyOrdersLinkActive.isActive||isManageOrdersLinkActive.isActive||isManageProductsLinkActive.isActive"
             id="navbarDropdownMenuLink" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
             User Name
@@ -92,6 +94,22 @@
       </ul>
     </div>
   </div>
-  <div class="avocado"></div>
+  <div 
+    *ngIf="isMyOrdersLinkActive.isActive"
+    class="clock">
+  </div>
+  <div 
+    *ngIf="isManageOrdersLinkActive.isActive||isManageProductsLinkActive.isActive"
+    [class.adminProducts]="isManageProductsLinkActive.isActive"
+    class="shield">
+  </div>
+  <div 
+    *ngIf="isShoppingCartActive.isActive||isMyOrdersLinkActive.isActive||isManageOrdersLinkActive.isActive"
+    class="basket">
+  </div>
+  <div 
+    [class.hideAvo]="isShoppingCartActive.isActive||isMyOrdersLinkActive.isActive||isManageOrdersLinkActive.isActive"
+    class="avocado">
+  </div>
 </nav>
 <!--  -->

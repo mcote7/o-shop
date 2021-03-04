@@ -84,6 +84,44 @@
     }
   }
   
+  .clock {
+    background-image: url('../../assets/images/clock.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
+    position: fixed;
+    right: 4.2rem;
+    top: 0.5rem;
+    z-index: 1;
+  }
+  
+  .shield {
+    background-image: url('../../assets/images/shieldAdmin.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
+    position: fixed;
+    right: 4.2rem;
+    top: 0.5rem;
+    z-index: 1;
+    
+    &.adminProducts {
+      right: 2rem; 
+    }
+  }
+  
+  .basket {
+    background-image: url('../../assets/images/vegbox.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80px;
+    width: 100px;
+    position: fixed;
+    right: 0rem;
+    top: 0rem;
+  }
   
   .avocado {
     background-image: url('../../assets/images/avocado.png');
@@ -94,6 +132,10 @@
     position: fixed;
     right: 1rem;
     top: 0.75rem;
+    
+    &.hideAvo {
+      display: none;
+    }
   }
 }
 // end navbar 
