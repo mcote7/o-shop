@@ -16,6 +16,9 @@
     height: 2rem;
     align-items: center;
     padding: 0rem 0.5rem;
+    @media (min-width: 576px) {
+      padding: 0rem 0.5rem 0.3rem 0.5rem;
+    }
   }
   
   .nav-link {
@@ -116,11 +119,11 @@
     background-image: url('../../assets/images/vegbox.png');
     background-size: cover;
     background-repeat: no-repeat;
-    height: 80px;
-    width: 100px;
+    height: 65px;
+    width: 85px;
     position: fixed;
-    right: 0rem;
-    top: 0rem;
+    right: 0.75rem;
+    top: 0.25rem;
   }
   
   .avocado {
