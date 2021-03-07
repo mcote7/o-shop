@@ -49,9 +49,11 @@
   }
   
   .dropdown-menu {
+    user-select: none;
     background-color: $tanish;
     
     .dropdown-item {
+      cursor: pointer;
       color: $darkGreen;
       font-weight: 500;
       

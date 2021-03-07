@@ -6,6 +6,7 @@
       (click)="isMenuCollapsed = true"
       (mousedown)="isDropdownCollapsed = true"
       routerLinkActive
+      #isHome
       #isHomeActive="routerLinkActive"
       routerLink="/">
       O-shop
@@ -32,18 +33,35 @@
             (mousedown)="isDropdownCollapsed = true"
             routerLink="/shopping-cart"
             routerLinkActive="active-link"
+            #isShoppingCart
             #isShoppingCartActive="routerLinkActive">
             Shopping Cart
           </a>
         </li>
+        <ng-template #anonymousUser>
+          <li class="nav-item">
+            <a 
+              *ngIf="!(auth.user$ | async)"
+              class="nav-link"
+              (click)="handleMenuCollapse()"
+              (mousedown)="isDropdownCollapsed = true"
+              routerLink="/login"
+              routerLinkActive="active-link"
+              #isLogin
+              #isLoginActive="routerLinkActive">
+              Login
+            </a>
+          </li>
+        </ng-template>
         <li class="nav-item dropdown">
           <div 
+            *ngIf="auth.user$ | async as user; else anonymousUser" 
             class="nav-link dropdown-toggle"
             (click)="handleDropdownCollapse()"
             [class.nav-item-selected]="!isDropdownCollapsed||isMyOrdersLinkActive.isActive||isManageOrdersLinkActive.isActive||isManageProductsLinkActive.isActive"
             id="navbarDropdownMenuLink" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
-            User Name
+            {{user.displayName}}
             <span class="nav-toggle-icon" *ngIf="isDropdownCollapsed">&#x25B2;</span>
             <span class="nav-toggle-icon" *ngIf="!isDropdownCollapsed">&#x25BC;</span>
           </div>
@@ -57,6 +75,7 @@
                 (mouseup)="handleDropdownCollapse()"
                 class="dropdown-item" routerLink="/my/orders"
                 routerLinkActive="active-dropdown-link"
+                #isMyOrdersLink
                 #isMyOrdersLinkActive="routerLinkActive">
                 My Orders
               </a>
@@ -67,6 +86,7 @@
                 (mouseup)="handleDropdownCollapse()"
                 class="dropdown-item" routerLink="/admin/orders"
                 routerLinkActive="active-dropdown-link"
+                #isManageOrdersLink
                 #isManageOrdersLinkActive="routerLinkActive">
                 Manage Orders
               </a>
@@ -77,14 +97,17 @@
                 (mouseup)="handleDropdownCollapse()"
                 class="dropdown-item" routerLink="/admin/products"
                 routerLinkActive="active-dropdown-link"
+                #isManageProductsLink
                 #isManageProductsLinkActive="routerLinkActive">
                 Manage Products
               </a>
             </li>
             <li>
               <a 
+                (mousedown)="logout()"
                 (click)="handleMenuCollapse()"
                 (mouseup)="handleDropdownCollapse()"
+                #isLogOut
                 class="dropdown-item">
                 Log Out
               </a>

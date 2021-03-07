@@ -1,19 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from '../services/auth.service';
+
 @Component({
-  selector: 'bs-navbar',
-  templateUrl: './bs-navbar.component.html',
-  styleUrls: ['./bs-navbar.component.scss']
+  selector: 'navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss']
 })
-export class BsNavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit {
 
   public isMenuCollapsed = true;
   public isDropdownCollapsed = true;
 
-  constructor() { }
+  constructor( public auth: AuthService) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  logout() {
+    this.auth.logout();
   }
+
 
   handleMenuCollapse() {
     // console.log("menu collapse")
@@ -32,5 +38,6 @@ export class BsNavbarComponent implements OnInit {
       this.isDropdownCollapsed = true;
     }
   }
+
 }
 // 

@@ -1,0 +1,23 @@
+// 
+@import '../../scss/variables.scss';
+
+.o-login-btn {
+  background-color: $carrot-hov;
+  color: $white;
+  margin: 1rem 0rem 0rem 2rem;
+  border-radius: $borderRad;
+  transition: $transition;
+  backface-visibility: hidden;
+  
+  &:hover {
+    background-color: $carrot;
+  }
+  
+  &:focus, :active {
+    box-shadow: none;
+  }
+  
+  &:active {
+    transform: scale3d(0.95, 0.95, 1);
+  }
+}
