@@ -4,6 +4,22 @@
 
 // main container 
 .o-container {
-  padding-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 4rem 1rem 1rem 1rem;
+  
+  .bg-image {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-image: url('./assets/images/nav_nachos@2x.png');
+    background-position: left 50% bottom 75%;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+    transform: rotateY(180deg) scaleX(2.75);
+    position: fixed;
+    z-index: -1;
+  }
 }
 // 

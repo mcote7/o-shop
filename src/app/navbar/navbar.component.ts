@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AppUser } from 'src/models/app-user';
+
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -9,10 +11,14 @@ import { AuthService } from '../services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
+  public appUser: AppUser;
+
   public isMenuCollapsed = true;
   public isDropdownCollapsed = true;
 
-  constructor( public auth: AuthService) {}
+  constructor( private auth: AuthService) {
+    auth.appUser$.subscribe( appUser => this.appUser = appUser );
+  }
 
   ngOnInit() {}
 

@@ -3,8 +3,7 @@
   <div class="container-fluid">
     <a 
       class="navbar-brand"
-      (click)="isMenuCollapsed = true"
-      (mousedown)="isDropdownCollapsed = true"
+      (click)="isMenuCollapsed = true && isDropdownCollapsed = true"
       routerLinkActive
       #isHome
       #isHomeActive="routerLinkActive"
@@ -41,7 +40,6 @@
         <ng-template #anonymousUser>
           <li class="nav-item">
             <a 
-              *ngIf="!(auth.user$ | async)"
               class="nav-link"
               (click)="handleMenuCollapse()"
               (mousedown)="isDropdownCollapsed = true"
@@ -55,13 +53,13 @@
         </ng-template>
         <li class="nav-item dropdown">
           <div 
-            *ngIf="auth.user$ | async as user; else anonymousUser" 
+            *ngIf="appUser; else anonymousUser" 
             class="nav-link dropdown-toggle"
             (click)="handleDropdownCollapse()"
             [class.nav-item-selected]="!isDropdownCollapsed||isMyOrdersLinkActive.isActive||isManageOrdersLinkActive.isActive||isManageProductsLinkActive.isActive"
             id="navbarDropdownMenuLink" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
-            {{user.displayName}}
+            {{appUser.name}}
             <span class="nav-toggle-icon" *ngIf="isDropdownCollapsed">&#x25B2;</span>
             <span class="nav-toggle-icon" *ngIf="!isDropdownCollapsed">&#x25BC;</span>
           </div>
@@ -80,33 +78,35 @@
                 My Orders
               </a>
             </li>
+            <ng-container>
+              <li>
+                <a 
+                  (click)="handleMenuCollapse()"
+                  (mouseup)="handleDropdownCollapse()"
+                  class="dropdown-item" routerLink="/admin/orders"
+                  routerLinkActive="active-dropdown-link"
+                  #isManageOrdersLink
+                  #isManageOrdersLinkActive="routerLinkActive">
+                  Manage Orders
+                </a>
+              </li>
+              <li>
+                <a
+                  (click)="handleMenuCollapse()"
+                  (mouseup)="handleDropdownCollapse()"
+                  class="dropdown-item" routerLink="/admin/products"
+                  routerLinkActive="active-dropdown-link"
+                  #isManageProductsLink
+                  #isManageProductsLinkActive="routerLinkActive">
+                  Manage Products
+                </a>
+              </li>
+            </ng-container>
             <li>
               <a 
-                (click)="handleMenuCollapse()"
-                (mouseup)="handleDropdownCollapse()"
-                class="dropdown-item" routerLink="/admin/orders"
-                routerLinkActive="active-dropdown-link"
-                #isManageOrdersLink
-                #isManageOrdersLinkActive="routerLinkActive">
-                Manage Orders
-              </a>
-            </li>
-            <li>
-              <a
-                (click)="handleMenuCollapse()"
-                (mouseup)="handleDropdownCollapse()"
-                class="dropdown-item" routerLink="/admin/products"
-                routerLinkActive="active-dropdown-link"
-                #isManageProductsLink
-                #isManageProductsLinkActive="routerLinkActive">
-                Manage Products
-              </a>
-            </li>
-            <li>
-              <a 
-                (mousedown)="logout()"
-                (click)="handleMenuCollapse()"
-                (mouseup)="handleDropdownCollapse()"
+                
+                (click)="logout()"
+                
                 #isLogOut
                 class="dropdown-item">
                 Log Out
