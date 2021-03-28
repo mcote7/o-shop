@@ -1,138 +1,117 @@
 <!--  -->
 <nav class="navbar navbar-expand-sm fixed-top o-navbar">
   <div class="container-fluid">
+    
     <a 
       class="navbar-brand"
-      (click)="isMenuCollapsed = true && isDropdownCollapsed = true"
-      routerLinkActive
-      #isHome
-      #isHomeActive="routerLinkActive"
+      (click)="closeMenus()"
       routerLink="/">
       O-shop
     </a>
+    
+    <!-- TODO CHANGE TO ICON BURGER || X -->
     <button 
       (click)="handleMenuCollapse()"
-      [class.nav-item-selected]="!isMenuCollapsed||isShoppingCartActive.isActive||isMyOrdersLinkActive.isActive||isManageOrdersLinkActive.isActive||isManageProductsLinkActive.isActive"
       class="o-navbar-toggler" type="button" data-bs-toggle="collapse"
       data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
       aria-expanded="false" aria-label="Toggle navigation">
-      Menu
+      menu
       <span class="nav-toggle-icon" *ngIf="isMenuCollapsed">&#x25B2;</span>
       <span class="nav-toggle-icon" *ngIf="!isMenuCollapsed">&#x25BC;</span>
     </button>
-    <div
+    
+    <div 
       class="collapse navbar-collapse"
       [class.show]="!isMenuCollapsed"
       id="navbarNavDropdown">
+      
       <ul class="navbar-nav">
+        
         <li class="nav-item">
           <a 
             class="nav-link"
-            (click)="handleMenuCollapse()"
-            (mousedown)="isDropdownCollapsed = true"
+            (click)="closeMenus()"
             routerLink="/shopping-cart"
-            routerLinkActive="active-link"
-            #isShoppingCart
-            #isShoppingCartActive="routerLinkActive">
+            routerLinkActive="active-link">
             Shopping Cart
           </a>
         </li>
+        
         <ng-template #anonymousUser>
           <li class="nav-item">
             <a 
               class="nav-link"
-              (click)="handleMenuCollapse()"
-              (mousedown)="isDropdownCollapsed = true"
+              (click)="closeMenus()"
               routerLink="/login"
-              routerLinkActive="active-link"
-              #isLogin
-              #isLoginActive="routerLinkActive">
+              routerLinkActive="active-link">
               Login
             </a>
           </li>
         </ng-template>
-        <li class="nav-item dropdown">
-          <div 
-            *ngIf="appUser; else anonymousUser" 
+        
+        <li 
+          *ngIf="appUser; else anonymousUser"
+          class="nav-item dropdown">
+          
+          <a 
             class="nav-link dropdown-toggle"
+            [class.active-link]="!isDropdownCollapsed"
             (click)="handleDropdownCollapse()"
-            [class.nav-item-selected]="!isDropdownCollapsed||isMyOrdersLinkActive.isActive||isManageOrdersLinkActive.isActive||isManageProductsLinkActive.isActive"
             id="navbarDropdownMenuLink" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
+            <!-- USER NAME -->
             {{appUser.name}}
             <span class="nav-toggle-icon" *ngIf="isDropdownCollapsed">&#x25B2;</span>
             <span class="nav-toggle-icon" *ngIf="!isDropdownCollapsed">&#x25BC;</span>
-          </div>
+          </a>
+          
           <ul 
             class="dropdown-menu"
             [class.show]="!isDropdownCollapsed"
             aria-labelledby="navbarDropdownMenuLink">
+            
             <li>
               <a 
-                (click)="handleMenuCollapse()"
-                (mouseup)="handleDropdownCollapse()"
+                (click)="closeMenus()"
                 class="dropdown-item" routerLink="/my/orders"
-                routerLinkActive="active-dropdown-link"
-                #isMyOrdersLink
-                #isMyOrdersLinkActive="routerLinkActive">
+                routerLinkActive="active-dropdown-link">
                 My Orders
               </a>
             </li>
-            <ng-container>
+            
+            <ng-container *ngIf="appUser.isAdmin">
               <li>
                 <a 
-                  (click)="handleMenuCollapse()"
-                  (mouseup)="handleDropdownCollapse()"
+                  (click)="closeMenus()"
                   class="dropdown-item" routerLink="/admin/orders"
-                  routerLinkActive="active-dropdown-link"
-                  #isManageOrdersLink
-                  #isManageOrdersLinkActive="routerLinkActive">
+                  routerLinkActive="active-dropdown-link">
                   Manage Orders
                 </a>
               </li>
+              
               <li>
-                <a
-                  (click)="handleMenuCollapse()"
-                  (mouseup)="handleDropdownCollapse()"
+                <a 
+                  (click)="closeMenus()"
                   class="dropdown-item" routerLink="/admin/products"
-                  routerLinkActive="active-dropdown-link"
-                  #isManageProductsLink
-                  #isManageProductsLinkActive="routerLinkActive">
+                  routerLinkActive="active-dropdown-link">
                   Manage Products
                 </a>
               </li>
             </ng-container>
+            
             <li>
               <a 
-                
                 (click)="logout()"
-                
-                #isLogOut
                 class="dropdown-item">
                 Log Out
               </a>
             </li>
+            
           </ul>
         </li>
       </ul>
     </div>
   </div>
-  <div 
-    *ngIf="isMyOrdersLinkActive.isActive"
-    class="clock">
-  </div>
-  <div 
-    *ngIf="isManageOrdersLinkActive.isActive||isManageProductsLinkActive.isActive"
-    [class.adminProducts]="isManageProductsLinkActive.isActive"
-    class="shield">
-  </div>
-  <div 
-    *ngIf="isShoppingCartActive.isActive||isMyOrdersLinkActive.isActive||isManageOrdersLinkActive.isActive"
-    class="basket">
-  </div>
-  <div 
-    [class.hideAvo]="isShoppingCartActive.isActive||isMyOrdersLinkActive.isActive||isManageOrdersLinkActive.isActive"
-    class="avocado">
-  </div>
+  <div class="avocado"></div>
 </nav>
-<!--  -->
+<!-- 💎 -->

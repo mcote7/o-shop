@@ -24,8 +24,9 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.auth.logout();
+    this.closeMenus();
+    this.appUser = null;
   }
-
 
   handleMenuCollapse() {
     // console.log("menu collapse")
@@ -43,6 +44,11 @@ export class NavbarComponent implements OnInit {
     } else {
       this.isDropdownCollapsed = true;
     }
+  }
+
+  closeMenus() {
+    this.isMenuCollapsed = true; 
+    this.isDropdownCollapsed = true;
   }
 
 }

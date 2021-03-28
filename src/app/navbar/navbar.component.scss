@@ -1,6 +1,5 @@
 @import '../../scss/variables.scss';
 
-// navbar 
 .o-navbar {
   background-color: $lightGreen;
   padding: 0.25rem 1rem;
@@ -21,6 +20,28 @@
     }
   }
   
+  .o-navbar-toggler {
+    margin-right: auto;
+    padding: 0.5rem;
+    background: transparent;
+    border: none;
+    font-weight: 500;
+    color: $tanish;
+    
+    @media (min-width: 576px) {
+      display: none!important;
+    }
+    
+    .nav-toggle-icon {
+      font-size: 0.75rem;
+      margin: auto 0rem auto 0.25rem;
+    }
+    
+    &:hover {
+      color: $darkGreen;
+    }
+  }
+  
   .nav-link {
     user-select: none;
     color: $tanish;
@@ -33,10 +54,6 @@
     &.active-link {
       color: $darkGreen;
     }
-  }
-  
-  .nav-item-selected {
-    color: $darkGreen;
   }
 
   .dropdown-toggle::after {
@@ -67,67 +84,6 @@
     }
   }
   
-  .o-navbar-toggler {
-    margin-right: auto;
-    padding: 0.5rem;
-    background: transparent;
-    border: none;
-    font-weight: 500;
-    color: $tanish;
-    
-    @media (min-width: 576px) {
-      display: none!important;
-    }
-    
-    .nav-toggle-icon {
-      font-size: 0.75rem;
-      margin: auto 0rem auto 0.25rem;
-    }
-    
-    &.nav-item-selected {
-      color: $darkGreen;
-    }
-  }
-  
-  .clock {
-    background-image: url('../../assets/images/clock.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 40px;
-    width: 40px;
-    position: fixed;
-    right: 4.2rem;
-    top: 0.5rem;
-    z-index: 1;
-  }
-  
-  .shield {
-    background-image: url('../../assets/images/shieldAdmin.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 40px;
-    width: 40px;
-    position: fixed;
-    right: 4.2rem;
-    top: 0.5rem;
-    z-index: 1;
-    
-    &.adminProducts {
-      right: 2rem; 
-    }
-  }
-  
-  .basket {
-    background-image: url('../../assets/images/vegbox.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 65px;
-    width: 85px;
-    position: fixed;
-    right: 0.75rem;
-    top: 0.25rem;
-  }
-  
   .avocado {
     background-image: url('../../assets/images/avocado.png');
     background-size: cover;
@@ -137,10 +93,6 @@
     position: fixed;
     right: 1rem;
     top: 0.75rem;
-    
-    &.hideAvo {
-      display: none;
-    }
   }
 }
-// end navbar 
+// 

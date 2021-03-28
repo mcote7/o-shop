@@ -18,6 +18,8 @@ export class AppComponent {
         this.userService.save(user);
         let returnUrl = localStorage.getItem('returnUrl');
         router.navigateByUrl(returnUrl);
+      } else {
+        router.navigate(['/']);
       }
     });
   }
