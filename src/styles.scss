@@ -3,6 +3,11 @@
 @import '../src/scss/variables.scss';
 
 // main container 
+
+body {
+  background-color: rgba(250, 241, 209, 15%);
+}
+
 .o-container {
   display: flex;
   flex-direction: column;
