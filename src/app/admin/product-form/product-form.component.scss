@@ -1,0 +1,47 @@
+// 
+@import '../../../scss/variables.scss';
+
+.product-submit-btn {
+  background-color: $carrot-hov;
+  color: $white;
+  margin: 1rem 0rem 0rem 0rem;
+  border-radius: $borderRad;
+  transition: $transition;
+  backface-visibility: hidden;
+  width: 100%;
+  
+  &:hover {
+    background-color: $carrot;
+  }
+  
+  &:focus, :active {
+    box-shadow: none;
+  }
+  
+  &:active {
+    transform: scale3d(0.95, 0.95, 1);
+  }
+}
+
+.input-group-addon {
+  width: 0.75rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  position: absolute;
+  z-index: 999;
+  top: 1px;
+  left: 1px;
+}
+
+.form-control {
+  
+  border-radius: $borderRad;
+  
+  &:focus {
+    border-color: $tanish-hov;
+    box-shadow: 0 0 0 0.2rem $tanish;
+  }
+}
