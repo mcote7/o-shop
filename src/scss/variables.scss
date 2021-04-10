@@ -1,13 +1,13 @@
 // colors 
-$darkGreen: #203c24;
+$darkGreen: hsl(129, 30%, 18%);
 
-$lightGreen: #5fab6a;
-$lightGreen-hov: #4a8c54;
+$lightGreen: hsl(129, 31%, 52%);
+$lightGreen-hov: hsl(129, 31%, 42%);
 
 $tanish: hsl(47, 80%, 90%);
 $tanish-hov: hsl(47, 80%, 80%);
 
-$bluegrey: #4a8085;
+$bluegrey: hsl(185, 29%, 41%);
 
 $carrot: hsl(29, 79%, 56%);
 $carrot-hov: hsl(29, 79%, 46%);
@@ -20,5 +20,5 @@ $white: #fff;
 
 $borderRad: 0.1rem;
 
-$transition: 0.2s;
+$transition: 150ms;
 

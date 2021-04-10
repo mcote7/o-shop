@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -8,15 +9,30 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.scss']
 })
+
 export class ProductFormComponent implements OnInit {
 
   public categories$: any;
+
+  public capsIsOn = false;
 
   constructor( categoryService: CategoryService, private productService: ProductService ) {
     this.categories$ = categoryService.getCategories();
   }
 
   ngOnInit() {
+  }
+
+  checkCapsLock(e: any) {
+    if (e.keyCode) {
+      if (e.getModifierState('CapsLock')) {
+        this.capsIsOn = true;
+      } else {
+        this.capsIsOn = false;
+      }
+    } else {
+      return;
+    }
   }
 
   save(product: any, f: NgForm) {
