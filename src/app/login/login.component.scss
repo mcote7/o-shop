@@ -21,3 +21,38 @@
     transform: scale3d(0.95, 0.95, 1);
   }
 }
+
+.carrot {
+  position: relative;
+  top: 0.5rem;
+  left: 0.75rem;
+  height: 2.75rem;
+  width: 2.75rem;
+  margin-right: -1rem;
+  background-image: url('../../assets/images/Rockarrot.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: rotate(-60deg);
+  animation: carrot-time 1s ease-out infinite;
+}
+
+@keyframes carrot-time {
+  from {opacity: 0; transform: translateY(-10rem);}
+  to {opacity: 1; transform: translateY(0rem) rotate(-60deg)}
+}
+
+.loggingIn {
+  color: $carrot;
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 1px $darkGreen;
+  font-weight: bold;
+  transform-origin: top left;
+  perspective: 100px;
+  perspective-origin: top left;
+  animation: sign 1s ease-out infinite;
+}
+
+@keyframes sign {
+  from {opacity: 0; transform: translateX(10rem);}
+  to {opacity: 1; transform: translateX(0rem);}
+}
