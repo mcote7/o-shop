@@ -22,6 +22,19 @@
   }
 }
 
+.form-control {
+  display: inline-flex;
+  border-radius: 0.1rem;
+  width: calc(75% - 12vw);
+  margin-left: 1rem;
+  transform: translateY(11px);
+  
+  &:focus {
+    border-color: $tanish-hov;
+    box-shadow: 0 0 0 0.2rem $tanish;
+  }
+}
+
 table {
   border-radius: $borderRad;
   margin: 1rem;
@@ -55,3 +68,20 @@ table {
     }
   }
 }
+
+@media only screen and (max-width: 576px) {
+  .o-new-product-btn {
+    margin: 1rem 0rem 0rem 0rem;
+  }
+  .form-control {
+    margin: 1rem 0rem;
+    margin-left: 0rem;
+    transform: translateY(0px);
+    width: 100%;
+  }
+  table {
+    margin: 0rem 0rem 2rem 0rem;
+    width: 100%;
+  }
+}
+
