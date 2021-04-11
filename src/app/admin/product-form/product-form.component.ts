@@ -16,6 +16,8 @@ export class ProductFormComponent implements OnInit {
 
   public capsIsOn = false;
 
+  public isSaved = false;
+
   constructor( categoryService: CategoryService, private productService: ProductService ) {
     this.categories$ = categoryService.getCategories();
   }
@@ -39,6 +41,14 @@ export class ProductFormComponent implements OnInit {
     console.log("product:", product);
     this.productService.create(product);
     f.reset();
+    this.saveConfirm();
+  }
+
+  saveConfirm() {
+    this.isSaved = true;
+    setTimeout(() => {
+      this.isSaved = false;
+    }, 3000);
   }
 
 }

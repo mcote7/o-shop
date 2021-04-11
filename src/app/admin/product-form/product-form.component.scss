@@ -1,6 +1,7 @@
 // 
 @import '../../../scss/variables.scss';
 
+// form 
 .product-submit-btn {
   background-color: $carrot-hov;
   color: $white;
@@ -20,6 +21,23 @@
   
   &:active {
     transform: scale3d(0.95, 0.95, 1);
+  }
+}
+
+form {
+  width: 20rem;
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  form {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .card {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -44,3 +62,17 @@
     box-shadow: 0 0 0 0.2rem $tanish;
   }
 }
+
+.alert {
+  border-radius: $borderRad;
+  margin-bottom: 0rem;
+}
+
+.prod-saved {
+  width: 20rem;
+}
+
+// end form 
+
+// card 
+

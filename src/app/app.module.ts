@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { FormsModule } from  '@angular/forms';
 
+import { CustomFormsModule } from 'ng2-validation';
+
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -52,7 +54,8 @@ import { ProductService } from './services/product.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    FormsModule
+    FormsModule,
+    CustomFormsModule
   ],
   providers: [
     AuthService,
