@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,15 +11,18 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-form.component.scss']
 })
 
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnInit, OnDestroy {
 
   public categories$: any;
 
   public capsIsOn = false;
 
   public isSaved = false;
+  public isUpdated = false;
 
   public product: any = {};
+
+  public id: any;
 
   constructor( 
     categoryService: CategoryService, 
@@ -28,13 +31,16 @@ export class ProductFormComponent implements OnInit {
     ) {
     this.categories$ = categoryService.getCategories();
     
-    let id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.productService.getOneProduct(id).subscribe( p => this.product = p );
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id) {
+      this.productService.getOneProduct(this.id).subscribe( p => this.product = p );
     }
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
   }
 
   checkCapsLock(e: any) {
@@ -51,15 +57,28 @@ export class ProductFormComponent implements OnInit {
 
   save(product: any, f: NgForm) {
     console.log("product:", product);
-    this.productService.create(product);
+    if ( this.id ) {
+      this.productService.update(this.id, product);
+      this.updateConfirm();
+    } else {
+      this.productService.create(product);
+      this.saveConfirm();
+    }
     f.reset();
-    this.saveConfirm();
   }
+
+  //
 
   saveConfirm() {
     this.isSaved = true;
     setTimeout(() => {
       this.isSaved = false;
+    }, 3000);
+  }
+  updateConfirm() {
+    this.isUpdated = true;
+    setTimeout(() => {
+      this.isUpdated = false;
     }, 3000);
   }
 
