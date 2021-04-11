@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -27,6 +27,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   constructor( 
     categoryService: CategoryService, 
     private productService: ProductService, 
+    private router: Router,
     private route: ActivatedRoute 
     ) {
     this.categories$ = categoryService.getCategories();
@@ -65,6 +66,14 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       this.saveConfirm();
     }
     f.reset();
+  }
+
+  deleteProduct() {
+    if (confirm('🤔 Are you sure you want to delete? You will be re-directed to the products page upon deletion')) {
+      this.productService.delete(this.id);
+      alert(`✔ Product id # ${this.id} has been deleted.`);
+      this.router.navigate(['/admin/products']);
+    }
   }
 
   //

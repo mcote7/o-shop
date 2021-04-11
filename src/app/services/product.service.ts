@@ -26,9 +26,8 @@ export class ProductService {
     return this.db.object('/products/' + productId).update(product);
   }
 
-  // not working 
-  // getKey() {
-  //   return this.db.list('/products').snapshotChanges();
-  // }
+  delete(productId: any) {
+    return this.db.object('/products/' + productId).remove();
+  }
 
 }

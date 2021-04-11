@@ -117,8 +117,15 @@
           Save
       </button>
       
+      <button 
+        *ngIf="id"
+        type="button"
+        (click)="deleteProduct()"
+        class="btn product-submit-btn delete-btn">
+          Delete
+      </button>
+      
       <a 
-        *ngIf="f.submitted"
         routerLink="/admin/products"
         class="btn product-submit-btn">
           Back to products
