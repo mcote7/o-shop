@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,11 +15,16 @@ export class ProductService {
   }
 
   getAll() {
-    return this.db.list('/products').valueChanges();
+    return this.db.list('/products').valueChanges(undefined, {idField: 'key'});
   }
 
-  getKey() {
-    return this.db.list('/products').snapshotChanges();
+  getOneProduct(productId: any) {
+    return this.db.object('/products/' + productId).valueChanges();
   }
+
+  // not working 
+  // getKey() {
+  //   return this.db.list('/products').snapshotChanges();
+  // }
 
 }

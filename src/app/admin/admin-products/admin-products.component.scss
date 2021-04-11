@@ -23,6 +23,35 @@
 }
 
 table {
+  border-radius: $borderRad;
   margin: 1rem;
   width: calc(100% - 2rem);
+  
+  thead {
+    user-select: none;
+    background-color: $darkGreen;
+    color: $tanish;
+  }
+  
+  tbody {
+    
+    tr {
+      background-color: hsla(47, 80%, 90%, 0.25);
+      transition: $transition;
+      &:hover {
+        background-color: hsla(47, 80%, 90%, 0);
+      }
+    }
+  }
+  
+  a {
+    color: $carrot-hov;
+    font-size: 1.25rem;
+    font-weight: bold;
+    transition: $transition;
+    &:hover {
+      color: $carrot;
+      text-decoration: none;
+    }
+  }
 }

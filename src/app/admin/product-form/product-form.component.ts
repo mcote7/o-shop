@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -18,8 +19,19 @@ export class ProductFormComponent implements OnInit {
 
   public isSaved = false;
 
-  constructor( categoryService: CategoryService, private productService: ProductService ) {
+  public product: any = {};
+
+  constructor( 
+    categoryService: CategoryService, 
+    private productService: ProductService, 
+    private route: ActivatedRoute 
+    ) {
     this.categories$ = categoryService.getCategories();
+    
+    let id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.productService.getOneProduct(id).subscribe( p => this.product = p );
+    }
   }
 
   ngOnInit() {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 
+
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
@@ -14,11 +15,11 @@ export class AdminProductsComponent implements OnInit {
 
   constructor( private productService: ProductService) {
     this.products$ = this.productService.getAll();
-    this.productKey$ = this.productService.getKey();
+    // this.productKey$ = this.productService.getKey();
   }
 
   ngOnInit() {
-    console.log("key?", this.productKey$.key)
+    // console.log("key?", this.productKey$)
   }
 
 }

@@ -12,7 +12,7 @@
         <input 
           (keyup)="checkCapsLock($event)"
           #title="ngModel"
-          ngModel
+          [(ngModel)]="product.title"
           name="title"
           id="title"
           type="text"
@@ -39,7 +39,7 @@
             <span class="input-group-addon">$</span>
             <input 
               #price="ngModel"
-              ngModel
+              [(ngModel)]="product.price"
               name="price"
               id="price"
               type="number"
@@ -62,7 +62,7 @@
         <label for="category">Category</label>
         <select 
           #category="ngModel"
-          ngModel
+          [(ngModel)]="product.Category"
           name="category"
           id="category"
           class="form-control"
@@ -70,7 +70,7 @@
           
           <option value=""></option>
           <option 
-            *ngFor="let c of categories$ | async" [value]="c.name">
+            *ngFor="let c of categories$ | async" [value]="c.key">
               {{c.name}}
           </option>
           
@@ -89,7 +89,7 @@
         <label for="imageUrl">Image Url</label>
         <input 
           #imageUrl="ngModel"
-          ngModel
+          [(ngModel)]="product.imageUrl"
           name="imageUrl"
           id="imageUrl"
           type="text"
@@ -112,6 +112,13 @@
           Save
       </button>
       
+      <a 
+        *ngIf="f.submitted"
+        routerLink="/admin/products"
+        class="btn product-submit-btn">
+          Back to products
+      </a>
+      
     </form>
     
   </div>
@@ -121,15 +128,23 @@
     <div class="card" style="width: 20rem;">
       
       <img 
-        *ngIf="imageUrl.touched && imageUrl.valid"
-        [src]="imageUrl.value"
+        *ngIf="product.imageUrl"
+        [src]="product.imageUrl"
         class="card-img-top"
         alt="produce">
       
       <div class="card-body">
-        <h5 class="card-title">{{title.value}}</h5>
-        <p class="card-text">{{category.value}}</p>
-        <p class="card-text">{{ price.value | currency:'USD':'symbol' }}</p>
+        
+        <h5 class="card-title">{{product.title}}</h5>
+        
+        <p *ngIf="!product.category">{{category.value}}</p>
+        
+        <p *ngIf="product.category && category.untouched" class="card-text">{{product.category}}</p>
+        
+        <p *ngIf="product.category && category.touched" class="card-text">{{category.value}}</p>
+        
+        <p class="card-text">{{ product.price | currency:'USD':'symbol' }}</p>
+        
       </div>
       
     </div>
