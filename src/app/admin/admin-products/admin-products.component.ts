@@ -24,7 +24,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   }
 
   searchProducts(query: string) {
-    console.log(query)
+    console.log("searching for", query)
     this.filteredProducts = (query) ?
       this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) : 
       this.products;
