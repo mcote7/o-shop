@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../services/auth.service';
 
+import { slideInTop } from '../../animations/anime';
+
 
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  animations: [slideInTop]
 })
 export class LoginComponent implements OnInit {
 

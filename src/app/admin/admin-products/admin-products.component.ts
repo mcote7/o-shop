@@ -1,12 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+
 import { Subscription } from 'rxjs';
+
 import { ProductService } from 'src/app/services/product.service';
+
+import {listAnimationWrap, listAnimationItem } from '../../../animations/anime';
 
 
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
-  styleUrls: ['./admin-products.component.scss']
+  styleUrls: ['./admin-products.component.scss'],
+  animations: [listAnimationWrap, listAnimationItem]
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
 

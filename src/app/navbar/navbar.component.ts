@@ -4,10 +4,14 @@ import { AppUser } from 'src/models/app-user';
 
 import { AuthService } from '../services/auth.service';
 
+import {  } from '../../animations/anime';
+
+
 @Component({
   selector: 'navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
+  animations: []
 })
 export class NavbarComponent implements OnInit {
 

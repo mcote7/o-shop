@@ -77,12 +77,12 @@
         </select>
         
         <div 
-          *ngIf="category.touched && category.invalid"
+          *ngIf="category.touched && category.invalid && !f.submitted"
           class="alert alert-danger">
             🛑 Category is required.
         </div>
         <div 
-          *ngIf="category.untouched"
+          *ngIf="category.untouched || f.submitted"
           class="alert alert-warning">
             ⚠ Category is required.
         </div>
@@ -151,9 +151,9 @@
         
         <p *ngIf="!product.category">{{category.value}}</p>
         
-        <p *ngIf="product.category && category.untouched" class="card-text">{{product.category}}</p>
+        <p *ngIf="product.category && category.untouched || f.submitted" class="card-text">{{product.category}}</p>
         
-        <p *ngIf="product.category && category.touched" class="card-text">{{category.value}}</p>
+        <p *ngIf="product.category && category.touched && !f.submitted" class="card-text">{{category.value}}</p>
         
         <p class="card-text">{{ product.price | currency:'USD':'symbol' }}</p>
         
@@ -162,11 +162,13 @@
     </div>
     
     <div 
+      @toastNotification
       *ngIf="isSaved"
       class="alert alert-success prod-saved">
         ✔ Product saved!
     </div>
     <div 
+      @toastNotification
       *ngIf="isUpdated"
       class="alert alert-info prod-saved">
         ✔ Product updated!

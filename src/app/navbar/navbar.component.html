@@ -79,12 +79,21 @@
               </a>
             </li>
             
+            <li>
+              <a 
+                (click)="logout()"
+                class="dropdown-item mb-3">
+                Log Out
+              </a>
+            </li>
+            
+            <!-- admin only -->
             <ng-container *ngIf="appUser.isAdmin">
-              <li>
+              <li style="border-top: 1px solid rgba(0,0,0,0.15);padding-top: 1.25rem;">
                 <a 
                   (click)="closeMenus()"
                   class="dropdown-item" routerLink="/admin/orders"
-                  title="Admin access only"
+                  title="&nbsp;Admin access.&nbsp;✔"
                   routerLinkActive="active-dropdown-link">
                     Manage Orders 🛡
                 </a>
@@ -94,20 +103,30 @@
                 <a 
                   (click)="closeMenus()"
                   class="dropdown-item" routerLink="/admin/products"
-                  title="Admin access only"
+                  title="&nbsp;Admin access.&nbsp;✔"
                   routerLinkActive="active-dropdown-link">
                     Manage Products 🛡
                 </a>
               </li>
             </ng-container>
-            
-            <li>
-              <a 
-                (click)="logout()"
-                class="dropdown-item">
-                Log Out
-              </a>
-            </li>
+            <!-- not admin -->
+            <ng-container *ngIf="!appUser.isAdmin">
+              <li style="border-top: 1px solid rgba(0,0,0,0.15);padding-top: 1.25rem;">
+                <a 
+                  class="dropdown-item not-admin"
+                  title="&nbsp;Admin access only.&nbsp;🛑">
+                    Manage Orders 🛡
+                </a>
+              </li>
+              
+              <li>
+                <a 
+                  class="dropdown-item not-admin"
+                  title="&nbsp;Admin access only.&nbsp;🛑">
+                    Manage Products 🛡
+                </a>
+              </li>
+            </ng-container>
             
           </ul>
         </li>

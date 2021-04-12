@@ -5,10 +5,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 
+import { toastNotification } from '../../../animations/anime';
+
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.scss']
+  styleUrls: ['./product-form.component.scss'],
+  animations: [toastNotification]
 })
 
 export class ProductFormComponent implements OnInit, OnDestroy {
@@ -67,8 +70,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     } else {
       this.productService.create(product);
       this.saveConfirm();
+      f.reset();
     }
-    f.reset();
   }
 
   deleteProduct() {

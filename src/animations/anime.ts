@@ -1,0 +1,186 @@
+// export transitions global 
+import { trigger, transition, style, animate, group, animateChild, query, stagger, keyframes } from '@angular/animations';
+
+// global anime ( these are used in many places DO NOT modify an animation for single use, create a new one )
+
+export const fadeIn = trigger('fadeIn', [
+    transition(':enter', [
+        style({
+            opacity: 0
+        }),
+        animate(150, style({
+            opacity: 1
+        }))
+    ])
+]);
+
+export const fadeInFast = trigger('fadeInFast', [
+    transition(':enter', [
+        style({
+            opacity: 0
+        }),
+        animate(75, style({
+            opacity: 1
+        }))
+    ])
+]);
+
+// fade in-out (:leave) GOOD *but with catch* - IF - ELEMENT IS CONDITIONALLY OCCUPYING SAME SPACE AS ANOTHER 
+// YOU NEED TO DELAY OTHER ELEMENT FROM ENTERING DOM, THIS CAN BE DONE BY DECLARING A BOOL - 
+// in .ts   - isAnimationRunning: bool; 
+// in .html - (@someAnimation.start)="isAnimationRunning = true" 
+//         && (@someAnimation.done)="isAnimationRunning = false" 
+//   ON ELEMENT YOU WISH TO DELAY - 
+// <someEl *ngIf="!isAnimationRunning && ect. "> </>  
+// 
+// THIS APPLYS TO ANY ANIME WITH A :leave transition <-----<<<|) 
+//
+export const fadeInOut = trigger('fadeInOut', [
+    transition(':enter', [
+        style({
+            opacity: 0
+        }),
+        animate(200, style({
+            opacity: 1
+        }))
+    ]),
+    transition(':leave', [
+        style({
+            opacity: 1
+        }),
+        animate(150, style({
+            opacity: 0
+        }))
+    ])
+]);
+
+// 
+
+export const slideInTop = trigger('slideInTop', [
+    transition(':enter', [
+        style({
+            opacity: 0,
+            transform: 'translateY(-1rem)'
+        }),
+        group([
+            animate(100, style({
+                opacity: 1
+            })),
+            animate(150, style({
+                transform: 'translateY(0rem)'
+            }))
+        ])
+    ])
+]);
+
+export const slideInRight = trigger('slideInRight', [
+    transition(':enter', [
+        style({
+            opacity: 0,
+            transform: 'translateX(1rem)'
+        }),
+        group([
+            animate(100, style({
+                opacity: 1
+            })),
+            animate(150, style({
+                transform: 'translateX(0rem)'
+            }))
+        ])
+    ])
+]);
+
+// 
+
+// set transform-origin on element for this one rotateInOut 
+
+export const rotateInOut = trigger('rotateInOut', [
+    transition(':enter', [
+        style({
+            transform: 'rotate(70deg)',
+            opacity: 0
+        }),
+        animate(200, style({
+            transform: 'rotate(0deg)',
+            opacity: 1
+        }))
+    ]),
+    transition(':leave', [
+        style({
+            transform: 'rotate(0deg)',
+            opacity: 1
+        }),
+        animate(150, style({
+            transform: 'rotate(45deg)',
+            opacity: 0
+        }))
+    ])
+]);
+
+// list stagger animation 
+
+// decorate the element that WRAPS the *ngFor element with '@listAnimationWrap' set to variable if list is dynamic 
+export const listAnimationWrap = trigger('listAnimationWrap', [
+    transition('* => *', [
+        query('@listAnimationItem', [
+            stagger(32, [
+                animateChild()
+            ])
+        ], { optional: true })
+    ])
+]);
+
+// decorate the element that is also decorated with the *ngFor with '@listAnimationItem' 
+export const listAnimationItem = trigger('listAnimationItem', [
+    transition(':enter', [
+        style({
+            opacity: 0
+        }),
+        animate(62, style({
+            opacity: 1
+        }))
+    ])
+]);
+
+// list stagger example 
+
+// <div [@listAnimationWrap]="someList.length">
+//     <div *ngFor="let i of someList" @listAnimationItem > this is the list item <div/>
+// <div/>
+
+// when the list is loaded the animation runs all items, if a new item is added that item is animated 
+
+// 
+
+// Toast notification Enter / Leave 
+export const toastNotification = trigger('toastNotification', [
+    transition(':enter', [
+        style({
+            opacity: 0,
+            transform: 'scale3d(0.8, 0.8, 0.8)'
+        }),
+        animate('200ms ease-in-out', keyframes([
+            style({
+                offset: .5,
+                opacity: 0.9,
+                transform: 'scale3d(1.1, 1.1, 1.1)'
+            }),
+            style({
+                offset: 1,
+                transform: 'scale3d(1, 1, 1)'
+            })
+        ]))
+    ]),
+    transition(':leave', [
+        style({
+            opacity: 1,
+            transform: 'scale3d(1, 1, 1)'
+        }),
+        animate('200ms ease-in', style({
+            opacity: 0,
+            transform: 'scale3d(0.4, 0.4, 0.4)'
+        }))
+    ])
+]);
+
+// ©️ cote 2021 👾 
