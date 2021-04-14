@@ -4,14 +4,14 @@ import { Subscription } from 'rxjs';
 
 import { ProductService } from 'src/app/services/product.service';
 
-import {listAnimationWrap, listAnimationItem } from '../../../animations/anime';
+import {listAnimationWrap, listAnimationItem, fadeIn } from '../../../animations/anime';
 
 
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.scss'],
-  animations: [listAnimationWrap, listAnimationItem]
+  animations: [listAnimationWrap, listAnimationItem, fadeIn]
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
 
@@ -21,11 +21,16 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
 
   public subscription: Subscription;
 
+  public loadBuffer = true;
+
   constructor( private productService: ProductService) {
     this.subscription = this.productService.getAll().subscribe(prod => this.filteredProducts = this.products = prod);
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.loadBuffer = false;
+    }, 2000);
   }
 
   searchProducts(query: string) {

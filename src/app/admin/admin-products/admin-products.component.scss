@@ -105,4 +105,16 @@ table {
 
 .alert {
   user-select: none;
+  border-radius: $borderRad;
+}
+
+.load-buff {
+  margin: 1rem 0rem 0rem 1rem;
+  width: min-content;
+  font-size: 2rem;
+  animation: spin-it 0.5s infinite;
+}
+@keyframes spin-it {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
 }

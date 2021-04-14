@@ -6,7 +6,10 @@
   (keyup)="searchProducts(query.value)"
   type="text" 
   class="form-control" 
-  placeholder="Search...">
+  placeholder="🔎 Search all {{filteredProducts?.length}} products...">
+
+  <!-- TODO add 3rd. party data-table for pagination & filtering -->
+  <!-- https://www.ngdevelop.tech/best-angular-tables/ -->
 
 <table class="table">
   <thead>
@@ -17,12 +20,7 @@
       <th></th>
     </tr>
   </thead>
-  <tbody [@listAnimationWrap]="filteredProducts && filteredProducts.length !== 0">
-    <div 
-      *ngIf="filteredProducts?.length === 0"
-      class="alert alert-warning">
-        <div class="no-no">🙄</div> No products match.
-    </div>
+  <tbody *ngIf="!loadBuffer" [@listAnimationWrap]="filteredProducts?.length">
     <tr *ngFor="let p of filteredProducts" @listAnimationItem>
       <td>{{p.title}}</td>
       <td>{{p.category}}</td>
@@ -32,4 +30,13 @@
       </td>
     </tr>
   </tbody>
+  <div *ngIf="loadBuffer" class="load-buff">
+    🌽
+  </div>
+  <div 
+    @fadeIn
+    *ngIf="filteredProducts?.length === 0"
+    class="alert alert-warning">
+      <div class="no-no">🙄</div> No products match.
+  </div>
 </table>

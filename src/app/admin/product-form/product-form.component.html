@@ -137,7 +137,10 @@
   
   <div class="col-md-6 mt-5 mb-5">
     
-    <div class="card" style="width: 20rem;">
+    <div 
+      *ngIf="product.title"
+      class="card"
+      style="width: 20rem;">
       
       <img 
         *ngIf="product.imageUrl"
