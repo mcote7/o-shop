@@ -1,0 +1,111 @@
+
+@import '../../scss/variables.scss';
+
+.list-group {
+  position: fixed;
+  top: 4rem;
+  user-select: none;
+  margin: 0.5rem 0rem 0rem 1rem;
+  border-radius: $borderRad;
+  border-top: 1px solid rgba(74, 140, 84, 0.25);
+  .list-group-item {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: $bluegrey;
+    border: 1px solid rgba(74, 140, 84, 0.25);
+    border-top: none;
+    height: 3rem;
+    padding-top: calc(0.75rem - 2px);
+    transition: $transition ease-in-out;
+    &:hover {
+      cursor: pointer;
+      color: $tanish;
+      background-color: $bluegrey;
+      box-shadow: inset 0.25px -2px 1px 2px $tanish;
+      border: 1px solid $tanish-hov;
+      border-top: none;
+    }
+    &:active {
+      box-shadow: inset 0.25px 2px 1px 2px $tanish;
+      padding-top: calc(0.75rem + 2px);
+    }
+  }
+}
+
+.card {
+  user-select: none;
+  margin: 0.5rem auto;
+  border-radius: $borderRad;
+  border: 1px solid rgba(231, 140, 54, 0.25);
+  transition: $transition ease-in-out;
+  
+  &:hover {
+    top: -2px;
+    border: 1px solid rgba(74, 140, 84, 0.25);
+    box-shadow: 2px 2px 1px 1px $lightGreen;
+    .card-img-top {
+      border-bottom: 1px solid rgba(74, 140, 84, 0.15);
+    }
+  }
+  
+  &.right-col {
+    margin: 0.5rem auto 0.5rem 0.5rem;
+  }
+  
+  &.last-col {
+    margin-bottom: 4rem!important;
+  }
+  
+  .card-img-top {
+    margin: 1rem auto;
+    border-bottom: 1px solid rgba(231, 140, 54, 0.15);
+    height: 200px;
+  }
+  
+  .btn-card {
+    background-color: $carrot-hov;
+    color: $white;
+    border-radius: $borderRad;
+    transition: $transition;
+    backface-visibility: hidden;
+    
+    &:hover {
+      background-color: $carrot;
+    }
+    
+    &:focus, :active {
+      box-shadow: none;
+    }
+    
+    &:active {
+      transform: scale3d(0.95, 0.95, 0.95);
+    }
+  }
+}
+
+.load-wrap {
+  margin-left: 0.5rem;
+  .load-buff {
+    margin: 1rem 0rem 0rem 1rem;
+    width: min-content;
+    font-size: 2rem;
+    animation: spin-it 0.5s infinite;
+  }
+}
+@keyframes spin-it {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
+}
+
+@media only screen and (max-width: 768px) {
+  .right-col {
+    margin: 0.5rem auto!important;
+  }
+  .list-group {
+    position: initial;
+    width: 18rem;
+    margin: 0.5rem auto;
+  }
+}
+
+// 🍇 

@@ -63,10 +63,10 @@ export const slideInTop = trigger('slideInTop', [
             transform: 'translateY(-1rem)'
         }),
         group([
-            animate(100, style({
+            animate(200, style({
                 opacity: 1
             })),
-            animate(150, style({
+            animate(250, style({
                 transform: 'translateY(0rem)'
             }))
         ])
@@ -181,6 +181,31 @@ export const toastNotification = trigger('toastNotification', [
             transform: 'scale3d(0.4, 0.4, 0.4)'
         }))
     ])
+]);
+
+// stagger for cards 
+
+// decorate the element that WRAPS the *ngFor element with '@listAnimationWrap' set to variable if list is dynamic 
+export const listAnimationWrapCard = trigger('listAnimationWrapCard', [
+  transition('* => *', [
+      query('@listAnimationItemCard', [
+          stagger(2032, [
+              animateChild()
+          ])
+      ], { optional: true })
+  ])
+]);
+
+// decorate the element that is also decorated with the *ngFor with '@listAnimationItem' 
+export const listAnimationItemCard = trigger('listAnimationItemCard', [
+  transition(':enter', [
+      style({
+          opacity: 0
+      }),
+      animate(2062, style({
+          opacity: 1
+      }))
+  ])
 ]);
 
 // ©️ cote 2021 👾 

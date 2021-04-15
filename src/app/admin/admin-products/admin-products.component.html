@@ -30,16 +30,17 @@
       </td>
     </tr>
   </tbody>
-  <div *ngIf="loadBuffer" class="row">
-    <div class="load-buff">
-      🌽
-    </div>
-    <span class="mt-auto ml-2">Loading products...</span>
-  </div>
-  <div 
-    @fadeIn
-    *ngIf="filteredProducts?.length === 0"
-    class="alert alert-warning">
-      <div class="no-no">🙄</div> No products match.
-  </div>
 </table>
+<div @fadeIn *ngIf="loadBuffer" class="row load-wrap">
+  <div class="load-buff">
+      🌽
+  </div>
+  <span class="mt-auto ml-2">Loading products...</span>
+</div>
+<div 
+  @fadeIn
+  *ngIf="filteredProducts?.length === 0"
+  class="alert alert-warning">
+  <div class="no-no">🙄</div> No products match.
+</div>
+<!--  -->

@@ -34,6 +34,7 @@ import { UserService } from './services/user.service';
 import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 import { CategoryService } from './services/category.service';
 import { ProductService } from './services/product.service';
+import { ScrollProgressReadComponent } from './scroll-progress-read/scroll-progress-read.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ProductService } from './services/product.service';
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ScrollProgressReadComponent
     ],
   imports: [
     BrowserModule,

@@ -8,11 +8,27 @@ body {
   background-color: rgba(250, 241, 209, 0.2);
 }
 
+// // scrollbar 
+// ::-webkit-scrollbar {
+//   display: none!important;
+// }
+// /* Track */
+// ::-webkit-scrollbar-track {
+//   color: black!important;
+//   background-color: black!important;
+// }
+// /* Handle */
+// ::-webkit-scrollbar-thumb {
+//   color: black!important;
+//   background-color: black!important;
+// }
+
 .o-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  padding: 4rem 1rem 1rem 1rem;
+  // display: flex;
+  // flex-direction: column;
+  // height: 100vh;
+  // padding: 4rem 1rem 1rem 1rem;
+  padding-top: 4rem;
   
   .bg-image {
     display: flex;

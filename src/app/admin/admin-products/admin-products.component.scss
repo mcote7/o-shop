@@ -70,22 +70,6 @@ table {
   }
 }
 
-@media only screen and (max-width: 576px) {
-  .o-new-product-btn {
-    margin: 1rem 0rem 0rem 0rem;
-  }
-  .form-control {
-    margin: 1rem 0rem;
-    margin-left: 0rem;
-    transform: translateY(0px);
-    width: 100%;
-  }
-  table {
-    margin: 0rem 0rem 2rem 0rem;
-    width: 100%;
-  }
-}
-
 .no-no {
   display: inline-flex;
   position: relative;
@@ -106,15 +90,44 @@ table {
 .alert {
   user-select: none;
   border-radius: $borderRad;
+  margin: 0rem 1rem;
 }
 
-.load-buff {
-  margin: 1rem 0rem 0rem 1rem;
-  width: min-content;
-  font-size: 2rem;
-  animation: spin-it 0.5s infinite;
+.load-wrap {
+  margin-left: 0.5rem;
+  .load-buff {
+    margin: 1rem 0rem 0rem 1rem;
+    width: min-content;
+    font-size: 2rem;
+    animation: spin-it 0.5s infinite;
+  }
 }
 @keyframes spin-it {
   from {transform: rotate(0deg);}
   to {transform: rotate(360deg);}
+}
+
+@media only screen and (max-width: 576px) {
+  .o-new-product-btn {
+    margin: 1rem 0rem 0rem 0rem;
+  }
+  .form-control {
+    margin: 1rem 0rem;
+    margin-left: 0rem;
+    transform: translateY(0px);
+    width: 100%;
+  }
+  table {
+    margin: 0rem 0rem 2rem 0rem;
+    width: 100%;
+  }
+  .load-wrap {
+    margin: 0rem 0rem 0rem 0.25rem;
+    .load-buff {
+      margin: 0rem;
+    }
+  }
+  .alert {
+    margin: 0rem 0rem;
+  }
 }

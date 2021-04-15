@@ -1,1 +1,49 @@
-<p>products works!</p>
+<!--  -->
+
+<div class="row">
+  <div class="col-md-2">
+    <ul @slideInTop *ngIf="categories$" class="list-group">
+      <li *ngFor="let c of categories$ | async" class="list-group-item">
+        {{ c.name }}
+      </li>
+    </ul>
+  </div>
+  <div class="col">
+    <div *ngIf="isAnime" [@listAnimationWrapCard]="products.length" class="row">
+      <ng-container *ngFor="let p of products; let i = index; let e = even; let l = last">
+        <div class="col-md-6">
+          <div 
+            @listAnimationItemCard
+            class="card"
+            [class.right-col]="!e"
+            [class.last-col]="l"
+            style="width: 18rem;">
+            
+            <img [src]="p.imageUrl" class="card-img-top" alt="&nbsp; 🤷‍♂️ image not found">
+            
+            <div class="card-body">
+              
+              <h5 class="card-title">{{p.title}}</h5>
+              
+              <p class="card-text">{{p.category}}</p>
+              
+              <p class="card-text"><strong>{{ p.price | currency:'USD':'symbol' }}</strong></p>
+              
+              <a href="#" class="btn btn-card">Add to cart</a>
+              
+            </div>
+            
+          </div>
+        </div>
+        <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
+      </ng-container>
+    </div>
+    <div @fadeIn *ngIf="!isAnime" class="row load-wrap">
+      <div class="load-buff">
+          🌽
+      </div>
+      <span class="mt-auto ml-2">Loading products...</span>
+    </div>
+  </div>
+</div>
+<!-- 🎇 -->
