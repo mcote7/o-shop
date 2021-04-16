@@ -2,15 +2,38 @@
 
 <div class="row">
   <div class="col-md-2">
-    <ul @slideInTop *ngIf="categories$" class="list-group">
-      <li *ngFor="let c of categories$ | async" class="list-group-item">
+    <div
+      @slideInTop
+      *ngIf="isAnime && categories$ | async"
+      class="list-group">
+      <a 
+        class="list-group-item"
+        [class.activeLink]="!category"
+        routerLink="/">
+        All items
+      </a>
+      <a
+        *ngFor="let c of categories$ | async"
+        routerLink="/"
+        [queryParams]="{category: c.key}"
+        [class.activeLink]="category === c.key"
+        class="list-group-item">
         {{ c.name }}
-      </li>
-    </ul>
+      </a>
+    </div>
   </div>
   <div class="col">
-    <div *ngIf="isAnime" [@listAnimationWrapCard]="products.length" class="row">
-      <ng-container *ngFor="let p of products; let i = index; let e = even; let l = last">
+    <div
+      *ngIf="isAnime && filteredProducts"
+      [@listAnimationWrapCard]="filteredProducts"
+      class="row">
+      
+      <ng-container
+        *ngFor="let p of filteredProducts;
+        let i = index;
+        let e = even;
+        let l = last">
+        
         <div class="col-md-6">
           <div 
             @listAnimationItemCard
@@ -38,12 +61,12 @@
         <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
       </ng-container>
     </div>
-    <div @fadeIn *ngIf="!isAnime" class="row load-wrap">
-      <div class="load-buff">
-          🌽
-      </div>
-      <span class="mt-auto ml-2">Loading products...</span>
-    </div>
   </div>
+</div>
+<div @fadeIn *ngIf="!isAnime" class="row load-wrap">
+  <div class="load-buff">
+      🌽
+  </div>
+  <span class="mt-auto ml-2">Loading products...</span>
 </div>
 <!-- 🎇 -->

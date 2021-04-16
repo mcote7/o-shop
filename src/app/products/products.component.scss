@@ -16,9 +16,10 @@
     border-top: none;
     height: 3rem;
     padding-top: calc(0.75rem - 2px);
-    transition: $transition ease-in-out;
+    transition: $transitionFast ease-in-out;
     &:hover {
       cursor: pointer;
+      text-decoration: none;
       color: $tanish;
       background-color: $bluegrey;
       box-shadow: inset 0.25px -2px 1px 2px $tanish;
@@ -29,6 +30,16 @@
       box-shadow: inset 0.25px 2px 1px 2px $tanish;
       padding-top: calc(0.75rem + 2px);
     }
+    &.activeLink {
+      text-decoration: none;
+      box-shadow: inset 0.25px 2px 1px 2px $tanish;
+      padding-top: calc(0.75rem + 2px);
+      background-color: $bluegrey;
+      color: $tanish;
+      border: 1px solid $tanish-hov;
+      border-top: none;
+    }
+
   }
 }
 
@@ -37,12 +48,11 @@
   margin: 0.5rem auto;
   border-radius: $borderRad;
   border: 1px solid rgba(231, 140, 54, 0.25);
-  transition: $transition ease-in-out;
-  
+  transition: $transitionFast;
   &:hover {
     top: -2px;
     border: 1px solid rgba(74, 140, 84, 0.25);
-    box-shadow: 2px 2px 1px 1px $lightGreen;
+    box-shadow: 2px 2px 1px 1px hsla(129, 31%, 52%, 0.35);
     .card-img-top {
       border-bottom: 1px solid rgba(74, 140, 84, 0.15);
     }
@@ -66,7 +76,7 @@
     background-color: $carrot-hov;
     color: $white;
     border-radius: $borderRad;
-    transition: $transition;
+    transition: $transitionFast;
     backface-visibility: hidden;
     
     &:hover {
@@ -78,7 +88,7 @@
     }
     
     &:active {
-      transform: scale3d(0.95, 0.95, 0.95);
+      transform: scale3d(0.95, 0.95, 1);
     }
   }
 }

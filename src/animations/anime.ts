@@ -153,6 +153,7 @@ export const listAnimationItem = trigger('listAnimationItem', [
 // 
 
 // Toast notification Enter / Leave 
+
 export const toastNotification = trigger('toastNotification', [
     transition(':enter', [
         style({
@@ -183,27 +184,27 @@ export const toastNotification = trigger('toastNotification', [
     ])
 ]);
 
-// stagger for cards 
+// stagger for cards 🍇 
 
-// decorate the element that WRAPS the *ngFor element with '@listAnimationWrap' set to variable if list is dynamic 
 export const listAnimationWrapCard = trigger('listAnimationWrapCard', [
   transition('* => *', [
       query('@listAnimationItemCard', [
-          stagger(2032, [
+          stagger(232, [
               animateChild()
           ])
       ], { optional: true })
   ])
 ]);
 
-// decorate the element that is also decorated with the *ngFor with '@listAnimationItem' 
 export const listAnimationItemCard = trigger('listAnimationItemCard', [
   transition(':enter', [
       style({
-          opacity: 0
+          opacity: 0,
+          transform: 'translateY(-1rem)'
       }),
-      animate(2062, style({
-          opacity: 1
+      animate(262, style({
+          opacity: 1,
+          transform: 'translateY(0rem)'
       }))
   ])
 ]);

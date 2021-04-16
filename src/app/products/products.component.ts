@@ -5,6 +5,7 @@ import { ProductService } from '../services/product.service';
 
 import { fadeIn, listAnimationWrapCard, listAnimationItemCard, slideInTop } from '../../animations/anime';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -15,16 +16,28 @@ import { Subscription } from 'rxjs';
 
 export class ProductsComponent implements OnInit, OnDestroy {
 
-  public products: any[];
+  public products: any[] = [];
+  public filteredProducts: any[] = [];
   public subscription: Subscription;
 
   public categories$: any;
+  public category: string;
 
   public isAnime = false;
 
-  constructor( private productService: ProductService, categoryService: CategoryService ) { 
-    this.subscription = this.productService.getAll().subscribe(prod => this.products = prod);
+  constructor( private productService: ProductService, categoryService: CategoryService, route: ActivatedRoute ) { 
 
+    this.subscription = this.productService.getAll().subscribe(prod => {
+      this.products = prod;
+      
+      route.queryParamMap.subscribe( params => {
+        this.category = params.get('category');
+        
+        this.filteredProducts = (this.category) ? 
+          this.products.filter( p => p.category === this.category ) : 
+          this.products;
+      })
+    });
     this.categories$ = categoryService.getCategories();
   }
 

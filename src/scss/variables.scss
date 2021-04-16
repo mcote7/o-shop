@@ -8,7 +8,8 @@ $lightGreen-hov: rgb(74, 140, 84);
 $tanish: hsl(47, 80%, 90%);
 $tanish-hov: hsl(47, 80%, 80%);
 
-$bluegrey: rgb(74, 130, 135);
+$bluegrey: hsl(185, 29%, 41%);
+$bluegrey-hov: hsl(185, 29%, 31%);
 
 $carrot: hsl(29, 79%, 56%);
 $carrot-hov: hsl(29, 79%, 46%);
@@ -22,4 +23,5 @@ $white: #fff;
 $borderRad: 0.1rem;
 
 $transition: 150ms;
+$transitionFast: 75ms;
 
