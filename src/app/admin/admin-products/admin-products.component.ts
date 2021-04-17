@@ -28,9 +28,20 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    setTimeout(() => {
+    // setTimeout(() => {
+    //   this.loadBuffer = false;
+    // }, 2000);
+    if(this.filteredProducts) {
       this.loadBuffer = false;
-    }, 2000);
+    } else {
+      setTimeout(() => {
+        if (this.filteredProducts) {
+          this.loadBuffer = false;
+        } else {
+          alert('error getting data')
+        }
+      }, 2000);
+    }
   }
 
   searchProducts(query: string) {

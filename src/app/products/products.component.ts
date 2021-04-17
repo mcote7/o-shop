@@ -6,6 +6,9 @@ import { ProductService } from '../services/product.service';
 import { fadeIn, listAnimationWrapCard, listAnimationItemCard, slideInTop } from '../../animations/anime';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { ShoppingCartService } from '../services/shopping-cart.service';
+import { Product } from '../../models/product';
+
 
 @Component({
   selector: 'app-products',
@@ -26,7 +29,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public isAnime = false;
   public isAnimeDone = false;
 
-  constructor( private productService: ProductService, categoryService: CategoryService, route: ActivatedRoute ) { 
+  constructor( 
+    private productService: ProductService, 
+    categoryService: CategoryService, 
+    route: ActivatedRoute,
+    private cartService: ShoppingCartService) { 
 
     this.subscription = this.productService.getAll().subscribe(prod => {
       this.products = prod;
@@ -43,9 +50,21 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    setTimeout(() => {
+    if( this.categories$ && this.products ) {
       this.isAnime = true;
-    }, 2000);
+    } else {
+      setTimeout(() => {
+        if( this.categories$ && this.products ) {
+          this.isAnime = true;
+        } else {
+          alert('error getting data')
+        }
+      }, 2000);
+    }
+  }
+
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
   }
 
   ngOnDestroy() {

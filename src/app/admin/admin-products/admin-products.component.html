@@ -20,7 +20,7 @@
       <th></th>
     </tr>
   </thead>
-  <tbody *ngIf="!loadBuffer" [@listAnimationWrap]="filteredProducts?.length">
+  <tbody *ngIf="!loadBuffer && filteredProducts" [@listAnimationWrap]="filteredProducts">
     <tr *ngFor="let p of filteredProducts" @listAnimationItem>
       <td>{{p.title}}</td>
       <td>{{p.category}}</td>

@@ -54,7 +54,7 @@
               <p class="card-text"><strong>{{ p.price | currency:'USD':'symbol' }}</strong></p>
               
               <div class="btm-btns-wrp">
-                <button class="btn btn-card">Add to cart</button>
+                <button (click)="addToCart(p)" class="btn btn-card">Add to cart</button>
               </div>
               
             </div>

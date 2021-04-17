@@ -27,6 +27,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { ScrollProgressReadComponent } from './scroll-progress-read/scroll-progress-read.component';
 
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -34,7 +35,7 @@ import { UserService } from './services/user.service';
 import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 import { CategoryService } from './services/category.service';
 import { ProductService } from './services/product.service';
-import { ScrollProgressReadComponent } from './scroll-progress-read/scroll-progress-read.component';
+import { ShoppingCartService } from './services/shopping-cart.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { ScrollProgressReadComponent } from './scroll-progress-read/scroll-progr
     AdminAuthGuardService,
     UserService,
     CategoryService,
-    ProductService
+    ProductService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })
