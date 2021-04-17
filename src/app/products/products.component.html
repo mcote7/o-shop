@@ -4,6 +4,7 @@
   <div class="col-md-2">
     <div
       @slideInTop
+      (@slideInTop.done)="isAnimeDone = true"
       *ngIf="isAnime && categories$ | async"
       class="list-group">
       <a 
@@ -24,7 +25,7 @@
   </div>
   <div class="col">
     <div
-      *ngIf="isAnime && filteredProducts"
+      *ngIf="isAnimeDone && filteredProducts"
       [@listAnimationWrapCard]="filteredProducts"
       class="row">
       
@@ -52,7 +53,9 @@
               
               <p class="card-text"><strong>{{ p.price | currency:'USD':'symbol' }}</strong></p>
               
-              <a href="#" class="btn btn-card">Add to cart</a>
+              <div class="btm-btns-wrp">
+                <button class="btn btn-card">Add to cart</button>
+              </div>
               
             </div>
             

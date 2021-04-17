@@ -72,6 +72,10 @@
     height: 200px;
   }
   
+  .card-body {
+    text-align: center;
+  }
+  
   .btn-card {
     background-color: $carrot-hov;
     color: $white;
@@ -95,6 +99,7 @@
 
 .load-wrap {
   margin-left: 0.5rem;
+  color: $carrot-hov;
   .load-buff {
     margin: 1rem 0rem 0rem 1rem;
     width: min-content;

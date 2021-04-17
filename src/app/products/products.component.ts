@@ -24,6 +24,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public category: string;
 
   public isAnime = false;
+  public isAnimeDone = false;
 
   constructor( private productService: ProductService, categoryService: CategoryService, route: ActivatedRoute ) { 
 

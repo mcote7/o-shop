@@ -27,6 +27,10 @@
     border: none;
     font-weight: 500;
     color: $tanish;
+    position: relative;
+    z-index: 1999;
+    transform: scale(2);
+    margin-left: 1rem;
     
     @media (min-width: 576px) {
       display: none!important;
@@ -53,6 +57,17 @@
     
     &.active-link {
       color: $darkGreen;
+    }
+    
+    &.cart-link {
+      transform: rotateY(180deg);
+      padding: 0rem;
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      float: left;
+      @media (min-width: 576px) {
+        float: none;
+      }
     }
   }
 
