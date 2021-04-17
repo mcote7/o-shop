@@ -65,10 +65,16 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   save(product: any, f: NgForm) {
     console.log("product:", product);
     if ( this.id ) {
-      this.productService.update(this.id, product);
+      this.productService.update(this.id, product).catch(err => {
+        console.log("error", err)
+        alert("🤚 🛑 🚫 🔒\nYou do not have permission\nto write or modify product data!\nChanges will not take effect. 😢")
+      });
       this.updateConfirm();
     } else {
-      this.productService.create(product);
+      this.productService.create(product).catch(err => {
+        console.log("error", err)
+        alert("🤚 🛑 🚫 🔒\nYou do not have permission\nto write or modify product data!\nChanges will not take effect. 😢")
+      });
       this.saveConfirm();
       f.reset();
     }
@@ -77,7 +83,10 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   deleteProduct() {
     if (confirm('🤔 Are you sure you want to delete? You will be re-directed to the products page upon deletion.')) {
       this.isDeleting = true;
-      this.productService.delete(this.id);
+      this.productService.delete(this.id).catch(err => {
+        console.log("error", err)
+        alert("🤚 🛑 🚫 🔒\nYou do not have permission\nto write or modify product data!\nChanges will not take effect. 😢")
+      });
       this.router.navigate(['/admin/products']);
       alert(`✔ Product id # ${this.id} has been deleted.`);
     }
