@@ -8,6 +8,7 @@ import { Product } from '../../models/product';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ShoppingCartService {
 
   constructor(private db: AngularFireDatabase) { }
@@ -18,8 +19,13 @@ export class ShoppingCartService {
     });
   }
 
-  private getCart(cartId: string) {
-    return this.db.object('/shopping-carts' + cartId);
+  getCart(cartId: string) {
+    // let cartId = await this.getOrCreateCartId();
+    return this.db.object('/shopping-carts/' + cartId).valueChanges();
+  }
+
+  private getItem(cartId: string, productId: string) {
+    return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
   }
 
   private async getOrCreateCartId() {
@@ -34,7 +40,7 @@ export class ShoppingCartService {
 
   async addToCart(product: Product) {
     let cartId = await this.getOrCreateCartId();
-    let items$ = this.db.object('/shopping-carts/' + cartId + '/items/' + product.key);
+    let items$ = this.getItem(cartId, product.key);
     items$.valueChanges().pipe(take(1)).subscribe((item: Product) => {
       if(item !== null) {
         console.log("hey not null", item)

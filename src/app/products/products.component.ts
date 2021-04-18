@@ -1,12 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { Subscription } from 'rxjs';
 
 import { CategoryService } from '../services/category.service';
 import { ProductService } from '../services/product.service';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
 import { fadeIn, listAnimationWrapCard, listAnimationItemCard, slideInTop } from '../../animations/anime';
-import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
-import { ShoppingCartService } from '../services/shopping-cart.service';
+
 import { Product } from '../../models/product';
 
 
@@ -22,6 +24,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public products: any[] = [];
   public filteredProducts: any[] = [];
   public subscription: Subscription;
+  public subscription2: Subscription;
+
+  public cart: any;
 
   public categories$: any;
   public category: string;
@@ -47,14 +52,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
       })
     });
     this.categories$ = categoryService.getCategories();
+    
+    let cartId = localStorage.getItem('cartId');
+    this.subscription2 = this.cartService.getCart(cartId).subscribe(cart => this.cart = cart);
   }
 
   ngOnInit() {
-    if( this.categories$ && this.products ) {
+    if( this.categories$ && this.filteredProducts ) {
       this.isAnime = true;
     } else {
       setTimeout(() => {
-        if( this.categories$ && this.products ) {
+        if( this.categories$ && this.filteredProducts ) {
           this.isAnime = true;
         } else {
           alert('error getting data')
@@ -67,7 +75,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.cartService.addToCart(product);
   }
 
+  getQuantity(product: Product) {
+    if(!this.cart) {
+      return 0;
+    }
+    let item = this.cart.items[product.key];
+    // console.log("hey", this.cart)
+    return item ? item.quantity : 0;
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.subscription2.unsubscribe();
   }
 }
