@@ -33,12 +33,17 @@
             (click)="closeMenus()"
             routerLink="/shopping-cart"
             routerLinkActive="active-link">
-            🛒
+            🛒 <div 
+                  @fadeInOut
+                  *ngIf="isItems && shoppingCartCount !== 0" 
+                  class="cart-count">
+                  {{shoppingCartCount}}
+                </div>
           </a>
         </li>
         
         <ng-template #anonymousUser>
-          <li class="nav-item">
+          <li class="nav-item login-btn">
             <a 
               class="nav-link"
               (click)="closeMenus()"
@@ -61,8 +66,8 @@
             data-bs-toggle="dropdown" aria-expanded="false">
             <!-- USER NAME -->
             {{appUser.name}}
-            <span class="nav-toggle-icon" *ngIf="isDropdownCollapsed">&#x25B2;</span>
-            <span class="nav-toggle-icon" *ngIf="!isDropdownCollapsed">&#x25BC;</span>
+            <span @fadeIn class="nav-toggle-icon" *ngIf="isDropdownCollapsed">&#x25B2;</span>
+            <span @fadeIn class="nav-toggle-icon" *ngIf="!isDropdownCollapsed">&#x25BC;</span>
           </a>
           
           <ul 

@@ -45,7 +45,7 @@
       color: $darkGreen;
     }
   }
-  
+
   .nav-link {
     user-select: none;
     color: $tanish;
@@ -65,9 +65,47 @@
       font-size: 1.5rem;
       margin-right: 1rem;
       float: left;
+      &:hover {
+        color: $tanish;
+        .cart-count {
+          transform: scale(1.1) translateY(2px) rotateY(180deg);
+        }
+      }
       @media (min-width: 576px) {
         float: none;
+        margin-left: 1rem;
       }
+      .cart-count {
+        display: inline-flex;
+        height: 20px;
+        width: 20px;
+        align-items: center;
+        justify-content: center;
+        background-color: $bluegrey;
+        border-radius: 50%;
+        font-size: 0.9rem;
+        font-weight: bold;
+        position: absolute;
+        top: 2px;
+        right: 1.5rem;
+        transform: rotateY(180deg);
+        transition: $transition;
+      }
+    }
+  }
+
+  .login-btn {
+    margin-left: 0rem;
+    font-weight: bold;
+    @media (min-width: 576px) {
+      margin-left: 2rem;
+    }
+  }
+  .dropdown {
+    margin-left: 0rem;
+    font-weight: bold;
+    @media (min-width: 576px) {
+      margin-left: 2rem;
     }
   }
 

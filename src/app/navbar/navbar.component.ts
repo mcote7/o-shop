@@ -1,30 +1,53 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { AppUser } from 'src/models/app-user';
 
 import { AuthService } from '../services/auth.service';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
-import {  } from '../../animations/anime';
+import { fadeInOut, fadeIn } from '../../animations/anime';
 
 
 @Component({
   selector: 'navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  animations: []
+  animations: [fadeInOut, fadeIn]
 })
 export class NavbarComponent implements OnInit {
 
   public appUser: AppUser;
 
+  // public cart: any;
+  public subscription: Subscription;
+  public shoppingCartCount: number;
+  public isItems = false;
+
   public isMenuCollapsed = true;
   public isDropdownCollapsed = true;
 
-  constructor( private auth: AuthService) {
-    auth.appUser$.subscribe( appUser => this.appUser = appUser );
+  constructor( private auth: AuthService, private cartService: ShoppingCartService ) {
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.auth.appUser$.subscribe( appUser => this.appUser = appUser );
+    let cartId = localStorage.getItem('cartId');
+    this.subscription = this.cartService.getCart(cartId).subscribe(cart => {
+      console.log("this", cart.items)
+      this.shoppingCartCount = 0;
+      if(cart.items) {
+        for(let productId in cart.items) {
+            this.shoppingCartCount += cart.items[productId].quantity;
+            this.isItems = true;
+            console.log("this", cart.items)
+        }
+      } else {
+        this.isItems = false;
+        console.log("this", cart.items)
+      }
+    });
+  }
 
   logout() {
     this.auth.logout();
@@ -33,7 +56,6 @@ export class NavbarComponent implements OnInit {
   }
 
   handleMenuCollapse() {
-    // console.log("menu collapse")
     if(this.isMenuCollapsed === true) {
       this.isMenuCollapsed = false;
     } else {
@@ -42,7 +64,6 @@ export class NavbarComponent implements OnInit {
   }
 
   handleDropdownCollapse() {
-    // console.log("dropdown collapse")
     if(this.isDropdownCollapsed === true) {
       this.isDropdownCollapsed = false;
     } else {
