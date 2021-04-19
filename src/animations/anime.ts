@@ -184,6 +184,28 @@ export const toastNotification = trigger('toastNotification', [
     ])
 ]);
 
+// pop in
+
+export const popin = trigger('popin', [
+  transition(':enter', [
+    style({
+        opacity: 0,
+        transform: 'scale3d(0.8, 0.8, 0.8)'
+    }),
+    animate('200ms ease-in-out', keyframes([
+        style({
+            offset: .5,
+            opacity: 0.9,
+            transform: 'scale3d(1.1, 1.1, 1.1)'
+        }),
+        style({
+            offset: 1,
+            transform: 'scale3d(1, 1, 1)'
+        })
+    ]))
+])
+]);
+
 // stagger for cards 🍇 
 
 export const listAnimationWrapCard = trigger('listAnimationWrapCard', [

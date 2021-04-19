@@ -7,7 +7,7 @@ import { CategoryService } from '../services/category.service';
 import { ProductService } from '../services/product.service';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 
-import { fadeIn, listAnimationWrapCard, listAnimationItemCard, slideInTop } from '../../animations/anime';
+import { fadeIn, listAnimationWrapCard, listAnimationItemCard, slideInTop, popin } from '../../animations/anime';
 
 import { Product } from '../../models/product';
 
@@ -16,7 +16,7 @@ import { Product } from '../../models/product';
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
-  animations: [fadeIn,listAnimationWrapCard,listAnimationItemCard,slideInTop]
+  animations: [fadeIn,listAnimationWrapCard,listAnimationItemCard,slideInTop,popin]
 })
 
 export class ProductsComponent implements OnInit, OnDestroy {
@@ -73,6 +73,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   addToCart(product: Product) {
     this.cartService.addToCart(product);
+  }
+
+  removeFromCart(product: Product) {
+    this.cartService.removeFromCart(product);
   }
 
   getQuantity(product: Product) {
