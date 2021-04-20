@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit {
         for(let productId in cart.items) {
             this.shoppingCartCount += cart.items[productId].quantity;
             this.isItems = true;
-            console.log("this cart 2", cart.items)
+            // console.log("this cart 2", cart.items)
         }
       } else {
         this.isItems = false;
