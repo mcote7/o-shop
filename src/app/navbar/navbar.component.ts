@@ -34,17 +34,17 @@ export class NavbarComponent implements OnInit {
     this.auth.appUser$.subscribe( appUser => this.appUser = appUser );
     let cartId = localStorage.getItem('cartId');
     this.subscription = this.cartService.getCart(cartId).subscribe(cart => {
-      console.log("this", cart.items)
+      // console.log("this cart", cart.items)
       this.shoppingCartCount = 0;
-      if(cart.items) {
+      if(cart && cart.items) {
         for(let productId in cart.items) {
             this.shoppingCartCount += cart.items[productId].quantity;
             this.isItems = true;
-            console.log("this", cart.items)
+            console.log("this cart 2", cart.items)
         }
       } else {
         this.isItems = false;
-        console.log("this", cart.items)
+        // console.log("this cart 3", cart.items)
       }
     });
   }
