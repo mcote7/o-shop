@@ -51,12 +51,21 @@ export class ShoppingCartService {
     let items$ = this.getItem(cartId, product.key);
     items$.valueChanges().pipe(take(1)).subscribe((item: Product) => {
       if(item !== null) {
-        console.log("hey not null", item)
-        items$.update({ quantity: item.quantity + change});
+        let quantity = item.quantity + change;
+        if(quantity === 0) {
+          items$.remove();
+        } else {
+          // console.log("hey not null", item)
+          items$.update({ quantity: quantity});
+        }
       } else {
         items$.set({ product: product, quantity: change });
-        console.log("hey null", item)
+        // console.log("hey null", item)
       }
     });
+  }
+
+  clearCart() {
+    return this.db.object('/shopping-carts').remove();
   }
 }
