@@ -123,7 +123,7 @@ export const rotateInOut = trigger('rotateInOut', [
 export const listAnimationWrap = trigger('listAnimationWrap', [
     transition('* => *', [
         query('@listAnimationItem', [
-            stagger(62, [
+            stagger(162, [
                 animateChild()
             ])
         ], { optional: true })
@@ -136,7 +136,7 @@ export const listAnimationItem = trigger('listAnimationItem', [
         style({
             opacity: 0
         }),
-        animate(92, style({
+        animate(192, style({
             opacity: 1
         }))
     ])

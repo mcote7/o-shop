@@ -5,10 +5,13 @@ import { Product } from 'src/models/product';
 
 import { ShoppingCartService } from '../services/shopping-cart.service';
 
+import { listAnimationWrap, listAnimationItem } from '../../animations/anime';
+
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.scss']
+  styleUrls: ['./shopping-cart.component.scss'],
+  animations: [listAnimationItem,listAnimationWrap]
 })
 export class ShoppingCartComponent implements OnInit {
 

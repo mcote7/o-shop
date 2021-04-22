@@ -7,7 +7,7 @@
 </div>
 <div *ngIf="isItems" class="row">
   <div class="col">
-    <table class="table table-striped">
+    <table class="table table-striped cart-table">
       <thead>
         <tr>
           <th>Product</th>
@@ -15,9 +15,17 @@
           <th>Price</th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let productId of itemKeys">
-          <td>{{cart?.items[productId].product.title}}</td>
+      <tbody [@listAnimationWrap]="cart?.length">
+        <tr @listAnimationItem *ngFor="let productId of itemKeys">
+          
+          <td class="prod-img-td">
+            <div class="prod-img-wrap">
+              <img class="cart-img" [src]="cart?.items[productId].product.imageUrl" alt="&nbsp; 🤷‍♂️ image not found">
+              <div class="badge prod-badge mt-auto">
+                {{cart?.items[productId].product.title}}
+              </div>
+            </div>
+          </td>
           
           <td>
             <div class="btm-btns-wrp">
@@ -33,7 +41,7 @@
               <button  
                 id="{{cart?.items[productId].product.title}}"
                 class="btn btn-card-cart">
-                {{getQuantity(cart?.items[productId].product)}} in cart
+                {{getQuantity(cart?.items[productId].product)}}
               </button>
               
               <div class="handle-right"></div>
@@ -52,20 +60,18 @@
       </tbody>
       <tfoot>
         <tr>
-          <th></th>
-          <th></th>
+          <th>
+            <button 
+              class="btn cart-clear-btn"
+              (click)="clearCart()">
+              Clear Cart
+            </button>
+          </th>
+          <th>Total Price:</th>
           <th>{{ totalPrice | currency:'USD':'symbol' }}</th>
         </tr>
       </tfoot>
     </table>
   </div>
 </div>
-<div *ngIf="isItems" class="row">
-  <div class="col">
-    <button 
-      class="btn btn-danger btn-small btn-clear-cart"
-      (click)="clearCart()">
-      Clear Cart
-    </button>
-  </div>
-</div>
+<!-- 🔥🚒🧯 -->

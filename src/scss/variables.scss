@@ -25,3 +25,6 @@ $borderRad: 0.1rem;
 $transition: 150ms;
 $transitionFast: 75ms;
 
+* {
+  user-select: none;
+}
