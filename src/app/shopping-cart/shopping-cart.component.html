@@ -5,8 +5,8 @@
     <p>You have {{shoppingCartCount}} items in your cart</p>
   </div>
 </div>
-<div *ngIf="isItems" class="row">
-  <div class="col">
+<div *ngIf="isItems" class="row mb-5">
+  <div class="col-xl-8 col-lg-9 col-md-10 col-sm-11 col-xs-12">
     <table class="table table-striped cart-table">
       <thead>
         <tr>
@@ -15,7 +15,9 @@
           <th>Price</th>
         </tr>
       </thead>
-      <tbody [@listAnimationWrap]="cart?.length">
+      <tbody 
+        [@listAnimationWrap]="cart?.length"
+        (@listAnimationWrap.done)="isStaggDone = true">
         <tr @listAnimationItem *ngFor="let productId of itemKeys">
           
           <td class="prod-img-td">
@@ -58,7 +60,7 @@
           <td>{{cart?.items[productId].product.price * cart?.items[productId].quantity | currency:'USD':'symbol' }}</td>
         </tr>
       </tbody>
-      <tfoot>
+      <tfoot @fadeIn *ngIf="isStaggDone">
         <tr>
           <th>
             <button 
@@ -67,11 +69,19 @@
               Clear Cart
             </button>
           </th>
-          <th>Total Price:</th>
-          <th>{{ totalPrice | currency:'USD':'symbol' }}</th>
+          <th>
+            <button 
+              class="btn check-out-btn">
+              Check out
+            </button>
+          </th>
+          <th>
+            <strong>Total</strong><br>
+            {{ totalPrice | currency:'USD':'symbol' }}
+          </th>
         </tr>
       </tfoot>
     </table>
   </div>
 </div>
-<!-- 🔥🚒🧯 -->
+<!-- this template === 🔥🚒🧯 -->

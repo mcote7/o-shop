@@ -77,7 +77,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   removeFromCart(product: Product, i: string) {
     this.cartService.removeFromCart(product);
-    console.log("heyheyhey",i)
+    // console.log("heyheyhey",i)
     let btn = document.getElementById(i);
     btn.animate([
       {transform: 'rotateX(360deg)', backgroundColor: 'hsla(29, 79%, 56%, 1)'},
