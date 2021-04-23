@@ -3,6 +3,7 @@
 .o-navbar {
   background-color: $lightGreen;
   padding: 0.25rem 1rem;
+  z-index: 2999;
   
   .navbar-brand  {
     user-select: none;
@@ -123,6 +124,8 @@
     user-select: none;
     background-color: $tanish;
     border-radius: $borderRad;
+    backface-visibility: hidden;
+    transform-origin: 0% 0%;
     
     .dropdown-item {
       cursor: pointer;
@@ -166,6 +169,6 @@
 }
 // 
 @keyframes show-drop {
-  from {opacity: 0; transform: scale3d(0.9, 0.9, 0.9)}
+  from {opacity: 0; transform: scale3d(0.4, 0.4, 1)}
   to {opacity: 1; transform: scale3d(1, 1, 1)}
 }

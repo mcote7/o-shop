@@ -6,14 +6,14 @@ import { AppUser } from 'src/models/app-user';
 import { AuthService } from '../services/auth.service';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 
-import { fadeInOut, fadeIn } from '../../animations/anime';
+import { fadeInOut, fadeIn, toastNotification } from '../../animations/anime';
 
 
 @Component({
   selector: 'navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  animations: [fadeInOut, fadeIn]
+  animations: [fadeInOut, fadeIn, toastNotification]
 })
 export class NavbarComponent implements OnInit {
 
@@ -67,7 +67,17 @@ export class NavbarComponent implements OnInit {
     if(this.isDropdownCollapsed === true) {
       this.isDropdownCollapsed = false;
     } else {
-      this.isDropdownCollapsed = true;
+      let el = document.getElementById('drop-d');
+      el.animate([
+        {opacity: 1, transform: 'scaleY(1)'},
+        {opacity: 0, transform: 'scaleY(0.2)'}
+      ], {
+        duration: 155,
+        easing: 'ease-in'
+      });
+      setTimeout(() => {
+        this.isDropdownCollapsed = true;
+      }, 150);
     }
   }
 
