@@ -1,0 +1,134 @@
+// 
+@import '../../scss/variables.scss';
+
+// form 
+.order-submit-btn {
+  position: relative;
+  display: block;
+  margin: 2rem auto 0rem auto;
+  background-color: $carrot-hov;
+  color: $white;
+  width: 60%;
+  border-radius: $borderRad;
+  transition: background-color 0.6s, transform 0.2s;
+  backface-visibility: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: rgba(255,255,255,0.8);
+    transition: none;
+  }
+
+  &::before {
+    content: '';
+  }
+  
+  &:hover {
+    background-color: $carrot;
+
+    &::before {
+      content: '🚛';
+      transform: rotateY(180deg);
+      position: absolute;
+      right: calc(0% + 0.5rem);
+      font-size: 1.25rem;
+      top: -0.1rem;
+      z-index: 1982;
+      animation: fade-in2 0.2s ease-out;
+      @media only screen and (max-width: 576px) {
+        right: calc(0% + 1.35rem);
+      }
+    }
+    
+    &::after {
+      width: 120%;
+      background-color: rgba(255,255,255,0);
+      transition: all 0.4s ease-in-out;
+    }
+  }
+  
+  &:focus, :active {
+    box-shadow: none;
+  }
+  
+  &:active {
+    transition: transform 0.2s;
+    transform: scale3d(0.95, 0.95, 1);
+  }
+
+  &:disabled {
+    &:hover {
+      background-color: $carrot-hov;
+      transform: none;
+      &::before {
+        content: '';
+        display: none;
+      }
+      &::after {
+        content: '';
+        display: none;
+      }
+    }
+  }
+}
+
+.order-back-btn {
+  background-color: $bluegrey-hov;
+  color: $white;
+  display: block;
+  margin: 1rem auto 0rem auto;
+  border-radius: $borderRad;
+  transition: $transition;
+  backface-visibility: hidden;
+  width: 60%;
+  &:hover {
+    background-color: $bluegrey;
+  }
+  &:focus, :active {
+    box-shadow: none;
+  }
+  &:active {
+    transform: scale3d(0.95, 0.95, 1);
+  }
+}
+
+form {
+  width: 80%;
+}
+
+.form-control {
+  border-radius: $borderRad;
+  
+  &:focus {
+    border-color: $tanish-hov;
+    box-shadow: 0 0 0 0.2rem $tanish;
+  }
+}
+
+.alert {
+  border-radius: $borderRad;
+  margin-bottom: 0rem;
+}
+
+.shipping-saved {
+  width: 60%;
+  margin: 1rem auto;
+}
+
+@keyframes fade-in2 {
+  from {opacity: 0; filter: blur(12px); margin-right: 4rem;}
+  to {opacity: 1; filter: blur(0px); margin-right: 0rem;}
+}
+
+@media only screen and (max-width: 768px) {
+  form {
+    width: 100%;
+  }
+}
+
+// end form 

@@ -1,1 +1,122 @@
-<p>check-out works!</p>
+
+
+<!-- TEMPLATE DRIVEN FORM EX. -->
+
+<div class="row justify-content-center mt-4 mb-3">
+  <div class="col-xl-8 col-lg-9 col-md-10 col-sm-11 col-xs-12">
+    <h4>Shipping details</h4>
+  </div>
+</div>
+
+<div class="row mb-5 justify-content-center">
+  <div class="col-xl-8 col-lg-9 col-md-10 col-sm-11 col-xs-12">
+    
+    <form 
+      @fadeIn
+      #f="ngForm"
+      (ngSubmit)="placeOrder(f.value, f)">
+      
+      <div class="form-group">
+        
+        <label for="name">Name</label>
+        <input 
+          (keyup)="checkCapsLock($event)"
+          #name="ngModel"
+          [(ngModel)]="shipping.name"
+          name="name"
+          id="name"
+          type="text"
+          class="form-control"
+          required>
+          
+        <div 
+          *ngIf="name.touched && name.invalid"
+          class="alert alert-danger">
+            🛑 name is required.
+        </div>
+        <div 
+          *ngIf="capsIsOn"
+          class="alert alert-warning">
+            ⚠ CapsLock is on.
+        </div>
+        
+      </div>
+      
+      <div class="form-group">
+        
+        <label for="address">Address</label>
+          
+        <input 
+          #address="ngModel"
+          [(ngModel)]="shipping.address"
+          name="address"
+          id="address"
+          type="text"
+          class="form-control"
+          placeholder="Line 1"
+          required>
+          
+        <br>
+          
+        <input 
+          #address="ngModel"
+          [(ngModel)]="shipping.address2"
+          name="address2"
+          id="address2"
+          type="text"
+          class="form-control"
+          placeholder="Line 2">
+          
+          
+        <div 
+          *ngIf="address.touched && address.invalid"
+          class="alert alert-danger">
+          <div *ngIf="address.errors.required">🛑 address is required.</div>
+        </div>
+        
+      </div>
+      
+      <div class="form-group">
+        
+        <label for="city">City</label>
+        
+        <input 
+          #city="ngModel"
+          [(ngModel)]="shipping.city"
+          name="city"
+          id="city"
+          type="text"
+          class="form-control"
+          required>
+        
+        <div 
+          *ngIf="city.touched && city.invalid && !f.submitted"
+          class="alert alert-danger">
+            🛑 city is required.
+        </div>
+        
+      </div>
+      
+      <button 
+        [disabled]="f.untouched || f.invalid"
+        class="btn order-submit-btn">
+          Place order
+      </button>
+      
+      <a 
+        routerLink="/shopping-cart"
+        class="btn order-back-btn">
+          Back to cart
+      </a>
+      
+      <div 
+        @toastNotification
+        *ngIf="isSaved"
+        class="alert alert-success shipping-saved">
+          ✔ Order placed !
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 🐱‍🚀 -->

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/models/product';
@@ -13,7 +13,7 @@ import { listAnimationWrap, listAnimationItem, slideInTop, fadeIn } from '../../
   styleUrls: ['./shopping-cart.component.scss'],
   animations: [listAnimationItem,listAnimationWrap,slideInTop,fadeIn]
 })
-export class ShoppingCartComponent implements OnInit {
+export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   public subscription: Subscription;
   public shoppingCartCount: number;
@@ -37,7 +37,7 @@ export class ShoppingCartComponent implements OnInit {
             this.totalPrice += cart.items[productId].product.price * cart.items[productId].quantity;
             this.isItems = true;
             this.cart = cart;
-            // console.log("this cart 2", cart.items)
+            // console.log("this cart 2", cart)
         }
         this.itemKeys = Object.keys(cart.items);
       } else {
@@ -101,4 +101,8 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

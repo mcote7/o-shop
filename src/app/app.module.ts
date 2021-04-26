@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from  '@angular/forms';
-
 import { CustomFormsModule } from 'ng2-validation';
 
 import { AngularFireModule } from '@angular/fire';
@@ -36,6 +35,7 @@ import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 import { CategoryService } from './services/category.service';
 import { ProductService } from './services/product.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
+import { OrderService } from './services/order.service';
 
 @NgModule({
   declarations: [
@@ -70,7 +70,8 @@ import { ShoppingCartService } from './services/shopping-cart.service';
     UserService,
     CategoryService,
     ProductService,
-    ShoppingCartService
+    ShoppingCartService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })
