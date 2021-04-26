@@ -1,1 +1,22 @@
-<p>my-orders works!</p>
+
+<h1 @slideInLeft>Orders</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Customer</th>
+      <th>Date</th>
+      <th>Email</th>
+      <th># of items</th>
+    </tr>
+  </thead>
+  <tbody [@listAnimationWrap]="orders?.length">
+    <tr @listAnimationItem *ngFor="let order of orders">
+      <div *ngIf="order.userId === user.uid" style="display: contents;">
+        <td>{{ order.shipping.name }}</td>
+        <td>{{ order.datePlaced | date}}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ order.items.length }}</td>
+      </div>
+    </tr>
+  </tbody>
+</table>

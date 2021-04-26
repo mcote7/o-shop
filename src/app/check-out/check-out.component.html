@@ -3,13 +3,13 @@
 <!-- TEMPLATE DRIVEN FORM EX. -->
 
 <div class="row justify-content-center mt-4 mb-3">
-  <div class="col-xl-8 col-lg-9 col-md-10 col-sm-11 col-xs-12">
+  <div @slideInLeft class="col-xl-8 col-lg-9 col-md-10 col-sm-11 col-xs-12">
     <h4>Shipping details</h4>
   </div>
 </div>
 
 <div class="row mb-5 justify-content-center">
-  <div class="col-xl-8 col-lg-9 col-md-10 col-sm-11 col-xs-12">
+  <div class="col-md-6 mt-4">
     
     <form 
       @fadeIn
@@ -30,14 +30,10 @@
           required>
           
         <div 
+          @fadeIn
           *ngIf="name.touched && name.invalid"
           class="alert alert-danger">
             🛑 name is required.
-        </div>
-        <div 
-          *ngIf="capsIsOn"
-          class="alert alert-warning">
-            ⚠ CapsLock is on.
         </div>
         
       </div>
@@ -48,31 +44,21 @@
           
         <input 
           #address="ngModel"
+          (keyup)="checkCapsLock($event)"
           [(ngModel)]="shipping.address"
           name="address"
           id="address"
           type="text"
           class="form-control"
-          placeholder="Line 1"
+          placeholder="city, state & zip code"
           required>
-          
-        <br>
-          
-        <input 
-          #address="ngModel"
-          [(ngModel)]="shipping.address2"
-          name="address2"
-          id="address2"
-          type="text"
-          class="form-control"
-          placeholder="Line 2">
-          
-          
-        <div 
-          *ngIf="address.touched && address.invalid"
-          class="alert alert-danger">
-          <div *ngIf="address.errors.required">🛑 address is required.</div>
-        </div>
+        
+          <div 
+            @fadeIn
+            *ngIf="address.touched && address.invalid"
+            class="alert alert-danger">
+              🛑 address is required.
+          </div>
         
       </div>
       
@@ -82,6 +68,7 @@
         
         <input 
           #city="ngModel"
+          (keyup)="checkCapsLock($event)"
           [(ngModel)]="shipping.city"
           name="city"
           id="city"
@@ -90,11 +77,19 @@
           required>
         
         <div 
-          *ngIf="city.touched && city.invalid && !f.submitted"
+          @fadeIn
+          *ngIf="city.touched && city.invalid"
           class="alert alert-danger">
             🛑 city is required.
         </div>
         
+      </div>
+      
+      <div 
+        @toastNotification
+        *ngIf="capsIsOn"
+        class="alert alert-warning">
+          ⚠ CapsLock is on.
       </div>
       
       <button 
@@ -113,9 +108,12 @@
         @toastNotification
         *ngIf="isSaved"
         class="alert alert-success shipping-saved">
-          ✔ Order placed !
+          ⏳ Placing your order...
       </div>
     </form>
+  </div>
+  <div @slideInTop class="col-md-6 mt-5 mb-5">
+    <shopping-cart-summary></shopping-cart-summary>
   </div>
 </div>
 

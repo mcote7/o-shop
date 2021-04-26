@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Order } from 'src/models/order';
 
-import { fadeIn, toastNotification } from '../../animations/anime';
+import { fadeIn, toastNotification, slideInTop, slideInLeft } from '../../animations/anime';
 import { AuthService } from '../services/auth.service';
 
 import { OrderService } from '../services/order.service';
@@ -13,7 +14,7 @@ import { ShoppingCartService } from '../services/shopping-cart.service';
   selector: 'app-check-out',
   templateUrl: './check-out.component.html',
   styleUrls: ['./check-out.component.scss'],
-  animations: [fadeIn,toastNotification]
+  animations: [fadeIn,toastNotification,slideInTop,slideInLeft]
 })
 
 export class CheckOutComponent implements OnInit, OnDestroy {
@@ -62,28 +63,16 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     this.userSubscription = this.authService.user$.subscribe(user => this.userId = user.uid);
   }
 
-  placeOrder(info: any, f: NgForm) {
-    let order = {
-      userId: this.userId,
-      datePlaced: new Date().getTime(),
-      shipping: info,
-      items: this.items.map(i => {
-        // console.log("i", i)
-        return {
-          product: {
-            title: i.product.title,
-            imageUrl: i.product.imageUrl,
-            price: i.product.price
-          },
-          quantity: i.quantity,
-          totalPrice: i.product.price * i.quantity
-        }
-      })
-    }
-    console.log("order?", order)
-    this.orderService.saveOrder(order);
-    f.reset();
+  async placeOrder(info: any, f: NgForm) {
     this.saveConfirm();
+    let order = new Order(this.userId, info, this.items)
+    // console.log("order?", order)
+    let result = await this.orderService.saveOrder(order);
+    f.reset();
+    this.router.navigate(['order-success', result.key]);
+    setTimeout(() => {
+      this.cartService.clearCart();
+    }, 100);
   }
 
   saveConfirm() {

@@ -1,0 +1,31 @@
+
+<div class="card" style="width: 20rem;">
+  <div class="card-body">
+    <h5 class="card-title">Order summary</h5>
+    <p class="card-text">you have {{ shoppingCartCount }} items in your cart</p>
+    <ul 
+      [@listAnimationWrap]="itemKeys?.length" 
+      (@listAnimationWrap.done)="isStagDone = true" 
+      class="list-group list-group-flush">
+      <li 
+        @listAnimationItem 
+        *ngFor="let productId of itemKeys; let l = last" 
+        class="list-group-item">
+        {{cart?.items[productId].quantity}} &times; {{cart?.items[productId].product.title}}
+        <div class="float-right">
+          {{ cart.items[productId].product.price * cart.items[productId].quantity | currency:'USD':'symbol' }}
+        </div>
+        
+        <div 
+          *ngIf="isStagDone && l"
+          class="list-group-item mt-5">
+          <strong>Total Price:</strong>
+          <div class="float-right">
+            {{totalPrice | currency:'USD':'symbol'}}&nbsp;💵
+          </div>
+        </div>
+        
+      </li>
+    </ul>
+  </div>
+</div>

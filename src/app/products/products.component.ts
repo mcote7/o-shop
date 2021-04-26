@@ -7,7 +7,7 @@ import { CategoryService } from '../services/category.service';
 import { ProductService } from '../services/product.service';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 
-import { fadeIn, listAnimationWrapCard, listAnimationItemCard, slideInTop, popin } from '../../animations/anime';
+import { fadeIn, listAnimationWrapCard, listAnimationItemCard, slideInTop, popin, toastNotification } from '../../animations/anime';
 
 import { Product } from '../../models/product';
 
@@ -16,7 +16,7 @@ import { Product } from '../../models/product';
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
-  animations: [fadeIn,listAnimationWrapCard,listAnimationItemCard,slideInTop,popin]
+  animations: [fadeIn,listAnimationWrapCard,listAnimationItemCard,slideInTop,popin,toastNotification]
 })
 
 export class ProductsComponent implements OnInit, OnDestroy {
@@ -27,6 +27,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public subscription2: Subscription;
 
   public cart: any;
+
+  public totItemsInCat: number = 0;
 
   public categories$: any;
   public category: string;

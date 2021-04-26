@@ -11,4 +11,9 @@ export class OrderService {
   saveOrder(order: any) {
     return this.db.list('/orders').push(order);
   }
+
+  getOrders() {
+    return this.db.list('/orders').valueChanges();
+  }
+
 }

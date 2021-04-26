@@ -4,6 +4,7 @@
 .list-group {
   position: fixed;
   top: 4rem;
+  width: 8rem;
   user-select: none;
   margin: 0.5rem 0rem 0rem 1rem;
   border-radius: $borderRad;
@@ -17,6 +18,8 @@
     border-top: none;
     height: 3rem;
     padding-top: calc(0.75rem - 2px);
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
     transition: $transitionFast ease-in-out;
     
     &:hover {
@@ -42,6 +45,13 @@
       color: $tanish;
       border: 1px solid $tanish-hov;
       border-top: none;
+      .cat-item-len {
+        display: inline-flex;
+      }
+    }
+
+    .cat-item-len {
+      display: none;
     }
   }
 }
@@ -200,7 +210,7 @@
   }
   .list-group {
     position: initial;
-    width: 18rem;
+    width: 12rem;
     margin: 0.5rem auto;
   }
 }

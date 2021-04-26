@@ -73,12 +73,13 @@
           <ul 
             class="dropdown-menu"
             id="drop-d"
+            (mouseleave)="handleDropdownCollapse()"
             [class.show]="!isDropdownCollapsed"
             aria-labelledby="navbarDropdownMenuLink">
             
             <li>
               <a 
-                (click)="closeMenus()"
+                
                 class="dropdown-item" routerLink="/my/orders"
                 routerLinkActive="active-dropdown-link">
                 My Orders
@@ -97,7 +98,7 @@
             <ng-container *ngIf="appUser.isAdmin">
               <li style="border-top: 1px solid rgba(0,0,0,0.15);padding-top: 1.25rem;">
                 <a 
-                  (click)="closeMenus()"
+                  
                   class="dropdown-item" routerLink="/admin/orders"
                   title="&nbsp;Admin access.&nbsp;✔"
                   routerLinkActive="active-dropdown-link">
@@ -107,7 +108,7 @@
               
               <li>
                 <a 
-                  (click)="closeMenus()"
+                  
                   class="dropdown-item" routerLink="/admin/products"
                   title="&nbsp;Admin access.&nbsp;✔"
                   routerLinkActive="active-dropdown-link">

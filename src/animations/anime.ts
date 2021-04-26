@@ -73,11 +73,11 @@ export const slideInTop = trigger('slideInTop', [
     ])
 ]);
 
-export const slideInRight = trigger('slideInRight', [
+export const slideInLeft = trigger('slideInLeft', [
     transition(':enter', [
         style({
             opacity: 0,
-            transform: 'translateX(1rem)'
+            transform: 'translateX(-1rem)'
         }),
         group([
             animate(100, style({
