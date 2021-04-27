@@ -52,6 +52,7 @@
 
     .cat-item-len {
       display: none;
+      backface-visibility: hidden;
     }
   }
 }

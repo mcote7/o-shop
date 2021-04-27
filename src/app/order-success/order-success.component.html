@@ -1,1 +1,16 @@
-<p>order-success works!</p>
+
+
+<div class="row">
+  <div @slideInTop (@slideInTop.done)="clockDone = true" class="col clock">
+    <div style="margin: auto;">
+      <div @toastNotification *ngIf="clockDone" class="alert" style="cursor: pointer; top: 6rem;" routerLink="/">
+          <div style="font-size: 1.675rem;">
+            <strong>🎉 Thank you</strong>
+            <hr>
+            <small>your order will arive someday...</small>
+          </div>
+      </div>
+      <div class="fade"><strong>Back to shop</strong></div>
+    </div>
+  </div>
+</div>

@@ -1,2 +1,47 @@
 // order success here 
-
+@import '../../scss/variables.scss';
+.clock {
+  display: flex;
+  min-height: 50vh;
+  margin-top: 3rem;
+  background-image: url('../../assets/images/clock.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-x: 50%;
+}
+.alert {
+  background-color: $bluegrey;
+  color: $tanish;
+  border: 0.25rem solid $bluegrey-hov;
+  filter: blur(0px);
+  backface-visibility: hidden;
+  transition: 0.85s ease-in-out;
+  &:hover {
+    opacity: 0.15;
+    filter: blur(12px);
+    transform: scale3d(1.2, 1.2, 1);
+    ~.fade {
+      opacity: 1;
+      filter: blur(0px);
+    }
+  }
+}
+hr {
+  margin-bottom: 0.25rem;
+  margin-top: 1rem;
+}
+.fade {
+  pointer-events: none;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  background-color: $carrot;
+  border-radius: 0.25rem;
+  border: 0.25rem solid $carrot-hov;
+  color: $tanish;
+  padding: 0.75rem 1.25rem;
+  z-index: 99999;
+  opacity: 0;
+  filter: blur(12px);
+  transition: 1.15s ease-in-out;
+}

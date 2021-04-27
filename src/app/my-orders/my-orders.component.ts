@@ -58,9 +58,6 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   }
 
   callLast(l?:any) {
-    // setTimeout(() => {
-    //   this.lastOne = true;
-    // }, 1000);
     if(l) {
       this.lastOne = true;
     } else {
@@ -72,3 +69,4 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 }
+  

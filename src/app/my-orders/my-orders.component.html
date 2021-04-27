@@ -1,11 +1,10 @@
 
-<h1 @slideInLeft>Orders</h1>
+<h1 @slideInLeft>🍃 Your Orders</h1>
 <table class="table">
   <thead>
     <tr>
       <th>Customer</th>
       <th>Date</th>
-      <th>Email</th>
       <th>Quantity</th>
       <th>Total</th>
     </tr>
@@ -17,9 +16,13 @@
       *ngFor="let order of orders; let l = last"
       (@listAnimationItem.done)="callLast(l)">
       <div *ngIf="order.userId === user.uid" style="display: contents;">
-        <td>{{ order.shipping.name }}</td>
+        <td>
+          <div class="name-group">
+            <strong>{{ order.shipping.name }}</strong>
+            <small class="small">{{ user.email }}</small>
+          </div>
+        </td>
         <td>{{ order.datePlaced | date}}</td>
-        <td>{{ user.email }}</td>
         <td>{{ order.items.length }}</td>
         <td>{{ getTotalPrice(order.items, order.items.length) | currency:'USD':'symbol' }}</td>
       </div>
@@ -31,8 +34,7 @@
     <tr>
       <th></th>
       <th></th>
-      <th></th>
-      <th><strong>Orders:</strong></th>
+      <th><strong>Grand total:</strong></th>
       <th><strong>{{orderTotal | currency:'USD':'symbol' }}</strong></th>
     </tr>
   </tfoot>
