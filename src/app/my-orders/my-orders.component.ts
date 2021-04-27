@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { OrderService } from '../services/order.service';
 import {listAnimationWrap, listAnimationItem, slideInLeft, slideInTop, fadeIn} from '../../animations/anime';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-orders',
@@ -20,10 +21,13 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
 
   public lastOne = false;
 
-  constructor(private userService: AuthService, private orderService: OrderService) {
+  constructor(private userService: AuthService, private orderService: OrderService,private router: Router) {
     this.subscription = this.orderService.getOrders().subscribe(order => {
       // console.log("orders?", order)
       this.orders = order;
+      if(!this.orders.length) {
+        this.router.navigate(['/']);
+      }
       this.orderTotal = 0;
       for(let i = 0; i < this.orders.length; i++) {
         // console.log("1 order", this.orders[i])
@@ -49,9 +53,6 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
     for(let i = 0; i < length; i++) {
       let subTot =  items[i].quantity * items[i].totalPrice;
       // console.log("items i", items[i])
-      if (items.length !== length) {
-        break;
-      }
       total += subTot;
     }
     return total;
