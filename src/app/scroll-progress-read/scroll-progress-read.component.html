@@ -1,1 +1,20 @@
-<p>scroll-progress-read works!</p>
+
+
+<div 
+  (window:scroll)="scrollCheck()"
+  id="scrollContainer"
+  class="wrap">
+  
+  <div 
+    id="scrollObject"
+    (click)="scrollTop()"
+    class="lemon">
+    🍋
+  </div>
+  
+  <div 
+    class="badge">
+    {{scrollPos?.toFixed()}}%
+  </div>
+  
+</div>
