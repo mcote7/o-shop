@@ -6,17 +6,34 @@
       <th>Customer</th>
       <th>Date</th>
       <th>Email</th>
-      <th># of items</th>
+      <th>Quantity</th>
+      <th>Total</th>
     </tr>
   </thead>
-  <tbody [@listAnimationWrap]="orders?.length">
-    <tr @listAnimationItem *ngFor="let order of orders">
+  <tbody 
+    [@listAnimationWrap]="orders?.length">
+    <tr 
+      @listAnimationItem 
+      *ngFor="let order of orders; let l = last"
+      (@listAnimationItem.done)="callLast(l)">
       <div *ngIf="order.userId === user.uid" style="display: contents;">
         <td>{{ order.shipping.name }}</td>
         <td>{{ order.datePlaced | date}}</td>
         <td>{{ user.email }}</td>
         <td>{{ order.items.length }}</td>
+        <td>{{ getTotalPrice(order.items, order.items.length) | currency:'USD':'symbol' }}</td>
       </div>
     </tr>
   </tbody>
+  <tfoot 
+    @fadeIn
+    *ngIf="lastOne">
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th><strong>Orders:</strong></th>
+      <th><strong>{{orderTotal | currency:'USD':'symbol' }}</strong></th>
+    </tr>
+  </tfoot>
 </table>
