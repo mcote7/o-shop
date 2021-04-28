@@ -15,7 +15,7 @@
       </a>
       <a 
         @fadeIn 
-        (@fadeIn.done)="isAnimeDone = true"
+        (@fadeIn.done)="isAnimeDone = true" 
         *ngFor="let c of categories$ | async"
         routerLink="/"
         [queryParams]="{category: c.key}"
