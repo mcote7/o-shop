@@ -53,6 +53,9 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
     for(let i = 0; i < length; i++) {
       let subTot =  items[i].quantity * items[i].totalPrice;
       // console.log("items i", items[i])
+      if(items.length !== length) {
+        break;
+      }
       total += subTot;
     }
     return total;

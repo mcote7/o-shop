@@ -3,18 +3,22 @@
 <div 
   (window:scroll)="scrollCheck()"
   id="scrollContainer"
-  class="wrap">
+  class="wrap"
+  title="&nbsp;☝&nbsp;">
   
   <div 
-    id="scrollObject"
-    (click)="scrollTop()"
-    class="lemon">
-    🍋
-  </div>
-  
-  <div 
-    class="badge">
-    {{scrollPos?.toFixed()}}%
+    [class.isScroll]="isScrollBar">
+    <div 
+      id="scrollObject"
+      (click)="scrollTop()"
+      class="lemon">
+      🍋
+    </div>
+    
+    <div 
+      class="badge">
+      {{scrollPos?.toFixed()}}%
+    </div>
   </div>
   
 </div>

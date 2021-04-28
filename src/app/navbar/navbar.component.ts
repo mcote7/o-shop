@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit {
     this.auth.appUser$.subscribe( appUser => this.appUser = appUser );
     let cartId = localStorage.getItem('cartId');
     this.subscription = this.cartService.getCart(cartId).subscribe(cart => {
-      // console.log("this cart", cart.items)
+      // console.log("this cart", cart)
       this.shoppingCartCount = 0;
       if(cart && cart.items) {
         for(let productId in cart.items) {
@@ -86,5 +86,11 @@ export class NavbarComponent implements OnInit {
     this.isDropdownCollapsed = true;
   }
 
+  scrollDown() {
+    window.scrollTo({
+      top: 999999,
+      behavior: 'smooth'
+    })
+  }
 }
 // 
