@@ -4,7 +4,7 @@
   <div class="col-md-2">
     <div
       @fadeIn
-      (@fadeIn.done)="isAnimeDone = true"
+      
       *ngIf="isAnime && categories$ | async"
       class="list-group">
       <a 
@@ -14,7 +14,8 @@
         All items
       </a>
       <a 
-        @fadeIn
+        @fadeIn 
+        (@fadeIn.done)="isAnimeDone = true"
         *ngFor="let c of categories$ | async"
         routerLink="/"
         [queryParams]="{category: c.key}"
