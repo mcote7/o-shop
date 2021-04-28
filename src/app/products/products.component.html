@@ -13,21 +13,24 @@
         routerLink="/">
         All items
       </a>
-      <a
-        *ngFor="let c of categories$ | async"
-        routerLink="/"
-        [queryParams]="{category: c.key}"
-        [class.activeLink]="category === c.key"
-        class="list-group-item">
-        {{ c.name }}
-        <div 
-          @popin
-          *ngIf="category === c.key"
-          title="ℹ&nbsp;{{filteredProducts.length}} fresh varieties to choose from in - {{c.name}} 🍃"
-          class="float-right cat-item-len">
-          (&nbsp;<strong>{{filteredProducts.length}}</strong>&nbsp;)
-        </div>
-      </a>
+      <ng-container *ngIf="isAnimeDone">
+        <a 
+          @slideInBottom 
+          *ngFor="let c of categories$ | async"
+          routerLink="/"
+          [queryParams]="{category: c.key}"
+          [class.activeLink]="category === c.key"
+          class="list-group-item">
+          {{ c.name }}
+          <div 
+            @popin
+            *ngIf="category === c.key"
+            title="ℹ&nbsp;{{filteredProducts.length}} fresh varieties to choose from in - {{c.name}} 🍃"
+            class="float-right cat-item-len">
+            (&nbsp;<strong>{{filteredProducts.length}}</strong>&nbsp;)
+          </div>
+        </a>
+      </ng-container>
     </div>
   </div>
   <div class="col">

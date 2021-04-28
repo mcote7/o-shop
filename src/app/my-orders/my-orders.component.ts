@@ -48,7 +48,7 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   }
 
   getTotalPrice(items: any[], length: number) {
-    console.log("items", items)
+    // console.log("items", items)
     let total = 0;
     for(let i = 0; i < length; i++) {
       let subTot =  items[i].totalPrice;

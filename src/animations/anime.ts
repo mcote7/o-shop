@@ -73,6 +73,23 @@ export const slideInTop = trigger('slideInTop', [
     ])
 ]);
 
+export const slideInBottom = trigger('slideInBottom', [
+    transition(':enter', [
+        style({
+            opacity: 0,
+            transform: 'translateY(2rem)'
+        }),
+        group([
+            animate(200, style({
+                opacity: 1
+            })),
+            animate(250, style({
+                transform: 'translateY(0rem)'
+            }))
+        ])
+    ])
+]);
+
 export const slideInLeft = trigger('slideInLeft', [
     transition(':enter', [
         style({
