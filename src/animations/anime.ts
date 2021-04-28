@@ -77,7 +77,7 @@ export const slideInBottom = trigger('slideInBottom', [
     transition(':enter', [
         style({
             opacity: 0,
-            transform: 'translateY(2rem)'
+            transform: 'translateY(1rem)'
         }),
         group([
             animate(200, style({
