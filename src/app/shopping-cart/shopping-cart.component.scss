@@ -110,9 +110,6 @@
         margin-right: 0rem;
         &:active {
           transform: scale(0.95) translateX(0.25rem);
-          ~.btn-card-cart {
-            animation: add-item-2 $transition ease-in-out;
-          }
         }
       }
       
@@ -204,10 +201,10 @@
   }
 }
 
-@keyframes add-item-2 {
-  0% {box-shadow: 0 0 0 0 $bluegrey; transform: scale(1.5);}
-  100% {box-shadow: 0 0 10px 20px rgba(255,150,44,0); transform: scale(1);}
-}
+// @keyframes add-item-2 {
+//   0% {box-shadow: 0 0 0 0 $bluegrey; transform: scale(1.5);}
+//   100% {box-shadow: 0 0 10px 20px rgba(255,150,44,0); transform: scale(1);}
+// }
 
 @keyframes fade-in {
   from {opacity: 0; filter: blur(12px);}

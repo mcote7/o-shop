@@ -73,8 +73,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
   }
 
-  addToCart(product: Product) {
+  addToCart(product: Product, i: string) {
     this.cartService.addToCart(product);
+    let btn = document.getElementById(i);
+    btn.animate([
+      {boxShadow: '0 0 0 0 hsla(29, 79%, 56%, 1)', transform: 'scale(1.025)'},
+      {boxShadow: '0 0 10px 20px rgba(255,150,44,0)', transform: 'scale(1)'}
+    ], {
+      duration: 150
+    });
   }
 
   removeFromCart(product: Product, i: string) {

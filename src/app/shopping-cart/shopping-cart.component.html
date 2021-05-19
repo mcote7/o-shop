@@ -34,9 +34,9 @@
             <div class="btm-btns-wrp">
               
               <button 
-                (click)="addToCart(cart?.items[productId].product)"
+              (click)="removeFromCart(cart?.items[productId].product, cart?.items[productId].product.title)"
                 class="btn btn-paddle pad-left">
-                <i class="fa fa-plus" aria-hidden="true"></i>
+                <i class="fa fa-minus" aria-hidden="true"></i>
               </button>
               
               <div class="handle-left"></div>
@@ -50,9 +50,9 @@
               <div class="handle-right"></div>
               
               <button 
-                (click)="removeFromCart(cart?.items[productId].product, cart?.items[productId].product.title)"
+                (click)="addToCart(cart?.items[productId].product, cart?.items[productId].product.title)"
                 class="btn btn-paddle pad-right">
-                <i class="fa fa-minus" aria-hidden="true"></i>
+                <i class="fa fa-plus" aria-hidden="true"></i>
               </button>
               
             </div>
