@@ -73,7 +73,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
   }
 
-  addToCart(product: Product, i: string) {
+  addToCart(product: Product, i?: string) {
     this.cartService.addToCart(product);
     let btn = document.getElementById(i);
     btn.animate([
