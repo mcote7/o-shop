@@ -8,4 +8,23 @@
     </div>
   </div>
 </div>
+<div class="row">
+  <div class="col" style="display: flex; min-height: 100vh; text-align: center;">
+    <div style="margin: auto;">
+      <!--  #scrollMe [scrollTop]="scrollMe.scrollHeight" -->
+      <div id="mesc" class="messageContainer">
+        
+        <p *ngFor="let m of messages">
+          {{m}}
+        </p>
+        
+      </div>
+      
+      <br>
+      <button class="btn btn-warning" (click)="addMessage()">➕</button>
+      |<button class="btn btn-danger ml-1" (click)="removeMessage()">➖</button>
+      |<button class="btn btn-secondary ml-1" (click)="resetMessage()">✖</button>
+    </div>
+  </div>
+</div>
 
