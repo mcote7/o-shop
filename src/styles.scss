@@ -11,7 +11,8 @@ body {
   scrollbar-color: $lightGreen-hov;
   scrollbar-width: thin;
   scrollbar-track-color: $bluegrey;
-  overflow: overlay;
+  overflow-y: overlay;
+  overflow-x: hidden;
 }
 
 // scrollbar 

@@ -68,13 +68,13 @@
     border: 1px solid rgba(74, 140, 84, 0.25);
     box-shadow: 2px 2px 1px 1px hsla(129, 31%, 52%, 0.35);
     .card-img-top {
-      border-bottom: 1px solid rgba(74, 140, 84, 0.15);
+      border-bottom: 2px solid rgba(74, 140, 84, 0.15);
     }
   }
   
-  &.right-col {
-    margin: 0.5rem auto 0.5rem 0.5rem;
-  }
+  // &.right-col {
+  //   margin: 0.5rem auto 0.5rem 0.5rem;
+  // }
   
   &.last-col {
     margin-bottom: 4rem!important;
@@ -82,12 +82,21 @@
   
   .card-img-top {
     margin: 1rem auto;
-    border-bottom: 1px solid rgba(231, 140, 54, 0.15);
-    height: 200px;
+    border-bottom: 2px solid rgba(231, 140, 54, 0.15);
+    height: 120px;
+    width: 150px;
   }
   
   .card-body {
     text-align: center;
+    padding-top: 0rem;
+    
+    h5 {
+      margin-bottom: 0.5rem;
+    }
+    p {
+      margin-bottom: 0.5rem;
+    }
   }
 
   .btm-btns-wrp {

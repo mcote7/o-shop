@@ -7,7 +7,7 @@
   title="&nbsp;☝&nbsp;">
   
   <div 
-    [class.isScroll]="isScrollBar">
+    [class.isScroll]="isScrollBar && !isNaN(scrollPos)">
     <div 
       id="scrollObject"
       (click)="scrollTop()"

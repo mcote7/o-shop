@@ -25,6 +25,10 @@ export class ScrollProgressReadComponent implements OnInit {
       })
   }
 
+  isNaN(el: any): boolean {
+    return Number.isNaN(el);
+  }
+
   scrollCheck() {
     let scrollSpeed = window.pageYOffset / 6;
     let scrollObject = document.getElementById("scrollObject");
