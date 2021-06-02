@@ -16,6 +16,7 @@
     </div>
     
     <div 
+      *ngIf="!isNaN(scrollPos)"
       class="badge">
       {{scrollPos?.toFixed()}}%
     </div>
