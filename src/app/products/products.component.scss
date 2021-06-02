@@ -66,15 +66,11 @@
   
   &:hover {
     border: 1px solid rgba(74, 140, 84, 0.25);
-    box-shadow: 2px 2px 1px 1px hsla(129, 31%, 52%, 0.35);
+    box-shadow: 2px 2px 1px 1px hsl(129, 31%, 52%, 0.75);
     .card-img-top {
-      border-bottom: 2px solid rgba(74, 140, 84, 0.15);
+      border-bottom: 2px solid rgba(74, 140, 84, 0.5);
     }
   }
-  
-  // &.right-col {
-  //   margin: 0.5rem auto 0.5rem 0.5rem;
-  // }
   
   &.last-col {
     margin-bottom: 4rem!important;
@@ -82,7 +78,7 @@
   
   .card-img-top {
     margin: 1rem auto;
-    border-bottom: 2px solid rgba(231, 140, 54, 0.15);
+    border-bottom: 2px solid rgba(231, 140, 54, 0.5);
     height: 120px;
     width: 150px;
   }
