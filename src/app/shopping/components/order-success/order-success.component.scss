@@ -1,10 +1,10 @@
 // order success here 
-@import '../../scss/variables.scss';
+@import '../../../../scss/variables.scss';
 .clock {
   display: flex;
   min-height: 50vh;
   margin-top: 3rem;
-  background-image: url('../../assets/images/clock.png');
+  background-image: url('../../../../assets/images/clock.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position-x: 50%;

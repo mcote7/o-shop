@@ -15,15 +15,10 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
+import { ShoppingModule } from './shopping/shopping.module';
 
 import { NavbarComponent } from './navbar/navbar.component';
-import { ProductsComponent } from './products/products.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { LoginComponent } from './login/login.component';
-import { CheckOutComponent } from './check-out/check-out.component';
-import { OrderSuccessComponent } from './order-success/order-success.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 import { ScrollProgressReadComponent } from './scroll-progress-read/scroll-progress-read.component';
 
 
@@ -31,14 +26,8 @@ import { ScrollProgressReadComponent } from './scroll-progress-read/scroll-progr
   declarations: [
     AppComponent,
     NavbarComponent,
-    ProductsComponent,
-    ShoppingCartComponent,
     LoginComponent,
-    CheckOutComponent,
-    OrderSuccessComponent,
-    MyOrdersComponent,
     ScrollProgressReadComponent,
-    ShoppingCartSummaryComponent,
     ],
   imports: [
     BrowserModule,
@@ -51,6 +40,7 @@ import { ScrollProgressReadComponent } from './scroll-progress-read/scroll-progr
     CustomFormsModule,
     SharedModule,
     AdminModule,
+    ShoppingModule,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Product } from '../shared/models/product';
+import { Product } from '../../../shared/models/product';
 
-import { ShoppingCartService } from '../shared/services/shopping-cart.service';
+import { ShoppingCartService } from '../../../shared/services/shopping-cart.service';
 
-import { listAnimationWrap, listAnimationItem, slideInTop, fadeIn, slideInLeft } from '../../animations/anime';
+import { listAnimationWrap, listAnimationItem, slideInTop, fadeIn, slideInLeft } from '../../../../animations/anime';
 
 @Component({
   selector: 'app-shopping-cart',
