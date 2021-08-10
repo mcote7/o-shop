@@ -2,13 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Order } from 'src/models/order';
+import { Order } from '../shared/models/order';
 
 import { fadeIn, toastNotification, slideInTop, slideInLeft } from '../../animations/anime';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../shared/services/auth.service';
 
-import { OrderService } from '../services/order.service';
-import { ShoppingCartService } from '../services/shopping-cart.service';
+import { OrderService } from '../shared/services/order.service';
+import { ShoppingCartService } from '../shared/services/shopping-cart.service';
 
 @Component({
   selector: 'app-check-out',

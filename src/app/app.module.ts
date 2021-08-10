@@ -28,14 +28,14 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { ScrollProgressReadComponent } from './scroll-progress-read/scroll-progress-read.component';
 
-import { AuthService } from './services/auth.service';
-import { AuthGuardService } from './services/auth-guard.service';
-import { UserService } from './services/user.service';
+import { AuthService } from './shared/services/auth.service';
+import { AuthGuardService } from './shared/services/auth-guard.service';
+import { UserService } from './shared/services/user.service';
 import { AdminAuthGuardService } from './services/admin-auth-guard.service';
-import { CategoryService } from './services/category.service';
-import { ProductService } from './services/product.service';
-import { ShoppingCartService } from './services/shopping-cart.service';
-import { OrderService } from './services/order.service';
+import { CategoryService } from './shared/services/category.service';
+import { ProductService } from './shared/services/product.service';
+import { ShoppingCartService } from './shared/services/shopping-cart.service';
+import { OrderService } from './shared/services/order.service';
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 
 @NgModule({

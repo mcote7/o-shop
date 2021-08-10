@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 
 import { take } from 'rxjs/operators';
-import { ShoppingCart } from 'src/models/shopping-cart';
+import { ShoppingCart } from '../models/shopping-cart';
 
-import { Product } from '../../models/product';
+import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root'

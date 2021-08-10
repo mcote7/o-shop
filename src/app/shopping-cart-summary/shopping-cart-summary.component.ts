@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { slideInTop, listAnimationWrap, listAnimationItem, popin, fadeIn } from '../../animations/anime';
-import { ShoppingCartService } from '../services/shopping-cart.service';
+import { ShoppingCartService } from '../shared/services/shopping-cart.service';
 
 
 @Component({

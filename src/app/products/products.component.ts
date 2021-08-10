@@ -3,13 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { CategoryService } from '../services/category.service';
-import { ProductService } from '../services/product.service';
-import { ShoppingCartService } from '../services/shopping-cart.service';
+import { CategoryService } from '../shared/services/category.service';
+import { ProductService } from '../shared/services/product.service';
+import { ShoppingCartService } from '../shared/services/shopping-cart.service';
 
 import { fadeIn, listAnimationWrapCard, listAnimationItemCard, slideInTop, popin, toastNotification, listAnimationWrap, listAnimationItem, slideInLeft,slideInBottom } from '../../animations/anime';
 
-import { Product } from '../../models/product';
+import { Product } from '../shared/models/product';
 
 
 @Component({
