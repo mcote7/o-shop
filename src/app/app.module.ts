@@ -17,7 +17,6 @@ import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 
 import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { LoginComponent } from './login/login.component';
@@ -32,7 +31,6 @@ import { ScrollProgressReadComponent } from './scroll-progress-read/scroll-progr
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent,
     ProductsComponent,
     ShoppingCartComponent,
     LoginComponent,
