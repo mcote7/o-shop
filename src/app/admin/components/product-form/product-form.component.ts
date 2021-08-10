@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 
-import { toastNotification } from '../../../animations/anime';
+import { toastNotification } from '../../../../animations/anime';
 
 @Component({
   selector: 'app-product-form',

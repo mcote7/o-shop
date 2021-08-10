@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { SharedModule } from './shared/shared.module';
+import { AdminModule } from './admin/admin.module';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
@@ -23,13 +24,8 @@ import { LoginComponent } from './login/login.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
-import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
-import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 import { ScrollProgressReadComponent } from './scroll-progress-read/scroll-progress-read.component';
-
-import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 
 
 @NgModule({
@@ -43,9 +39,6 @@ import { AdminAuthGuardService } from './services/admin-auth-guard.service';
     CheckOutComponent,
     OrderSuccessComponent,
     MyOrdersComponent,
-    AdminProductsComponent,
-    AdminOrdersComponent,
-    ProductFormComponent,
     ScrollProgressReadComponent,
     ShoppingCartSummaryComponent,
     ],
@@ -59,9 +52,7 @@ import { AdminAuthGuardService } from './services/admin-auth-guard.service';
     FormsModule,
     CustomFormsModule,
     SharedModule,
-  ],
-  providers: [
-    AdminAuthGuardService,
+    AdminModule,
   ],
   bootstrap: [AppComponent]
 })
