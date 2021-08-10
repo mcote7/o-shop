@@ -1,4 +1,4 @@
-@import '../../scss/variables.scss';
+@import '../../../../scss/variables.scss';
 
 .o-navbar {
   background-color: $lightGreen;
@@ -156,7 +156,7 @@
   }
   
   .avocado {
-    background-image: url('../../assets/images/avocado.png');
+    background-image: url('../../../../assets/images/avocado.png');
     background-size: cover;
     background-repeat: no-repeat;
     height: 80px;

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { AppUser } from '../shared/models/app-user';
+import { AppUser } from '../../../shared/models/app-user';
 
-import { AuthService } from '../shared/services/auth.service';
-import { ShoppingCartService } from '../shared/services/shopping-cart.service';
+import { AuthService } from '../../../shared/services/auth.service';
+import { ShoppingCartService } from '../../../shared/services/shopping-cart.service';
 
-import { fadeInOut, fadeIn, toastNotification } from '../../animations/anime';
+import { fadeInOut, fadeIn, toastNotification } from '../../../../animations/anime';
 
 
 @Component({

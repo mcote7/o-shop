@@ -1,5 +1,5 @@
 // 
-@import '../../scss/variables.scss';
+@import '../../../../scss/variables.scss';
 
 .o-login-btn {
   background-color: $carrot-hov;
@@ -35,7 +35,7 @@
   height: 2.75rem;
   width: 2.75rem;
   margin-right: -1rem;
-  background-image: url('../../assets/images/Rockarrot.png');
+  background-image: url('../../../../assets/images/Rockarrot.png');
   background-size: cover;
   background-repeat: no-repeat;
   transform: rotate(-60deg);

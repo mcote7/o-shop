@@ -1,7 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
-import { CustomFormsModule } from "ng2-validation";
 
 import { SharedModule } from "../shared/shared.module";
 import { AdminRoutingModule } from "./admin-routing.module";
@@ -21,8 +19,6 @@ import { AdminAuthGuardService } from "./services/admin-auth-guard.service";
   ],
   imports: [
     CommonModule,
-    FormsModule,
-    CustomFormsModule,
     SharedModule,
     AdminRoutingModule,
   ],

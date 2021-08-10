@@ -16,18 +16,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 import { ShoppingModule } from './shopping/shopping.module';
-
-import { NavbarComponent } from './navbar/navbar.component';
-import { LoginComponent } from './login/login.component';
-import { ScrollProgressReadComponent } from './scroll-progress-read/scroll-progress-read.component';
+import { CoreModule } from './core/core.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    LoginComponent,
-    ScrollProgressReadComponent,
     ],
   imports: [
     BrowserModule,
@@ -36,11 +30,10 @@ import { ScrollProgressReadComponent } from './scroll-progress-read/scroll-progr
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    FormsModule,
-    CustomFormsModule,
     SharedModule,
     AdminModule,
     ShoppingModule,
+    CoreModule,
   ],
   bootstrap: [AppComponent]
 })

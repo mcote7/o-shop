@@ -9,10 +9,16 @@ import { ProductService } from "./services/product.service";
 import { ShoppingCartService } from "./services/shopping-cart.service";
 import { UserService } from "./services/user.service";
 
+// to share with other mods 
+import { FormsModule } from "@angular/forms";
+import { CustomFormsModule } from "ng2-validation";
+
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    CustomFormsModule,
   ],
   providers: [
     AuthService,
@@ -23,5 +29,9 @@ import { UserService } from "./services/user.service";
     ShoppingCartService,
     OrderService,
   ],
+  exports: [
+    FormsModule,
+    CustomFormsModule,
+  ]
 })
 export class SharedModule {}

@@ -1,7 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
-import { CustomFormsModule } from "ng2-validation";
 import { SharedModule } from "../shared/shared.module";
 import { ShoppingRoutingModule } from "./shopping-routing.module";
 
@@ -24,8 +22,6 @@ import { ShoppingCartComponent } from "./components/shopping-cart/shopping-cart.
   ],
   imports: [
     CommonModule,
-    FormsModule,
-    CustomFormsModule,
     SharedModule,
     ShoppingRoutingModule,
   ],

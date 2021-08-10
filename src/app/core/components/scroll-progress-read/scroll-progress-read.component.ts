@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { popin, toastNotification } from '../../animations/anime';
+import { popin, toastNotification } from '../../../../animations/anime';
 
 @Component({
   selector: 'scroll-progress-read',
