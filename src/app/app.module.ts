@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { FormsModule } from  '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 
@@ -15,6 +13,8 @@ import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { SharedModule } from './shared/shared.module';
+
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
@@ -26,17 +26,11 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 import { ScrollProgressReadComponent } from './scroll-progress-read/scroll-progress-read.component';
 
-import { AuthService } from './shared/services/auth.service';
-import { AuthGuardService } from './shared/services/auth-guard.service';
-import { UserService } from './shared/services/user.service';
 import { AdminAuthGuardService } from './services/admin-auth-guard.service';
-import { CategoryService } from './shared/services/category.service';
-import { ProductService } from './shared/services/product.service';
-import { ShoppingCartService } from './shared/services/shopping-cart.service';
-import { OrderService } from './shared/services/order.service';
-import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +47,7 @@ import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-c
     AdminOrdersComponent,
     ProductFormComponent,
     ScrollProgressReadComponent,
-    ShoppingCartSummaryComponent
+    ShoppingCartSummaryComponent,
     ],
   imports: [
     BrowserModule,
@@ -63,17 +57,11 @@ import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-c
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FormsModule,
-    CustomFormsModule
+    CustomFormsModule,
+    SharedModule,
   ],
   providers: [
-    AuthService,
-    AuthGuardService,
     AdminAuthGuardService,
-    UserService,
-    CategoryService,
-    ProductService,
-    ShoppingCartService,
-    OrderService
   ],
   bootstrap: [AppComponent]
 })
