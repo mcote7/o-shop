@@ -13,12 +13,25 @@ import { UserService } from "./services/user.service";
 import { FormsModule } from "@angular/forms";
 import { CustomFormsModule } from "ng2-validation";
 
+// ngrx 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+// register your reducers & effects 
+// import { reducers, effects } from './store';
+
+// use meta until new 
+const reducers = [];
+
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     CustomFormsModule,
+    StoreModule.forFeature('shopping', reducers), // reducers 
+    EffectsModule.forFeature([]), // effects 
   ],
   providers: [
     AuthService,

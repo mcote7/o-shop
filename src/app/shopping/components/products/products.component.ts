@@ -59,10 +59,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   constructor( 
     private productService: ProductService, 
-    categoryService: CategoryService, 
-    route: ActivatedRoute,
+    public categoryService: CategoryService, 
+    public route: ActivatedRoute, 
     private cartService: ShoppingCartService) { 
-
+    
     this.subscription = this.productService.getAll().subscribe(prod => {
       this.products = prod;
       

@@ -16,6 +16,9 @@ import { AdminModule } from './admin/admin.module';
 import { ShoppingModule } from './shopping/shopping.module';
 import { CoreModule } from './core/core.module';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import { CoreModule } from './core/core.module';
     AdminModule,
     ShoppingModule,
     CoreModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
   ],
   bootstrap: [AppComponent]
 })
