@@ -1,9 +1,9 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { slideInTop, listAnimationWrap, listAnimationItem, popin, fadeIn } from '../../../../animations/anime';
-import { ShoppingCartService } from '../../../shared/services/shopping-cart.service';
+import { slideInTop, listAnimationWrap, listAnimationItem, popin, fadeIn } from 'src/animations/anime';
+import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 
 
 @Component({

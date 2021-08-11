@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { ProductService } from 'src/app/shared/services/product.service';
 
-import {listAnimationWrap, listAnimationItem, fadeIn } from '../../../../animations/anime';
+import {listAnimationWrap, listAnimationItem, fadeIn } from 'src/animations/anime';
 
 
 @Component({

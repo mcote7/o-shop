@@ -1,15 +1,26 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../../../shared/services/auth.service';
-import { OrderService } from '../../../shared/services/order.service';
-import {listAnimationWrap, listAnimationItem, slideInLeft, slideInTop, fadeIn} from '../../../../animations/anime';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { OrderService } from 'src/app/shared/services/order.service';
+import {
+  listAnimationWrap, 
+  listAnimationItem, 
+  slideInLeft, 
+  slideInTop, 
+  fadeIn} from 'src/animations/anime';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-orders',
   templateUrl: './my-orders.component.html',
   styleUrls: ['./my-orders.component.scss'],
-  animations: [listAnimationWrap,listAnimationItem,slideInLeft,slideInTop, fadeIn]
+  animations: [
+    listAnimationWrap,
+    listAnimationItem,
+    slideInLeft,
+    slideInTop,
+    fadeIn,
+  ]
 })
 export class MyOrdersComponent implements OnInit, OnDestroy {
 
@@ -63,6 +74,7 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
 
   callLast(l?:any) {
     if(l) {
+      // console.log("what the hell is 'l' ???", l) // is boolean
       this.lastOne = true;
     } else {
       return;

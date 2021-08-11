@@ -1,22 +1,43 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { CategoryService } from '../../../shared/services/category.service';
-import { ProductService } from '../../../shared/services/product.service';
-import { ShoppingCartService } from '../../../shared/services/shopping-cart.service';
+import { CategoryService } from 'src/app/shared/services/category.service';
+import { ProductService } from 'src/app/shared/services/product.service';
+import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 
-import { fadeIn, listAnimationWrapCard, listAnimationItemCard, slideInTop, popin, toastNotification, listAnimationWrap, listAnimationItem, slideInLeft,slideInBottom } from '../../../../animations/anime';
+import { 
+  popin, 
+  fadeIn, 
+  slideInTop, 
+  slideInLeft,
+  toastNotification, 
+  listAnimationWrap, 
+  listAnimationItem, 
+  listAnimationWrapCard, 
+  listAnimationItemCard, 
+  slideInBottom } from 'src/animations/anime';
 
-import { Product } from '../../../shared/models/product';
+import { Product } from 'src/app/shared/models/product';
 
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
-  animations: [fadeIn,listAnimationWrapCard,listAnimationItemCard,slideInTop,popin,toastNotification,listAnimationWrap,listAnimationItem, slideInLeft, slideInBottom]
+  animations: [
+    popin,
+    fadeIn,
+    slideInTop,
+    slideInLeft,
+    slideInBottom,
+    toastNotification,
+    listAnimationWrap,
+    listAnimationItem,
+    listAnimationWrapCard,
+    listAnimationItemCard,
+  ]
 })
 
 export class ProductsComponent implements OnInit, OnDestroy {

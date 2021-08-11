@@ -13,7 +13,7 @@
     [@listAnimationWrap]="orders?.length">
     <tr 
       @listAnimationItem 
-      *ngFor="let order of orders; let l = last"
+      *ngFor="let order of orders; let l = last;"
       (@listAnimationItem.done)="callLast(l)">
       <div *ngIf="order.userId === user.uid" style="display: contents;">
         <td>
