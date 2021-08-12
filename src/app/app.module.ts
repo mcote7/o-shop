@@ -11,7 +11,8 @@ import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from './shared/shared.module'; // has feature store
+
 import { AdminModule } from './admin/admin.module';
 import { ShoppingModule } from './shopping/shopping.module';
 import { CoreModule } from './core/core.module';

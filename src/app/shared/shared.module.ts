@@ -22,6 +22,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 // use meta until new 
 const reducers = [];
+const effects = [];
 
 
 
@@ -31,7 +32,7 @@ const reducers = [];
     FormsModule,
     CustomFormsModule,
     StoreModule.forFeature('shopping', reducers), // reducers 
-    EffectsModule.forFeature([]), // effects 
+    EffectsModule.forFeature(effects), // effects  
   ],
   providers: [
     AuthService,

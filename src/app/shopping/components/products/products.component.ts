@@ -74,6 +74,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.products;
       })
     });
+    
+    // convert to ngrx select()
     this.categories$ = categoryService.getCategories();
     
     let cartId = localStorage.getItem('cartId');
