@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { ProductService } from 'src/app/shared/services/product.service';
@@ -51,7 +51,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   public totItemsInCat: number = 0;
 
-  public categories$: any;
+  public categories$: Observable<any>;
   public category: string;
 
   public isAnime = false;
@@ -85,6 +85,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if( this.categories$ && this.filteredProducts ) {
       this.isAnime = true;
+      console.log("cats?", this.categories$)
     } else {
       setTimeout(() => {
         if( this.categories$ && this.filteredProducts ) {

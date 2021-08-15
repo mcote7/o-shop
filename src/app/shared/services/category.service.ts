@@ -13,3 +13,4 @@ export class CategoryService {
     return this.db.list('/categories').valueChanges(undefined, {idField: 'key'});
   }
 }
+
