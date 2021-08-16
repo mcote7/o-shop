@@ -10,6 +10,19 @@
   border-radius: $borderRad;
   border-top: 1px solid rgba(74, 140, 84, 0.25);
   box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
+  transition: $transition;
+  
+  &.no-box {
+    box-shadow: none;
+  }
+  
+  .loading-cats {
+    color: $bluegrey;
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 0.5rem auto;
+    animation: spin-it 0.5s infinite linear;
+  }
   
   .list-group-item {
     overflow: hidden;
@@ -46,11 +59,12 @@
       color: $tanish;
       border: 1px solid $tanish-hov;
       border-top: none;
+      
       .cat-item-len {
         display: inline-flex;
       }
     }
-
+    
     .cat-item-len {
       display: none;
       backface-visibility: hidden;
@@ -69,6 +83,7 @@
   &:hover {
     border: 1px solid rgba(74, 140, 84, 0.25);
     box-shadow: 2px 2px 1px 1px hsl(129, 31%, 52%, 0.75);
+    
     .card-img-top {
       transform: scale(1.25);
       border-color: transparent;
@@ -126,7 +141,7 @@
       }
       
     }
-    //
+    
     .btn-card-cart {
       cursor: default;
       font-weight: bold;
@@ -176,6 +191,7 @@
       
       &.pad-left {
         margin-right: 0rem;
+        
         &:active {
           transform: scale(0.9) translateX(0.5rem);
         }
@@ -183,6 +199,7 @@
       
       &.pad-right {
         margin-left: 0rem;
+        
         &:active {
           transform: scale(0.9) translateX(-0.5rem);
         }
@@ -191,30 +208,17 @@
   }
 }
 
-// @keyframes add-item {
-//   0% {box-shadow: 0 0 0 0 $carrot; transform: scale(1.025);}
-//   100% {box-shadow: 0 0 10px 20px rgba(255,150,44,0); transform: scale(1);}
-// }
-
-.load-wrap {
-  margin-left: 0.5rem;
-  color: $carrot-hov;
-  .load-buff {
-    margin: 1rem 0rem 0rem 1rem;
-    width: min-content;
-    font-size: 2rem;
-    animation: spin-it 0.5s infinite;
-  }
-}
 @keyframes spin-it {
   from {transform: rotate(0deg);}
   to {transform: rotate(360deg);}
 }
 
 @media only screen and (max-width: 768px) {
+  
   .right-col {
     margin: 0.5rem auto!important;
   }
+  
   .list-group {
     position: initial;
     width: 12rem;

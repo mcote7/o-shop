@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { AuthService } from './shared/services/auth.service';
 import { UserService } from './shared/services/user.service';
 
+import { Store } from '@ngrx/store';
+import * as fromStore from 'src/app/shared/store';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,7 +15,13 @@ export class AppComponent {
   
   title = 'o-shop';
   
-  constructor( private userService: UserService, private auth: AuthService, router: Router ) {
+  constructor(
+    private userService: UserService, 
+    private auth: AuthService, 
+    public router: Router, 
+    private store: Store<fromStore.ShoppingState>,
+    ) {
+    
     this.auth.user$.subscribe( user => {
       if(user) {
         this.userService.save(user);
@@ -24,6 +33,8 @@ export class AppComponent {
         router.navigate(['/']);
       }
     });
+    
+    this.store.dispatch(fromStore.loadCategories());
   }
 }
 // 

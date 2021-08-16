@@ -1,12 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 import * as fromStore from 'src/app/shared/store';
 import { Category } from 'src/app/shared/models/category';
+import { Product } from 'src/app/shared/models/product';
 
-import { Observable, Subscription } from 'rxjs';
 
+// working on removing services from component 
 import { ProductService } from 'src/app/shared/services/product.service';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 
@@ -18,8 +20,6 @@ import {
   listAnimationItem, 
   listAnimationWrapCard, 
   listAnimationItemCard } from 'src/animations/anime';
-
-import { Product } from 'src/app/shared/models/product';
 
 
 @Component({
@@ -39,63 +39,54 @@ import { Product } from 'src/app/shared/models/product';
 
 export class ProductsComponent implements OnInit, OnDestroy {
 
-  public products: any[] = [];
-  public filteredProducts: any[] = [];
   public subscription: Subscription;
   public subscription2: Subscription;
 
-  public cart: any;
+  public products: any[] = [];
+  public filteredProducts: any[] = [];
 
+  public cart: any;
   public totItemsInCat: number = 0;
 
+  // new for store
   public categories$: Observable<Category[]>;
+  public categoriesLoaded$: Observable<boolean>;
+  public categoriesLoading$: Observable<boolean>;
   public category: string;
 
-  public isAnime = false;
   public isAnimeDone = false;
 
   constructor( 
-    private store: Store<fromStore.ShoppingState>,
+    private store: Store<fromStore.ShoppingState>, 
     private productService: ProductService, 
+    private cartService: ShoppingCartService, 
     public route: ActivatedRoute, 
-    private cartService: ShoppingCartService) { 
+    ) { 
     
+    // get all products & filter by category from route params 
     this.subscription = this.productService.getAll().subscribe(prod => {
       this.products = prod;
-      
       route.queryParamMap.subscribe( params => {
         this.category = params.get('category');
-        
         this.filteredProducts = (this.category) ? 
           this.products.filter( p => p.category === this.category ) : 
           this.products;
       })
     });
     
-    // convert to ngrx select()
-    // this.categories$ = categoryService.getCategories();
-    this.store.dispatch(fromStore.loadCategories());
-    this.categories$ = this.store.select(fromStore.getAllCategories);
-    // 
-    
+    // get cart from local storage 
     let cartId = localStorage.getItem('cartId');
     this.subscription2 = this.cartService.getCart(cartId).subscribe(cart => this.cart = cart);
   }
 
   ngOnInit() {
-    if( this.categories$ && this.filteredProducts ) {
-      this.isAnime = true;
-      // console.log("cats?", this.categories$)
-    } else {
-      setTimeout(() => {
-        if( this.categories$ && this.filteredProducts ) {
-          this.isAnime = true;
-        } else {
-          alert('error getting data')
-        }
-      }, 2000);
-    }
+    // this.store.dispatch(fromStore.loadCategories()); in app.ts as to call only once 
+    this.categoriesLoading$ = this.store.select(fromStore.getCategoriesLoading);
+    this.categories$ = this.store.select(fromStore.getAllCategories);
   }
+
+
+
 
   addToCart(product: Product, i?: string) {
     this.cartService.addToCart(product);
@@ -119,6 +110,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
       duration: 150
     });
   }
+
+
+
+
 
   getQuantity(product: Product) {
     if(!this.cart) {
