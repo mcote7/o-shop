@@ -80,7 +80,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.store.dispatch(fromStore.loadCategories()); in app.ts as to call only once 
+    // this.store.dispatch(fromStore.loadCategories()); in app.ts as to call only once. 
     this.categoriesLoading$ = this.store.select(fromStore.getCategoriesLoading);
     this.categories$ = this.store.select(fromStore.getAllCategories);
   }
