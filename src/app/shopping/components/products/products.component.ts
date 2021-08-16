@@ -7,7 +7,6 @@ import { Category } from 'src/app/shared/models/category';
 
 import { Observable, Subscription } from 'rxjs';
 
-import { CategoryService } from 'src/app/shared/services/category.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 
@@ -49,15 +48,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   public totItemsInCat: number = 0;
 
-  public categories$: Observable<any>;
+  public categories$: Observable<Category[]>;
   public category: string;
 
   public isAnime = false;
   public isAnimeDone = false;
 
   constructor( 
+    private store: Store<fromStore.ShoppingState>,
     private productService: ProductService, 
-    public categoryService: CategoryService, 
     public route: ActivatedRoute, 
     private cartService: ShoppingCartService) { 
     
@@ -74,7 +73,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
     
     // convert to ngrx select()
-    this.categories$ = categoryService.getCategories();
+    // this.categories$ = categoryService.getCategories();
+    this.store.dispatch(fromStore.loadCategories());
+    this.categories$ = this.store.select(fromStore.getAllCategories);
+    // 
     
     let cartId = localStorage.getItem('cartId');
     this.subscription2 = this.cartService.getCart(cartId).subscribe(cart => this.cart = cart);
@@ -83,7 +85,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if( this.categories$ && this.filteredProducts ) {
       this.isAnime = true;
-      console.log("cats?", this.categories$)
+      // console.log("cats?", this.categories$)
     } else {
       setTimeout(() => {
         if( this.categories$ && this.filteredProducts ) {

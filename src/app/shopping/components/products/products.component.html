@@ -1,10 +1,9 @@
 <!--  -->
-
 <div class="row">
   <div class="col-md-2">
     <div
       @fadeIn
-      *ngIf="isAnime && categories$ | async"
+      *ngIf="isAnime && categories$"
       class="list-group">
       <a 
         class="list-group-item"
@@ -48,7 +47,7 @@
             @listAnimationItemCard
             class="card"
             [class.last-col]="l"
-            style="width: 16.25rem;">
+            style="width: 15rem;">
             
             <img [src]="p.imageUrl" class="card-img-top" alt="&nbsp; 🤷‍♂️ image not found">
             
@@ -85,7 +84,7 @@
                     @slideInTop 
                     id="{{i}}"
                     class="btn btn-card-cart">
-                    {{getQuantity(p)}} in cart
+                    <strong>{{getQuantity(p)}}</strong>
                   </button>
                   
                   <div @slideInTop class="handle-right"></div>

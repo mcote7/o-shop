@@ -9,6 +9,7 @@
   margin: 0.5rem 0rem 0rem 1rem;
   border-radius: $borderRad;
   border-top: 1px solid rgba(74, 140, 84, 0.25);
+  box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
   
   .list-group-item {
     overflow: hidden;
@@ -62,13 +63,15 @@
   margin: 0.5rem auto;
   border-radius: $borderRad;
   border: 1px solid rgba(231, 140, 54, 0.25);
-  transition: $transitionFast;
+  box-shadow: 2px 2px 2px 0px rgb(0,0,0,0.15);
+  transition: $transition ease-in-out;
   
   &:hover {
     border: 1px solid rgba(74, 140, 84, 0.25);
     box-shadow: 2px 2px 1px 1px hsl(129, 31%, 52%, 0.75);
     .card-img-top {
-      border-bottom: 2px solid rgba(74, 140, 84, 0.5);
+      transform: scale(1.25);
+      border-color: transparent;
     }
   }
   
@@ -81,6 +84,7 @@
     border-bottom: 2px solid rgba(231, 140, 54, 0.5);
     height: 120px;
     width: 150px;
+    transition: $transition ease-in-out;
   }
   
   .card-body {
