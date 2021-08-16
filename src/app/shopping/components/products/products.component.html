@@ -1,36 +1,42 @@
-<!--  -->
-
 <div class="row">
   <div class="col-md-2">
+    
     <div
-      @fadeIn
-      *ngIf="isAnime && categories$ | async"
-      class="list-group">
+      class="list-group"
+      [class.no-box]="categoriesLoading$|async">
+      
       <a 
         class="list-group-item"
         [class.activeLink]="!category"
         routerLink="/">
         All items
       </a>
+      
+      <div *ngIf="categoriesLoading$|async" class="loading-cats">
+        <i class="fa fa-spinner" aria-hidden="true"></i>
+      </div>
+      
       <a 
         @fadeIn 
         (@fadeIn.done)="isAnimeDone = true" 
-        *ngFor="let c of categories$ | async"
+        *ngFor="let cat of categories$|async"
         routerLink="/"
-        [queryParams]="{category: c.key}"
-        [class.activeLink]="category === c.key"
+        [queryParams]="{category: cat.key}"
+        [class.activeLink]="category === cat.key"
         class="list-group-item">
-        {{ c.name }}
+        {{ cat.name }}
+        
         <div 
           @popin
-          *ngIf="category === c.key"
-          title=" 🍃&nbsp;{{filteredProducts.length}} fresh varieties to choose from in - {{c.name}}"
+          *ngIf="category === cat.key"
+          title=" 🍃&nbsp;{{filteredProducts.length}} fresh varieties to choose from in - {{cat.name}}"
           class="float-right cat-item-len">
           (&nbsp;<strong>{{filteredProducts.length}}</strong>&nbsp;)
         </div>
       </a>
     </div>
   </div>
+  
   <div class="col">
     <div
       *ngIf="isAnimeDone && filteredProducts"
@@ -48,7 +54,7 @@
             @listAnimationItemCard
             class="card"
             [class.last-col]="l"
-            style="width: 16.25rem;">
+            style="width: 15rem;">
             
             <img [src]="p.imageUrl" class="card-img-top" alt="&nbsp; 🤷‍♂️ image not found">
             
@@ -85,7 +91,7 @@
                     @slideInTop 
                     id="{{i}}"
                     class="btn btn-card-cart">
-                    {{getQuantity(p)}} in cart
+                    <strong>{{getQuantity(p)}}</strong>
                   </button>
                   
                   <div @slideInTop class="handle-right"></div>
@@ -102,15 +108,8 @@
             </div>
           </div>
         </div>
-        <!-- <div *ngIf="(i + 1) % 2 === 0 >>> could be e as even" class="w-100"></div> -->
       </ng-container>
     </div>
   </div>
-</div>
-<div @fadeIn *ngIf="!isAnime" class="row load-wrap">
-  <div class="load-buff">
-      🌽
-  </div>
-  <span class="mt-auto ml-2">Loading products...</span>
 </div>
 <!-- 🎇 -->

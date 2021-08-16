@@ -128,8 +128,10 @@
     transition: $transition;
     backface-visibility: hidden;
     background-color: $darkGreen-hov;
+    box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
     &:hover {
       background-color: $darkGreen;
+      box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.25);
     }
     &:focus, :active {
       box-shadow: none;
@@ -149,8 +151,9 @@
   padding: 0.15rem 0.5rem;
   width: 100%;
   border-radius: $borderRad;
-  transition: background-color 0.6s, transform 0.2s;
+  transition: background-color 0.6s, transform $transition ease-in-out;
   backface-visibility: hidden;
+  box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
   
   &::after {
     content: '';
@@ -169,7 +172,8 @@
   
   &:hover {
     background-color: $carrot;
-    transform: scale3d(1,1.1,1);
+    transform: scale3d(1,1.2,1) translateZ(100px);
+    box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.25);
 
     &::before {
       content: '💳';
@@ -200,11 +204,6 @@
     transform: scale3d(0.95, 0.95, 1);
   }
 }
-
-// @keyframes add-item-2 {
-//   0% {box-shadow: 0 0 0 0 $bluegrey; transform: scale(1.5);}
-//   100% {box-shadow: 0 0 10px 20px rgba(255,150,44,0); transform: scale(1);}
-// }
 
 @keyframes fade-in {
   from {opacity: 0; filter: blur(12px);}

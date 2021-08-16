@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { toastNotification, slideInTop } from '../../../../animations/anime';
+import { toastNotification, slideInTop } from 'src/animations/anime';
 
 @Component({
   selector: 'app-order-success',

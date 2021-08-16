@@ -102,10 +102,6 @@ table {
     animation: spin-it 0.5s infinite;
   }
 }
-@keyframes spin-it {
-  from {transform: rotate(0deg);}
-  to {transform: rotate(360deg);}
-}
 
 @media only screen and (max-width: 576px) {
   .o-new-product-btn {

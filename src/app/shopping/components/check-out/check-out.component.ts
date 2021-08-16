@@ -2,19 +2,28 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Order } from '../../../shared/models/order';
+import { Order } from 'src/app/shared/models/order';
 
-import { fadeIn, toastNotification, slideInTop, slideInLeft } from '../../../../animations/anime';
-import { AuthService } from '../../../shared/services/auth.service';
+import { 
+  fadeIn, 
+  toastNotification, 
+  slideInTop, 
+  slideInLeft } from 'src/animations/anime';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
-import { OrderService } from '../../../shared/services/order.service';
-import { ShoppingCartService } from '../../../shared/services/shopping-cart.service';
+import { OrderService } from 'src/app/shared/services/order.service';
+import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 
 @Component({
   selector: 'app-check-out',
   templateUrl: './check-out.component.html',
   styleUrls: ['./check-out.component.scss'],
-  animations: [fadeIn,toastNotification,slideInTop,slideInLeft]
+  animations: [
+    fadeIn,
+    toastNotification,
+    slideInTop,
+    slideInLeft,
+  ]
 })
 
 export class CheckOutComponent implements OnInit, OnDestroy {
