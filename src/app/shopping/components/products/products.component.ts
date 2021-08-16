@@ -1,6 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { Store } from '@ngrx/store';
+import * as fromStore from 'src/app/shared/store';
+import { Category } from 'src/app/shared/models/category';
+
 import { Observable, Subscription } from 'rxjs';
 
 import { CategoryService } from 'src/app/shared/services/category.service';
@@ -11,13 +15,10 @@ import {
   popin, 
   fadeIn, 
   slideInTop, 
-  slideInLeft,
-  toastNotification, 
   listAnimationWrap, 
   listAnimationItem, 
   listAnimationWrapCard, 
-  listAnimationItemCard, 
-  slideInBottom } from 'src/animations/anime';
+  listAnimationItemCard } from 'src/animations/anime';
 
 import { Product } from 'src/app/shared/models/product';
 
@@ -30,9 +31,6 @@ import { Product } from 'src/app/shared/models/product';
     popin,
     fadeIn,
     slideInTop,
-    slideInLeft,
-    slideInBottom,
-    toastNotification,
     listAnimationWrap,
     listAnimationItem,
     listAnimationWrapCard,

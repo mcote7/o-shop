@@ -19,10 +19,11 @@ import { EffectsModule } from '@ngrx/effects';
 
 // register your reducers & effects 
 // import { reducers, effects } from './store';
+import { reducers, effects } from "./store";
 
 // use meta until new 
-const reducers = [];
-const effects = [];
+// const reducers = [];
+// const effects = [];
 
 
 
@@ -31,8 +32,8 @@ const effects = [];
     CommonModule,
     FormsModule,
     CustomFormsModule,
-    StoreModule.forFeature('shopping', reducers), // reducers 
-    EffectsModule.forFeature(effects), // effects  
+    StoreModule.forFeature('shopping', reducers),
+    EffectsModule.forFeature(effects),
   ],
   providers: [
     AuthService,
