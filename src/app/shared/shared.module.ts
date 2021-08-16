@@ -18,12 +18,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 // register your reducers & effects 
-// import { reducers, effects } from './store';
 import { reducers, effects } from "./store";
-
-// use meta until new 
-// const reducers = [];
-// const effects = [];
 
 
 
