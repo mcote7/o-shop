@@ -112,9 +112,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
 
-
-
-
   getQuantity(product: Product) {
     if(!this.cart) {
       return 0;
@@ -123,6 +120,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     // console.log("hey", this.cart)
     return item ? item.quantity : 0;
   }
+
+  
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

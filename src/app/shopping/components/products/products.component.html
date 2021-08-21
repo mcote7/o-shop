@@ -54,7 +54,11 @@
             @listAnimationItemCard
             class="card"
             [class.last-col]="l"
-            style="width: 15rem;">
+            style="width: 15rem; margin-bottom: 1.5rem;">
+            
+            <div @popin class="card-options">
+              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+            </div>
             
             <img [src]="p.imageUrl" class="card-img-top" alt="&nbsp; 🤷‍♂️ image not found">
             
