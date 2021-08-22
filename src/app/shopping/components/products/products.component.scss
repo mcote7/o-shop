@@ -187,9 +187,11 @@
       &:hover {
         cursor: pointer;
         background-color: hsla(182deg,88%,49%,0.1);
+        
         .svg-title {
           text-decoration: underline;
         }
+        
         svg {
           cursor: pointer;
           filter: grayscale(0);
@@ -216,6 +218,7 @@
               }
             }
           }
+          
           .steam {
             opacity: 1;
             animation: steam-it 1s;
@@ -259,6 +262,7 @@
           transform-origin: 50% 0%;
           opacity: 0;
         }
+        
         .steam {
           fill: $bluegrey;
           stroke: $tanish;
