@@ -56,6 +56,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   public isAnimeDone = false;
 
+  // new card options (4) 
+
   constructor( 
     private store: Store<fromStore.ShoppingState>, 
     private productService: ProductService, 
@@ -112,9 +114,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
 
-
-
-
   getQuantity(product: Product) {
     if(!this.cart) {
       return 0;
@@ -122,6 +121,29 @@ export class ProductsComponent implements OnInit, OnDestroy {
     let item = this.cart.items[product.key];
     // console.log("hey", this.cart)
     return item ? item.quantity : 0;
+  }
+
+  showCardMenu(id) {
+    const target_menu = document.getElementById(`card-menu-${id}`);
+    target_menu.style.display = 'flex';
+
+    const target_menu_btn = document.getElementById(`card-menu-button-${id}`);
+    target_menu_btn.style.display = 'none';
+
+    const target_reset_btn = document.getElementById(`card-reset-button-${id}`);
+    target_reset_btn.style.display = 'flex';
+
+  }
+
+  resetCard(id) {
+    const target_menu = document.getElementById(`card-menu-${id}`);
+    target_menu.style.display = 'none';
+
+    const target_reset_btn = document.getElementById(`card-reset-button-${id}`);
+    target_reset_btn.style.display = 'none';
+
+    const target_menu_btn = document.getElementById(`card-menu-button-${id}`);
+    target_menu_btn.style.display = 'flex';
   }
 
   ngOnDestroy() {
