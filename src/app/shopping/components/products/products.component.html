@@ -41,7 +41,8 @@
     <div
       *ngIf="isAnimeDone && filteredProducts"
       [@listAnimationWrapCard]="filteredProducts"
-      class="row">
+      class="row"
+      style="margin-top: 3rem;">
       
       <ng-container
         *ngFor="let p of filteredProducts;
@@ -63,6 +64,7 @@
               <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </div>
             
+            <!-- menu card -->
             <div id="card-menu-{{i}}" class="card-menu">
               <div class="menu-product">
                 <img [src]="p.imageUrl" class="mr-1" alt="&nbsp; 🤷‍♂️ image not found">
@@ -81,7 +83,9 @@
               
             </div>
             
+            <!-- nutrition card -->
             <div id="card-nutrition-{{i}}" class="card-menu">
+              
               <div class="menu-product">
                 <img [src]="p.imageUrl" class="mr-1" alt="&nbsp; 🤷‍♂️ image not found">
                 <div class="title-wrap">
@@ -90,11 +94,16 @@
                 </div>
               </div>
               
+              <div class="nuts-desc" *ngIf="isNutritionLoaded">
+                <div>Per 5oz. portion</div>
+                <small>(based on 2000 calorie diet)</small>
+              </div>
+              
               <ng-container *ngIf="isNutritionLoaded">
                 <div class="nuts">
+                  
                   <div class="cals">
-                    Calories: &nbsp;
-                    {{currentNutrition.calories}}
+                    Calories:&nbsp;<strong>{{currentNutrition.calories}}</strong>
                   </div>
                   
                   <div class="total-nuts">
@@ -162,7 +171,9 @@
                 Loading nutrition...
               </ng-container>
             </div>
+            <!-- end nutrition card -->
             
+            <!-- recipe card -->
             <div id="card-recipes-{{i}}" class="card-menu">
               <div class="menu-product">
                 <img [src]="p.imageUrl" class="mr-1" alt="&nbsp; 🤷‍♂️ image not found">
@@ -173,7 +184,9 @@
               </div>
               <!-- TODO: recipe modal -->
             </div>
+            <!-- end recipe card -->
             
+            <!-- product card -->
             <img [src]="p.imageUrl" class="card-img-top" alt="&nbsp; 🤷‍♂️ image not found">
             
             <div class="card-body">
