@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 
+// category store
 import { Store } from '@ngrx/store';
 import * as fromStore from 'src/app/shared/store';
 import { Category } from 'src/app/shared/models/category';
@@ -11,6 +12,9 @@ import { Product } from 'src/app/shared/models/product';
 // working on removing services from component 
 import { ProductService } from 'src/app/shared/services/product.service';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
+
+import { NutritionService } from 'src/app/shared/services/nutrition.service';
+import { RecipeService } from 'src/app/shared/services/recipe.service';
 
 import { 
   popin, 
@@ -56,12 +60,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   public isAnimeDone = false;
 
-  // new card options (4) 
+  // new card options 
+  public isNutritionLoaded: boolean;
+  public currentNutrition: any = {};
+  public currentRecipes: any = {};
 
   constructor( 
     private store: Store<fromStore.ShoppingState>, 
     private productService: ProductService, 
     private cartService: ShoppingCartService, 
+    private nutritionService: NutritionService, 
+    private recipeService: RecipeService, 
     public route: ActivatedRoute, 
     ) { 
     
@@ -123,7 +132,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
     return item ? item.quantity : 0;
   }
 
+  // card modals
+  
   showCardMenu(id) {
+    this.closeAllOtherCardModals(id);
+    
     const target_menu = document.getElementById(`card-menu-${id}`);
     target_menu.style.display = 'flex';
 
@@ -132,12 +145,48 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     const target_reset_btn = document.getElementById(`card-reset-button-${id}`);
     target_reset_btn.style.display = 'flex';
+  }
 
+  showCardNutrition(id, item) {
+    const target_menu = document.getElementById(`card-menu-${id}`);
+    target_menu.style.display = 'none';
+
+    const target_nutrition = document.getElementById(`card-nutrition-${id}`);
+    target_nutrition.style.display = 'flex';
+
+    this.isNutritionLoaded = false;
+
+    this.nutritionService.getNutritionFacts(item)
+      .subscribe(res => {
+        this.currentNutrition = res;
+        this.isNutritionLoaded = true;
+        console.log(`current nutrition: ${item}`, this.currentNutrition)
+      });
+  }
+
+  showCardRecipes(id, item) {
+    const target_menu = document.getElementById(`card-menu-${id}`);
+    target_menu.style.display = 'none';
+
+    const target_recipes = document.getElementById(`card-recipes-${id}`);
+    target_recipes.style.display = 'flex';
+
+    // this.recipeService.getRecipes(item)
+    //   .subscribe(res => {
+    //     this.currentRecipes = res;
+    //     console.log(`current recipes: ${item}`, this.currentRecipes)
+    //   });
   }
 
   resetCard(id) {
     const target_menu = document.getElementById(`card-menu-${id}`);
     target_menu.style.display = 'none';
+
+    const target_nutrition = document.getElementById(`card-nutrition-${id}`);
+    target_nutrition.style.display = 'none';
+
+    const target_recipes = document.getElementById(`card-recipes-${id}`);
+    target_recipes.style.display = 'none';
 
     const target_reset_btn = document.getElementById(`card-reset-button-${id}`);
     target_reset_btn.style.display = 'none';
@@ -146,6 +195,26 @@ export class ProductsComponent implements OnInit, OnDestroy {
     target_menu_btn.style.display = 'flex';
   }
 
+  closeAllOtherCardModals(id) {
+    const allOtherModels = Array.from(document.getElementsByClassName('card-menu') as HTMLCollectionOf<HTMLElement>);
+    allOtherModels.forEach(el => el.style.display = 'none');
+
+    const allOtherBacks = Array.from(document.getElementsByClassName('reset') as HTMLCollectionOf<HTMLElement>);
+    allOtherBacks.forEach(el => el.style.display = 'none');
+
+    const allOtherOptions = Array.from(document.getElementsByClassName('options') as HTMLCollectionOf<HTMLElement>);
+    allOtherOptions.forEach(el => el.style.display = 'flex');
+  }
+
+  trimUnderscore(word: string): string {
+    return word.split('_').join(' ').toLowerCase();
+  }
+  roundUpPercent(num: number): number {
+    return Math.ceil(num);
+  }
+  // end card modals
+
+  // 
   ngOnDestroy() {
     this.subscription.unsubscribe();
     this.subscription2.unsubscribe();

@@ -172,6 +172,17 @@
         width: 3rem;
         border-radius: 50%;
       }
+      
+      .title-wrap {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.3;
+      }
+    }
+    
+    .nuts {
+      text-align: left;
+      overflow-y: overlay;
     }
     
     .svg-row {
