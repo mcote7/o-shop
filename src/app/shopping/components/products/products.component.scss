@@ -372,7 +372,12 @@
           opacity: 0;
           @media only screen and (max-width: 568px) {
             opacity: 1;
-            animation: steam-it 1s;
+            animation: steam-it 1s 0.5s, fade-it 1.5s;
+            @keyframes fade-it {
+              from {opacity: 0;}
+              33% {opacity: 0;}
+              to {opacity: 1;}
+            }
           }
         }
       }
