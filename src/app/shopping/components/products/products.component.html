@@ -100,47 +100,55 @@
               </div>
               
               <ng-container *ngIf="isNutritionLoaded">
-                <div class="nuts">
+                <div class="nuts-info">
                   
-                  <div class="cals">
-                    Calories:&nbsp;<strong>{{currentNutrition.calories}}</strong>
+                  <div class="cals general-info">
+                    <small>Calories</small>&nbsp;<strong>{{currentNutrition.calories}}</strong>
                   </div>
                   
-                  <div class="total-nuts">
-                    {{currentNutrition.totalNutrientsKCal?.CHOCDF_KCAL.label}}:&nbsp;<strong>{{currentNutrition.totalNutrientsKCal?.CHOCDF_KCAL.quantity}}</strong>
+                  <div class="total-nuts general-info">
+                    <small>{{currentNutrition.totalNutrientsKCal?.CHOCDF_KCAL.label}}</small>&nbsp;<strong>{{currentNutrition.totalNutrientsKCal?.CHOCDF_KCAL.quantity}}</strong>
                     <br>
-                    {{currentNutrition.totalNutrientsKCal?.PROCNT_KCAL.label}}:&nbsp;<strong>{{currentNutrition.totalNutrientsKCal?.PROCNT_KCAL.quantity}}</strong>
+                    <small>{{currentNutrition.totalNutrientsKCal?.PROCNT_KCAL.label}}</small>&nbsp;<strong>{{currentNutrition.totalNutrientsKCal?.PROCNT_KCAL.quantity}}</strong>
                     <br>
-                    {{currentNutrition.totalNutrientsKCal?.FAT_KCAL.label}}:&nbsp;<strong>{{currentNutrition.totalNutrientsKCal?.FAT_KCAL.quantity}}</strong>
+                    <small>{{currentNutrition.totalNutrientsKCal?.FAT_KCAL.label}}</small>&nbsp;<strong>{{currentNutrition.totalNutrientsKCal?.FAT_KCAL.quantity}}</strong>
                     <br>
-                    {{currentNutrition.totalNutrientsKCal?.ENERC_KCAL.label}}:&nbsp;<strong>{{currentNutrition.totalNutrientsKCal?.ENERC_KCAL.quantity}}</strong>
+                    <small>{{currentNutrition.totalNutrientsKCal?.ENERC_KCAL.label}}</small>&nbsp;<strong>{{currentNutrition.totalNutrientsKCal?.ENERC_KCAL.quantity}}</strong>
                   </div>
                   
-                  <div class="cautions">
-                    Cautions: &nbsp;
-                    <ng-container *ngFor="let caution of currentNutrition.cautions">
-                      <strong style="color: red;">
-                        {{caution}}
-                      </strong>
-                    </ng-container>
-                  </div>
+                  <ng-container *ngIf="currentNutrition.dietLabels?.length > 0; else noDietLabels">
+                    <div class="diets general-info">
+                      <small style="font-weight: bold;">Diet Labels</small><br>
+                      <ng-container *ngFor="let label of currentNutrition.dietLabels; last as isLast">
+                        <strong  class="gen-list-good">
+                          {{trimUnderscore(label)}}<span *ngIf="!isLast">,</span><span *ngIf="isLast">.</span>
+                        </strong>
+                      </ng-container>
+                    </div>
+                  </ng-container>
+                  <ng-template #noDietLabels></ng-template>
                   
-                  <div class="diets">
-                    Diet Labels: &nbsp;
-                    <ng-container *ngFor="let label of currentNutrition.dietLabels; last as last">
-                      <strong style="color: green;">
-                        {{trimUnderscore(label)}}<span *ngIf="!last">,</span><span *ngIf="last">.</span>
-                      </strong>
-                    </ng-container>
-                  </div>
+                  <ng-container *ngIf="currentNutrition.cautions?.length > 0; else noCautions">
+                    <div class="cautions general-info">
+                      <small style="font-weight: bold;">Cautions</small><br>
+                      <ng-container *ngFor="let caution of currentNutrition.cautions">
+                        <strong class="gen-list-bad">
+                          {{caution}}
+                        </strong>
+                      </ng-container>
+                    </div>
+                  </ng-container>
+                  <ng-template #noCautions></ng-template>
                   
                   <br>
                   
                   <div class="daily-values">
                     <strong>Daily Values:</strong>
                     <br>
-                    <ng-container *ngFor="let item of currentNutrition.totalDaily|keyvalue">
-                      <small>{{item.value.label}}:</small>&nbsp;&nbsp;<strong>{{roundUpPercent(item.value.quantity)}}%</strong><br>
+                    <ng-container *ngFor="let item of currentNutrition.totalDaily|keyvalue; even as isEven">
+                      <div class="spec-rows" [class.even]="isEven">
+                        <small>{{item.value.label}}</small>&nbsp;&nbsp;<strong>{{roundUpPercent(item.value.quantity)}}%</strong><br>
+                      </div>
                     </ng-container>
                   </div>
                   
@@ -149,27 +157,29 @@
                   <div class="total-values">
                     <strong>Total Nutrients:</strong>
                     <br>
-                    <ng-container *ngFor="let item of currentNutrition.totalNutrients|keyvalue">
-                      <small>{{item.value.label}}:</small>&nbsp;&nbsp;<strong>{{roundUpPercent(item.value.quantity)}}{{item.value.unit}}.</strong><br>
+                    <ng-container *ngFor="let item of currentNutrition.totalNutrients|keyvalue; even as isEven">
+                      <div class="spec-rows" [class.even]="isEven">
+                        <small>{{item.value.label}}</small>&nbsp;&nbsp;<strong>{{roundUpPercent(item.value.quantity)}}{{item.value.unit}}.</strong><br>
+                      </div>
                     </ng-container>
                   </div>
                   
                   <br>
                   
+                  <strong>Health Tags:</strong>
                   <div class="nut-tags">
-                    <strong>Tags:</strong>
                     <br>
                     <ng-container *ngFor="let tag of currentNutrition.healthLabels">
-                      <strong style="color: green;">{{trimUnderscore(tag)}}</strong>
-                      <br>
+                      <span><small>✔</small>&nbsp;{{trimUnderscore(tag)}}</span>
                     </ng-container>
                   </div>
                 </div>
               </ng-container>
               
-              <ng-container *ngIf="!isNutritionLoaded">
-                Loading nutrition...
-              </ng-container>
+              <div class="loadingio-spinner-spinner-66dq5hz7hr" *ngIf="!isNutritionLoaded">
+                <div class="ldio-rm0bvq5jb0n">
+                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+              </div>
             </div>
             <!-- end nutrition card -->
             
