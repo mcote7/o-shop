@@ -228,9 +228,11 @@
           justify-content: space-between;
           background-color: $highlight-blue;
           padding: 0 0.5rem 0 0.25rem;
+          
           &.even {
             background-color: rgba(0,0,0,0.05);
           }
+          
           strong {
             margin-left: auto;
           }
@@ -239,6 +241,7 @@
       .nut-tags {
         display: flex;
         flex-wrap: wrap;
+        
         span {
           color: $white;
           background-color: $carrot;
@@ -248,6 +251,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
+          
           small {
             color: $lightGreen;
             background-color: white;
@@ -272,6 +276,7 @@
       padding: 0.5rem 0;
       background-color: rgba(0,0,0,0.05);
       transition: 0.5s ease-in-out;
+      
       @media only screen and (max-width: 568px) {
         background-color: $highlight-blue;
       }
@@ -291,6 +296,7 @@
           .check {
             opacity: 1;
             animation: check-it 0.8s;
+            
             @keyframes check-it {
               from {
                 fill: transparent;
@@ -314,6 +320,7 @@
           .steam {
             opacity: 1;
             animation: steam-it 1s;
+            
             @keyframes steam-it {
               from {
                 fill: transparent;
@@ -344,6 +351,7 @@
         height: 5rem;
         filter: grayscale(1);
         transition: 0.5s ease-in-out;
+        
         @media only screen and (max-width: 568px) {
           filter: grayscale(0);
         }
@@ -356,6 +364,7 @@
           stroke-dashoffset: 0;
           transform-origin: 50% 0%;
           opacity: 0;
+          
           @media only screen and (max-width: 568px) {
             opacity: 1;
             animation: check-it 0.8s;
@@ -370,9 +379,11 @@
           stroke-dashoffset: 0;
           transform-origin: 50% 0%;
           opacity: 0;
+          
           @media only screen and (max-width: 568px) {
             opacity: 1;
             animation: steam-it 1s 0.5s, fade-it 1.5s;
+            
             @keyframes fade-it {
               from {opacity: 0;}
               33% {opacity: 0;}
@@ -399,6 +410,7 @@
     h5 {
       margin-bottom: 0.5rem;
     }
+    
     p {
       margin-bottom: 0.5rem;
     }
@@ -518,7 +530,7 @@
 
 // 🍇 
 
-
+// spinner animated (nutrition card only right now)
 @keyframes ldio-rm0bvq5jb0n {
   0% { opacity: 1 }
   100% { opacity: 0 }

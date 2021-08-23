@@ -8,11 +8,10 @@ import * as fromStore from 'src/app/shared/store';
 import { Category } from 'src/app/shared/models/category';
 import { Product } from 'src/app/shared/models/product';
 
-
 // working on removing services from component 
 import { ProductService } from 'src/app/shared/services/product.service';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
-
+// new services 
 import { NutritionService } from 'src/app/shared/services/nutrition.service';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
 
@@ -42,6 +41,7 @@ import {
 })
 
 export class ProductsComponent implements OnInit, OnDestroy {
+  public isAnimeDone = false;
 
   public subscription: Subscription;
   public subscription2: Subscription;
@@ -52,25 +52,34 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public cart: any;
   public totItemsInCat: number = 0;
 
-  // new for store
+  // 🏪 store // 
+
+  // category 
   public categories$: Observable<Category[]>;
   public categoriesLoaded$: Observable<boolean>;
   public categoriesLoading$: Observable<boolean>;
   public category: string;
+  // products 
 
-  public isAnimeDone = false;
+  // end store //
 
   // new card options 
-  public isNutritionLoaded: boolean;
+  public isNutritionLoading: boolean;
   public currentNutrition: any = {};
+  
+  public isRecipesLoading: boolean;
   public currentRecipes: any = {};
+  // 
 
   constructor( 
     private store: Store<fromStore.ShoppingState>, 
-    private productService: ProductService, 
+    // 
+    private productService: ProductService, // next to go, he he he
     private cartService: ShoppingCartService, 
+    // 
     private nutritionService: NutritionService, 
-    private recipeService: RecipeService, 
+    private recipeService: RecipeService, // do more NgRx first... then play
+    // 
     public route: ActivatedRoute, 
     ) { 
     
@@ -90,17 +99,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.subscription2 = this.cartService.getCart(cartId).subscribe(cart => this.cart = cart);
   }
 
+  // dispactch load products in app.ts & select state here
+
   ngOnInit() {
     // this.store.dispatch(fromStore.loadCategories()); in app.ts as to call only once. 
     this.categoriesLoading$ = this.store.select(fromStore.getCategoriesLoading);
     this.categories$ = this.store.select(fromStore.getAllCategories);
   }
 
-
-
-
+// cart services
   addToCart(product: Product, i?: string) {
     this.cartService.addToCart(product);
+    // console.log("",i)
     let btn = document.getElementById(i);
     btn.animate([
       {boxShadow: '0 0 0 0 hsla(29, 79%, 56%, 1)', transform: 'scale(1.025)'},
@@ -109,10 +119,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
       duration: 150
     });
   }
-
   removeFromCart(product: Product, i: string) {
     this.cartService.removeFromCart(product);
-    // console.log("heyheyhey",i)
+    // console.log("",i)
     let btn = document.getElementById(i);
     btn.animate([
       {transform: 'rotateX(360deg)', backgroundColor: 'hsla(29, 79%, 56%, 1)'},
@@ -121,21 +130,24 @@ export class ProductsComponent implements OnInit, OnDestroy {
       duration: 150
     });
   }
-
-
-  getQuantity(product: Product) {
+  
+  getQuantity(product: Product): number {
     if(!this.cart) {
       return 0;
     }
     let item = this.cart.items[product.key];
-    // console.log("hey", this.cart)
+    // console.log("", this.cart)
     return item ? item.quantity : 0;
   }
+// end cart
 
-  // card modals
-  
-  showCardMenu(id) {
-    this.closeAllOtherCardModals(id);
+
+
+  // new card modals (needs re-factor)
+
+  // display main menu 
+  showCardMenu(id:any) {
+    this.closeAllOtherCardModals();
     
     const target_menu = document.getElementById(`card-menu-${id}`);
     target_menu.style.display = 'flex';
@@ -147,39 +159,44 @@ export class ProductsComponent implements OnInit, OnDestroy {
     target_reset_btn.style.display = 'flex';
   }
 
-  // good here for loading 
-  showCardNutrition(id, item) {
+  // display nutrition card & api call 
+  showCardNutrition(id:any, item:string) {
     const target_menu = document.getElementById(`card-menu-${id}`);
     target_menu.style.display = 'none';
 
     const target_nutrition = document.getElementById(`card-nutrition-${id}`);
     target_nutrition.style.display = 'flex';
 
-    this.isNutritionLoaded = false;
+    this.isNutritionLoading = true;
 
     this.nutritionService.getNutritionFacts(item)
       .subscribe(res => {
         this.currentNutrition = res;
-        this.isNutritionLoaded = true;
+        this.isNutritionLoading = false;
         console.log(`current nutrition: ${item}`, this.currentNutrition)
       });
   }
 
-  showCardRecipes(id, item) {
+  // display recipe card & call api 
+  showCardRecipes(id:any, item:string) {
     const target_menu = document.getElementById(`card-menu-${id}`);
     target_menu.style.display = 'none';
 
     const target_recipes = document.getElementById(`card-recipes-${id}`);
     target_recipes.style.display = 'flex';
 
+    this.isRecipesLoading = true;
+
     // this.recipeService.getRecipes(item)
     //   .subscribe(res => {
     //     this.currentRecipes = res;
+    //     this.isRecipesLoading = false;
     //     console.log(`current recipes: ${item}`, this.currentRecipes)
     //   });
   }
 
-  resetCard(id) {
+  // back button 
+  resetCard(id:any) {
     const target_menu = document.getElementById(`card-menu-${id}`);
     target_menu.style.display = 'none';
 
@@ -196,7 +213,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     target_menu_btn.style.display = 'flex';
   }
 
-  closeAllOtherCardModals(id) {
+  // to close other product card options if new card selected to minimize api calls 
+  closeAllOtherCardModals() {
     const allOtherModels = Array.from(document.getElementsByClassName('card-menu') as HTMLCollectionOf<HTMLElement>);
     allOtherModels.forEach(el => el.style.display = 'none');
 
@@ -206,16 +224,19 @@ export class ProductsComponent implements OnInit, OnDestroy {
     const allOtherOptions = Array.from(document.getElementsByClassName('options') as HTMLCollectionOf<HTMLElement>);
     allOtherOptions.forEach(el => el.style.display = 'flex');
   }
+  // end card modals
 
+
+  // CAN CONVERT TO  PIPES | pipe 
   trimUnderscore(word: string): string {
     return word.split('_').join(' ').toLowerCase();
   }
   roundUpPercent(num: number): number {
     return Math.ceil(num);
   }
-  // end card modals
 
-  // 
+
+  // will not need after full store implementation 
   ngOnDestroy() {
     this.subscription.unsubscribe();
     this.subscription2.unsubscribe();
