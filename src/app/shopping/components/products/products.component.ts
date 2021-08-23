@@ -147,6 +147,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     target_reset_btn.style.display = 'flex';
   }
 
+  // good here for loading 
   showCardNutrition(id, item) {
     const target_menu = document.getElementById(`card-menu-${id}`);
     target_menu.style.display = 'none';
