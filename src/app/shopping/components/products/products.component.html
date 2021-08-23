@@ -1,21 +1,19 @@
 <div class="row">
   <div class="col-md-2">
-    
+    <!-- category selector -->
     <div
       class="list-group"
       [class.no-box]="categoriesLoading$|async">
-      
       <a 
         class="list-group-item"
         [class.activeLink]="!category"
         routerLink="/">
         All items
       </a>
-      
+      <!-- loading -->
       <div *ngIf="categoriesLoading$|async" class="loading-cats">
         <i class="fa fa-spinner" aria-hidden="true"></i>
       </div>
-      
       <a 
         @fadeIn 
         (@fadeIn.done)="isAnimeDone = true" 
@@ -24,6 +22,7 @@
         [queryParams]="{category: cat.key}"
         [class.activeLink]="category === cat.key"
         class="list-group-item">
+        
         {{ cat.name }}
         
         <div 
@@ -36,7 +35,7 @@
       </a>
     </div>
   </div>
-  
+  <!-- products section -->
   <div class="col">
     <div
       *ngIf="isAnimeDone && filteredProducts"
@@ -51,11 +50,13 @@
         let l = last">
         
         <div class="col-xl-3 col-lg-4 col-md-6">
+          <!-- each product card -->
           <div 
             @listAnimationItemCard
             class="card"
             [class.last-col]="l">
             
+            <!-- top menu buttons -->
             <div id="card-menu-button-{{i}}" (click)="showCardMenu(i)" class="card-options options">
               <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
             </div>
@@ -80,7 +81,6 @@
                 <svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" enable-background="new 0 0 512 512" viewBox="0 0 512 512"><g><g><g><path d="m143.655 62.316h-47.952c.243 1.212.375 2.464.375 3.747 0 10.477-8.523 19-19 19s-19-8.523-19-19c0-1.283.131-2.535.375-3.747h-47.953c-1.657 0-3 1.343-3 3v133.155c0 1.657 1.343 3 3 3h133.155c1.657 0 3-1.343 3-3v-133.155c0-1.657-1.343-3-3-3z" fill="#ffd15b"/><g><path d="m41 198.471v-133.155c0-1.657 1.343-3 3-3h-33.5c-1.657 0-3 1.343-3 3v133.155c0 1.657 1.343 3 3 3h33.5c-1.657 0-3-1.343-3-3z" fill="#fdb441"/></g><g><circle cx="77.077" cy="66.062" fill="#6354b1" r="20"/></g><g><path d="m76.984 66.063c0-7.418 4.048-13.878 10.047-17.331-2.933-1.689-6.326-2.669-9.953-2.669-11.046 0-20 8.954-20 20s8.954 20 20 20c3.628 0 7.02-.981 9.953-2.669-5.999-3.453-10.047-9.914-10.047-17.331z" fill="#54469c"/></g><g><path d="m112.5 132.971h-70.845c-4.142 0-7.5-3.358-7.5-7.5s3.358-7.5 7.5-7.5h70.845c4.142 0 7.5 3.358 7.5 7.5s-3.358 7.5-7.5 7.5z" fill="#883f2e"/></g><g><path d="m112.5 166.154h-70.845c-4.142 0-7.5-3.358-7.5-7.5s3.358-7.5 7.5-7.5h70.845c4.142 0 7.5 3.358 7.5 7.5s-3.358 7.5-7.5 7.5z" fill="#883f2e"/></g></g><g><g><path d="m174.554 100.031h33v46.396h-33z" fill="#97d729"/><path d="m174.554 100.031h16.446v46.396h-16.446z" fill="#8bc727"/><g><path d="m210.179 101.031h-38.25c-1.864 0-3.375-1.511-3.375-3.375v-18c0-1.864 1.511-3.375 3.375-3.375h38.25c1.864 0 3.375 1.511 3.375 3.375v18c0 1.864-1.511 3.375-3.375 3.375z" fill="#81b823"/></g><path d="m188 97.656v-18c0-1.864 1.511-3.375 3.375-3.375h-19.446c-1.864 0-3.375 1.511-3.375 3.375v18c0 1.864 1.511 3.375 3.375 3.375h19.446c-1.864 0-3.375-1.511-3.375-3.375z" fill="#78a91f"/><g><path d="m238 272.812v-101.182c0-14.411-11.791-26.202-26.202-26.202h-41.487c-14.411 0-26.202 11.791-26.202 26.202v101.182z" fill="#81b823"/></g><g fill="#78a91f"><path d="m170.311 204.073h7.798v-32.443c0-14.411 11.791-26.202 26.202-26.202h-34c-14.411 0-26.202 11.791-26.202 26.202v101.182h25v-67.536c0-.607.596-1.203 1.202-1.203z"/><path d="m152.165 359.099.652.731.744-.637c4.729-4.05 10.073-7.151 15.883-9.217l.665-.237v-46.391h-26v48.277c2.904 2.231 5.605 4.728 8.056 7.474z"/></g><g><path d="m213 272.812v-67.536c0-.607-.595-1.202-1.202-1.202h-41.487c-.606 0-1.202.595-1.202 1.202v67.536z" fill="#ffd15b"/><g><path d="m186.163 347.087h7.014v-43.74h-24.067v46.763c5.436-1.98 11.203-3.023 17.053-3.023z" fill="#ffd15b"/></g></g><g><path d="m190 272.812v-67.536c0-.607.596-1.202 1.202-1.202h-20.891c-.606 0-1.202.595-1.202 1.202v67.536z" fill="#fdb441"/><g><path d="m186.163 347.087h3.837v-43.74h-20.891v46.763c5.437-1.98 11.204-3.023 17.054-3.023z" fill="#fdb441"/></g></g></g><g><g fill="#6354b1"><path d="m193.176 275.499-1-3.687h-51.756c-2.761 0-5 2.239-5 5v22.536c0 2.761 2.239 5 5 5h52.756z"/><path d="m499.5 271.811h-51.756l-1 3.722v28.814h52.756c2.761 0 5-2.239 5-5v-22.536c0-2.761-2.239-5-5-5z"/></g><g fill="#54469c"><path d="m192.176 287.536h-26.256c-2.761 0-5-2.239-5-5v-10.724h-20.5c-2.761 0-5 2.239-5 5v22.536c0 2.761 2.239 5 5 5h51.756z"/><path d="m447.744 287.536v16.811h51.756c2.761 0 5-2.239 5-5v-11.811z"/></g><path d="m192.176 271.811v75.276h34.104c27.713 0 50.26 22.547 50.26 50.26 0 15.664-7.563 30.688-20.231 40.191l-2.399 1.8h53.307c2.345 0 4.253 1.908 4.253 4.254v16.378h136.274v-188.159z" fill="#d8ecfe"/><g><path d="m200.828 321.894 5.393 12.257 5.393-12.257c1.668-3.792 6.093-5.514 9.885-3.844 3.792 1.668 5.513 6.094 3.844 9.885l-3.728 8.472 12.817-6.602v-57.995h-42.256v45.826c3.473-.856 7.162.872 8.652 4.258z" fill="#c4e2ff"/></g></g><g><path d="m163.785 339.352 15.865 8.172c2.134-.278 4.305-.436 6.513-.436h40.117c2.208 0 4.379.159 6.513.436l15.865-8.172c3.683-1.896 5.13-6.419 3.233-10.102-1.897-3.682-6.419-5.13-10.102-3.233l-20.174 10.391 3.728-8.472c1.668-3.792-.053-8.217-3.844-9.885-3.792-1.669-8.217.052-9.885 3.844l-5.393 12.257-5.393-12.257c-1.668-3.792-6.094-5.514-9.885-3.844-3.792 1.668-5.513 6.094-3.844 9.885l3.728 8.472-20.174-10.391c-3.681-1.898-8.205-.448-10.102 3.233-1.897 3.682-.449 8.205 3.234 10.102z" fill="#81b823"/><path d="m156.874 439.339h98.693c13.256-9.291 21.972-24.668 21.972-41.991 0-28.193-23.067-51.26-51.26-51.26h-40.117c-28.193 0-51.26 23.067-51.26 51.26 0 17.323 8.717 32.7 21.972 41.991z" fill="#fd4755"/><path d="m156.874 439.339h50.442c-13.249-9.291-21.955-24.673-21.955-41.991 0-26.448 20.3-48.384 46.089-50.998-1.701-.172-3.426-.262-5.171-.262h-40.117c-28.193 0-51.26 23.067-51.26 51.26 0 17.323 8.717 32.7 21.972 41.991z" fill="#fb2b3a"/><path d="m230.159 439.339c.746-2.382 1.148-4.915 1.148-7.542 0-13.927-11.29-25.218-25.218-25.218s-25.218 11.29-25.218 25.218c0 2.628.403 5.161 1.148 7.542z" fill="#81b823"/><path d="m207.163 439.339c-.747-2.383-1.163-4.913-1.163-7.542 0-9.351 5.094-17.507 12.654-21.862-3.7-2.131-7.988-3.356-12.564-3.356-13.927 0-25.218 11.29-25.218 25.218 0 2.628.403 5.161 1.148 7.542z" fill="#78a91f"/></g><g><path d="m65.555 439.339h85.734c10.344-10.703 16.711-25.273 16.711-41.333 0-21.047-10.935-39.53-27.43-50.1-10.001-6.409-18.128-15.354-24.067-25.641l-.072-.125c-.274-.475-.419-1.014-.419-1.563v-46.307c0-4.107-3.164-7.688-7.269-7.811-4.247-.128-7.731 3.278-7.731 7.497v22.978l-7.049-8.279c-2.737-3.212-7.596-3.546-10.747-.695-3.045 2.755-3.132 7.532-.47 10.659l17.299 20.316c.857 1.007.988 2.444.327 3.59-5.892 10.205-13.998 19.025-23.919 25.384-17.594 11.276-28.862 31.554-27.281 54.342 1.001 14.437 7.036 27.367 16.383 37.088z" fill="#fe7701"/><path d="m94.284 439.339h28.489c3.447-10.702 5.568-25.274 5.568-41.333 0-21.228-3.708-39.848-9.286-50.372-3.211-6.059-5.812-14.627-7.709-24.484l-.121-.628c-.575-2.988-4.852-2.988-5.427 0-1.952 10.144-4.62 18.985-7.914 25.271-5.898 11.253-9.681 31.59-9.153 54.455.332 14.324 2.394 27.309 5.553 37.091z" fill="#f46700"/><path d="m181.621 439.339c1.523-3.247 2.379-6.87 2.379-10.695 0-13.927-11.29-25.218-25.218-25.218s-25.218 11.29-25.218 25.218c0 3.824.856 7.447 2.379 10.695z" fill="#81b823"/><path d="m161.39 439.339c-1.526-3.248-2.39-6.868-2.39-10.695 0-9.288 5.024-17.397 12.5-21.773-3.734-2.186-8.078-3.445-12.718-3.445-13.927 0-25.218 11.29-25.218 25.218 0 3.824.856 7.447 2.379 10.695z" fill="#78a91f"/></g><path d="m312.47 459.971v-16.378c0-2.901-2.352-5.254-5.254-5.254h-272.397c-2.901 0-5.254 2.352-5.254 5.254v16.378z" fill="#fed2a4"/><path d="m80.096 459.971v-16.378c0-2.901 2.352-5.254 5.254-5.254h-50.53c-2.901 0-5.254 2.352-5.254 5.254v16.378z" fill="#ffbd86"/><g><path class="steam" d="m378.411 240.707c-4.142 0-7.5-3.358-7.5-7.5v-37.827c0-6.293-5.12-11.413-11.413-11.413h-40.979c-14.564 0-26.414-11.849-26.414-26.414v-2.102c0-14.564 11.849-26.413 26.414-26.413h85.11c6.293 0 11.414-5.12 11.414-11.413s-5.12-11.414-11.414-11.414h-69.349c-4.142 0-7.5-3.358-7.5-7.5s3.358-7.5 7.5-7.5h69.349c14.564 0 26.414 11.849 26.414 26.414s-11.849 26.413-26.414 26.413h-85.11c-6.293 0-11.414 5.12-11.414 11.413v2.102c0 6.293 5.12 11.414 11.414 11.414h40.979c14.564 0 26.413 11.849 26.413 26.413v37.827c0 4.142-3.358 7.5-7.5 7.5z" fill="#ffbd86"/></g><g><path class="steam" d="m306.961 106.212h-25.743c-14.854 0-26.938-12.084-26.938-26.938s12.084-26.939 26.938-26.939h94.041c4.142 0 7.5 3.358 7.5 7.5s-3.358 7.5-7.5 7.5h-94.041c-6.583 0-11.938 5.356-11.938 11.939s5.355 11.938 11.938 11.938h25.743c4.142 0 7.5 3.358 7.5 7.5s-3.358 7.5-7.5 7.5z" fill="#fed2a4"/></g></g></g><path class="steam" d="m440.319 51.688h-6.16v-6.159c0-4.142-3.358-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v6.159h-6.159c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h6.16v6.16c0 4.142 3.358 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-6.16h6.16c4.142 0 7.5-3.358 7.5-7.5s-3.359-7.5-7.501-7.5z" fill="#fed2a4"/><path class="steam" d="m316.319 216.25h-6.16v-6.16c0-4.142-3.358-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v6.16h-6.159c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h6.16v6.16c0 4.142 3.358 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-6.16h6.16c4.142 0 7.5-3.358 7.5-7.5s-3.359-7.5-7.501-7.5z" fill="#fed2a4"/><g><path d="m504.5 473.971h-497c-4.142 0-7.5-3.358-7.5-7.5s3.358-7.5 7.5-7.5h497c4.142 0 7.5 3.358 7.5 7.5s-3.358 7.5-7.5 7.5z" fill="#fe7701"/></g></g></svg>
                 <div class="svg-title">Recipe<br>Suggestions</div>
               </div>
-              
             </div>
             
             <!-- nutrition card -->
@@ -94,18 +94,16 @@
                 </div>
               </div>
               
-              <div class="nuts-desc" *ngIf="isNutritionLoaded">
+              <div class="nuts-desc" *ngIf="!isNutritionLoading">
                 <div>Per 5oz. portion</div>
                 <small>(based on 2000 calorie diet)</small>
               </div>
               
-              <ng-container *ngIf="isNutritionLoaded">
+              <ng-container *ngIf="!isNutritionLoading">
                 <div class="nuts-info">
-                  
                   <div class="cals general-info">
                     <small>Calories</small>&nbsp;<strong>{{currentNutrition.calories}}</strong>
                   </div>
-                  
                   <div class="total-nuts general-info">
                     <small>{{currentNutrition.totalNutrientsKCal?.CHOCDF_KCAL.label}}</small>&nbsp;<strong>{{currentNutrition.totalNutrientsKCal?.CHOCDF_KCAL.quantity}}</strong>
                     <br>
@@ -139,9 +137,7 @@
                     </div>
                   </ng-container>
                   <ng-template #noCautions></ng-template>
-                  
                   <br>
-                  
                   <div class="daily-values">
                     <strong>Daily Values:</strong>
                     <br>
@@ -151,9 +147,7 @@
                       </div>
                     </ng-container>
                   </div>
-                  
                   <br>
-                  
                   <div class="total-values">
                     <strong>Total Nutrients:</strong>
                     <br>
@@ -163,20 +157,18 @@
                       </div>
                     </ng-container>
                   </div>
-                  
                   <br>
-                  
                   <strong>Health Tags:</strong>
                   <div class="nut-tags">
                     <br>
                     <ng-container *ngFor="let tag of currentNutrition.healthLabels">
-                      <span><small>✔</small>&nbsp;{{trimUnderscore(tag)}}</span>
+                      <span><small><i class="fa fa-check" aria-hidden="true"></i></small>&nbsp;{{trimUnderscore(tag)}}</span>
                     </ng-container>
                   </div>
                 </div>
               </ng-container>
-              
-              <div class="loadingio-spinner-spinner-66dq5hz7hr" *ngIf="!isNutritionLoaded">
+              <!-- loading nutrients animated -->
+              <div class="loadingio-spinner-spinner-66dq5hz7hr" *ngIf="isNutritionLoading">
                 <div class="ldio-rm0bvq5jb0n">
                 <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
               </div>
@@ -196,19 +188,13 @@
             </div>
             <!-- end recipe card -->
             
-            <!-- product card -->
+            <!-- product card main -->
             <img [src]="p.imageUrl" class="card-img-top" alt="&nbsp; 🤷‍♂️ image not found">
-            
             <div class="card-body">
-              
               <h5 class="card-title">{{p.title}}</h5>
-              
               <p class="card-text">{{p.category}}</p>
-              
               <p class="card-text"><strong>{{ p.price | currency:'USD':'symbol' }}</strong></p>
-              
               <div class="btm-btns-wrp">
-                
                 <button 
                   *ngIf="getQuantity(p) === 0; else updateQuantity"
                   @popin
@@ -216,34 +202,27 @@
                   class="btn btn-card">
                   Add to cart
                 </button>
-                
                 <ng-template #updateQuantity>
-                  
                   <button 
                     @slideInTop 
                     (click)="removeFromCart(p, i.toString())"
                     class="btn btn-paddle pad-left">
                     <i class="fa fa-minus" aria-hidden="true"></i>
                   </button>
-                  
                   <div @slideInTop class="handle-left"></div>
-                  
                   <button 
                     @slideInTop 
                     id="{{i}}"
                     class="btn btn-card-cart">
                     <strong>{{getQuantity(p)}}</strong>
                   </button>
-                  
                   <div @slideInTop class="handle-right"></div>
-                  
                   <button 
                     @slideInTop 
                     (click)="addToCart(p, i.toString())"
                     class="btn btn-paddle pad-right">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                   </button>
-                  
                 </ng-template>
               </div>
             </div>
