@@ -78,7 +78,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private cartService: ShoppingCartService, 
     // 
     private nutritionService: NutritionService, 
-    private recipeService: RecipeService, // do more NgRx first... then play
+    private recipeService: RecipeService, 
     // 
     public route: ActivatedRoute, 
     ) { 
@@ -185,14 +185,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
     const target_recipes = document.getElementById(`card-recipes-${id}`);
     target_recipes.style.display = 'flex';
 
-    this.isRecipesLoading = true;
+    this.getRecipes(item);
+  }
 
-    // this.recipeService.getRecipes(item)
-    //   .subscribe(res => {
-    //     this.currentRecipes = res;
-    //     this.isRecipesLoading = false;
-    //     console.log(`current recipes: ${item}`, this.currentRecipes)
-    //   });
+  // get more recipes 
+  getRecipes(item:string) {
+    this.isRecipesLoading = true;
+    this.recipeService.getRecipes(item)
+      .subscribe(res => {
+        this.currentRecipes = res;
+        this.isRecipesLoading = false;
+        console.log(`current recipes: ${item}`, this.currentRecipes)
+      });
   }
 
   // back button 

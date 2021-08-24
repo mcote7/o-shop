@@ -184,7 +184,34 @@
                   <small style="border-bottom: 1px solid;">recipe suggestions</small>
                 </div>
               </div>
-              <!-- TODO: recipe modal -->
+              <!-- recipe modal -->
+              <ng-container *ngIf="!isRecipesLoading">
+                <div class="recipe-wrap">
+                  <ng-container *ngFor="let hit of currentRecipes.hits; even as isEven">
+                    <div class="recipe" [class.even]="isEven">
+                      <img [src]="hit.recipe.image" alt="recipe">
+                      <strong>{{hit.recipe.label}}</strong>
+                      <div>{{hit.recipe.ingredients.length}} ingredients</div>
+                      <a 
+                        href="{{hit.recipe.url}}" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        title="{{hit.recipe.url}}">
+                          See Full 
+                          <i class="fa fa-external-link" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </ng-container>
+                  <div class="pagination">
+                    <div (click)="getRecipes(p.title)" class="mx-auto more" title="see more"></div>
+                  </div>
+                </div>
+              </ng-container>
+              <!-- loading recipes animated -->
+              <div class="loadingio-spinner-spinner-66dq5hz7hr" *ngIf="isRecipesLoading">
+                <div class="ldio-rm0bvq5jb0n">
+                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+              </div>
             </div>
             <!-- end recipe card -->
             

@@ -266,6 +266,54 @@
       }
     }
     
+    .recipe-wrap {
+      text-align: left;
+      overflow-y: overlay;
+      border-radius: $borderRad;
+      width: 100%;
+      margin-top: 0.5rem;
+      
+      .recipe {
+        border-radius: $borderRad;
+        margin: 0.5rem 0;
+        padding: 0 0.5rem;
+        background-color: $highlight-blue;
+        display: flex;
+        flex-direction: column;
+        border-bottom: 0.25rem solid rgba(0,0,0,0.1);
+        
+        &.even {
+          background-color: $highlight-tanish;
+        }
+        
+        img {
+          height: 7rem;
+          width: calc(100% - 0.25rem);
+          margin: auto;
+          border-radius: $borderRad;
+          margin-top: 0.5rem;
+        }
+      }
+      .pagination {
+        .more {
+          height: 4rem;
+          width: 4rem;
+          cursor: pointer;
+          background-image: url('../../../../assets/images/icon.png');
+          background-size: contain;
+          background-repeat: no-repeat;
+          clip-path: circle(80%);
+          filter: hue-rotate(272deg);
+          transition: 0.2s;
+          
+          &:hover {
+            transform: scale(1.2);
+            clip-path: circle(34%);
+          }
+        }
+      }
+    }
+    
     .svg-row {
       display: flex;
       flex-direction: row;
