@@ -27,10 +27,10 @@
         
         <div 
           @popin
-          *ngIf="category === cat.key"
-          title=" 🍃&nbsp;{{filteredProducts.length}} fresh varieties to choose from in - {{cat.name}}"
+          *ngIf="category === cat.key && !productsLoading$"
+          title=" 🍃&nbsp;{{(products$|async).length}} fresh varieties to choose from in - {{cat.name}}"
           class="float-right cat-item-len">
-          (&nbsp;<strong>{{filteredProducts.length}}</strong>&nbsp;)
+          (&nbsp;<strong>{{(products$|async).length}}</strong>&nbsp;)
         </div>
       </a>
     </div>
@@ -38,13 +38,13 @@
   <!-- products section -->
   <div class="col">
     <div
-      *ngIf="isAnimeDone && filteredProducts"
-      [@listAnimationWrapCard]="filteredProducts"
+      *ngIf="isAnimeDone && (products$|async)"
+      [@listAnimationWrapCard]="(products$|async)"
       class="row"
       style="margin-top: 3rem;">
       
       <ng-container
-        *ngFor="let p of filteredProducts;
+        *ngFor="let p of products$|async;
         let i = index;
         let e = even;
         let l = last">

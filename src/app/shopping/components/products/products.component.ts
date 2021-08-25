@@ -10,9 +10,9 @@ import { Store } from '@ngrx/store';
 import * as fromStore from 'src/app/shared/store';
 
 
-// working on removing services from component 
-import { ProductService } from 'src/app/shared/services/product.service';
+// import { ProductService } from 'src/app/shared/services/product.service';
 // 
+// working on removing services from component 
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 
 // new services 
@@ -47,23 +47,29 @@ import {
 export class ProductsComponent implements OnInit, OnDestroy {
   public isAnimeDone = false;
   
-  public subscription: Subscription; // products 
-  public products: any[] = [];
-  public filteredProducts: any[] = [];
+  // XXXXXX
+  // public subscription: Subscription; // products 
+  // public products: any[] = [];
+  // public filteredProducts: any[] = [];
+  // XXXXXX
   
   public subscription2: Subscription; // cart 
   public cart: any;
-  public totItemsInCat: number = 0;
 
   // 🏪 store // 
 
   // category 
   public categories$: Observable<Category[]>;
-  public categoriesLoaded$: Observable<boolean>;
+  public categoriesLoaded$: Observable<boolean>;//x
   public categoriesLoading$: Observable<boolean>;
   // 
-  public category: string; // this can be used in products effect to filter return 
+  // XXXXXX
+  public category: string;// this can be used in products effect to filter return 
+
   // products 
+  public products$: Observable<any>;
+  public productsLoaded$: Observable<boolean>;//x
+  public productsLoading$: Observable<boolean>;
 
   // end store //
 
@@ -78,7 +84,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   constructor( 
     private store: Store<fromStore.ShoppingState>, 
     // 
-    private productService: ProductService, // next to go, he he he
+    // private productService: ProductService, // next to go, he he he
     private cartService: ShoppingCartService, 
     // 
     private nutritionService: NutritionService, 
@@ -87,16 +93,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
     public route: ActivatedRoute, 
     ) { 
     
-    // get all products & filter by category from route params 
-    this.subscription = this.productService.getAll().subscribe(prod => {
-      this.products = prod;
-      route.queryParamMap.subscribe( params => {
-        this.category = params.get('category');
-        this.filteredProducts = (this.category) ? 
-          this.products.filter( p => p.category === this.category ) : 
-          this.products;
-      })
-    });
+    // XXXXXX
+    // // get all products & filter by category from route params 
+    // this.subscription = this.productService.getAll().subscribe(prod => {
+    //   this.products = prod;
+    //   route.queryParamMap.subscribe( params => {
+    //     this.category = params.get('category');
+    //     this.filteredProducts = (this.category) ? 
+    //       this.products.filter( p => p.category === this.category ) : 
+    //       this.products;
+    //   })
+    // });
+    // XXXXXX
     
     // get cart from local storage 
     let cartId = localStorage.getItem('cartId');
@@ -106,9 +114,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
   // dispactch load products in app.ts & select state here
 
   ngOnInit() {
-    // this.store.dispatch(fromStore.loadCategories()); in app.ts as to call only once. 
+    this.route.queryParamMap.subscribe(params => {
+      if(params) this.category = params.get('category');
+    });
+    // this.store.dispatch(); in app.ts as to call only once. 
     this.categoriesLoading$ = this.store.select(fromStore.getCategoriesLoading);
     this.categories$ = this.store.select(fromStore.getAllCategories);
+    
+    this.productsLoading$ = this.store.select(fromStore.getProductsLoading);
+    this.products$ = this.store.select(fromStore.getProductsByCategory);
   }
 
 
@@ -247,7 +261,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   // will not need after full store implementation 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
     this.subscription2.unsubscribe();
   }
 }

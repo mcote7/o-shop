@@ -35,6 +35,7 @@ export class AppComponent {
     });
     
     this.store.dispatch(fromStore.loadCategories());
+    this.store.dispatch(fromStore.loadProducts());
   }
 }
 // 
