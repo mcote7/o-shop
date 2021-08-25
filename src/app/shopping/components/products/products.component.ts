@@ -2,15 +2,19 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 
-// category store
-import { Store } from '@ngrx/store';
-import * as fromStore from 'src/app/shared/store';
 import { Category } from 'src/app/shared/models/category';
 import { Product } from 'src/app/shared/models/product';
 
+// category|product store 
+import { Store } from '@ngrx/store';
+import * as fromStore from 'src/app/shared/store';
+
+
 // working on removing services from component 
 import { ProductService } from 'src/app/shared/services/product.service';
+// 
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
+
 // new services 
 import { NutritionService } from 'src/app/shared/services/nutrition.service';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
@@ -42,13 +46,12 @@ import {
 
 export class ProductsComponent implements OnInit, OnDestroy {
   public isAnimeDone = false;
-
-  public subscription: Subscription;
-  public subscription2: Subscription;
-
+  
+  public subscription: Subscription; // products 
   public products: any[] = [];
   public filteredProducts: any[] = [];
-
+  
+  public subscription2: Subscription; // cart 
   public cart: any;
   public totItemsInCat: number = 0;
 
@@ -108,6 +111,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.categories$ = this.store.select(fromStore.getAllCategories);
   }
 
+
 // cart services
   addToCart(product: Product, i?: string) {
     this.cartService.addToCart(product);
@@ -144,7 +148,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
 
 
-  // new card modals (needs re-factor)
+  // new card modals (needs re-factor) //
 
   // display main menu 
   showCardMenu(id:any) {

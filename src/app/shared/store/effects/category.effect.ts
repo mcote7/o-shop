@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
-import { catchError, concatMap, map, switchMap } from "rxjs/operators";
+import { catchError, map, switchMap } from "rxjs/operators";
 import * as fromServices from '../../services/category.service';
 import * as fromActions from '../actions/category.action';
 
@@ -19,5 +19,4 @@ export class CategoryEffects {
       catchError(error => of(fromActions.LoadCategoriesFail({errorMessage: error})))
     ))
   ));
-
 }
