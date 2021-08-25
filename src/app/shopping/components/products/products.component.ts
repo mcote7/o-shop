@@ -58,7 +58,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public categories$: Observable<Category[]>;
   public categoriesLoaded$: Observable<boolean>;
   public categoriesLoading$: Observable<boolean>;
-  public category: string;
+  // 
+  public category: string; // this can be used in products effect to filter return 
   // products 
 
   // end store //
