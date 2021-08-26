@@ -7,8 +7,14 @@ export const getProductsState = createSelector(fromFeature.getShoppingState, (st
 
 export const getAllProducts = createSelector(getProductsState, fromProducts.getAllProducts);
 
-export const getProductsByCategory = createSelector(getAllProducts, () => {
-  // use router store select
+export const getProductsByCategory = ({category}) => createSelector(getAllProducts, (prod) => {
+  if(category) {
+    return prod.filter(p => {
+      return p.category === category;
+    })
+  } else {
+    return prod;
+  }
 });
 
 // TODO: add get by id &...

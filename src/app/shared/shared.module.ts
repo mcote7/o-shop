@@ -24,7 +24,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers, effects } from "./store";
 
 
-
 @NgModule({
   imports: [
     CommonModule,

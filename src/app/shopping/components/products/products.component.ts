@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 import { Category } from 'src/app/shared/models/category';
 import { Product } from 'src/app/shared/models/product';
@@ -9,13 +9,10 @@ import { Product } from 'src/app/shared/models/product';
 import { Store } from '@ngrx/store';
 import * as fromStore from 'src/app/shared/store';
 
-
-// import { ProductService } from 'src/app/shared/services/product.service';
-// 
 // working on removing services from component 
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 
-// new services 
+// new 3rdp api services 
 import { NutritionService } from 'src/app/shared/services/nutrition.service';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
 
@@ -45,38 +42,24 @@ import {
 })
 
 export class ProductsComponent implements OnInit, OnDestroy {
-  public isAnimeDone = false;
+  public isAnimeDone = false; // remove plz 
   
-  // XXXXXX
-  // public subscription: Subscription; // products 
-  // public products: any[] = [];
-  // public filteredProducts: any[] = [];
-  // XXXXXX
-  
-  public subscription2: Subscription; // cart 
+  public subscriptionCart: Subscription; // cart 
   public cart: any;
 
   // 🏪 store // 
-
   // category 
   public categories$: Observable<Category[]>;
-  public categoriesLoaded$: Observable<boolean>;//x
   public categoriesLoading$: Observable<boolean>;
-  // 
-  // XXXXXX
-  public category: string;// this can be used in products effect to filter return 
-
+  public category: string;
   // products 
-  public products$: Observable<any>;
-  public productsLoaded$: Observable<boolean>;//x
+  public products$: Observable<Product[]>;
   public productsLoading$: Observable<boolean>;
-
   // end store //
 
   // new card options 
   public isNutritionLoading: boolean;
   public currentNutrition: any = {};
-  
   public isRecipesLoading: boolean;
   public currentRecipes: any = {};
   // 
@@ -84,46 +67,29 @@ export class ProductsComponent implements OnInit, OnDestroy {
   constructor( 
     private store: Store<fromStore.ShoppingState>, 
     // 
-    // private productService: ProductService, // next to go, he he he
     private cartService: ShoppingCartService, 
     // 
     private nutritionService: NutritionService, 
     private recipeService: RecipeService, 
-    // 
-    public route: ActivatedRoute, 
+    private router: ActivatedRoute, 
     ) { 
     
-    // XXXXXX
-    // // get all products & filter by category from route params 
-    // this.subscription = this.productService.getAll().subscribe(prod => {
-    //   this.products = prod;
-    //   route.queryParamMap.subscribe( params => {
-    //     this.category = params.get('category');
-    //     this.filteredProducts = (this.category) ? 
-    //       this.products.filter( p => p.category === this.category ) : 
-    //       this.products;
-    //   })
-    // });
-    // XXXXXX
-    
-    // get cart from local storage 
-    let cartId = localStorage.getItem('cartId');
-    this.subscription2 = this.cartService.getCart(cartId).subscribe(cart => this.cart = cart);
-  }
-
-  // dispactch load products in app.ts & select state here
-
-  ngOnInit() {
-    this.route.queryParamMap.subscribe(params => {
-      if(params) this.category = params.get('category');
-    });
-    // this.store.dispatch(); in app.ts as to call only once. 
     this.categoriesLoading$ = this.store.select(fromStore.getCategoriesLoading);
     this.categories$ = this.store.select(fromStore.getAllCategories);
-    
     this.productsLoading$ = this.store.select(fromStore.getProductsLoading);
-    this.products$ = this.store.select(fromStore.getProductsByCategory);
+    
+    this.router.queryParamMap.subscribe(params => {
+      this.category = params.get('category');
+      this.products$ = this.store.select(fromStore.getProductsByCategory({category: this.category}));
+    });
+
+    // get cart from local storage 
+    let cartId = localStorage.getItem('cartId'); // pass to select 
+    this.subscriptionCart = this.cartService.getCart(cartId).subscribe(cart => this.cart = cart);
   }
+
+  // dispactch load actions in app.ts^ & select state where needed 
+  ngOnInit() {}
 
 
 // cart services
@@ -161,19 +127,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
 // end cart
 
 
-
-  // new card modals (needs re-factor) //
-
+  // new ... card modals //
+  
   // display main menu 
   showCardMenu(id:any) {
     this.closeAllOtherCardModals();
-    
     const target_menu = document.getElementById(`card-menu-${id}`);
     target_menu.style.display = 'flex';
-
     const target_menu_btn = document.getElementById(`card-menu-button-${id}`);
     target_menu_btn.style.display = 'none';
-
     const target_reset_btn = document.getElementById(`card-reset-button-${id}`);
     target_reset_btn.style.display = 'flex';
   }
@@ -182,12 +144,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
   showCardNutrition(id:any, item:string) {
     const target_menu = document.getElementById(`card-menu-${id}`);
     target_menu.style.display = 'none';
-
     const target_nutrition = document.getElementById(`card-nutrition-${id}`);
     target_nutrition.style.display = 'flex';
-
     this.isNutritionLoading = true;
-
     this.nutritionService.getNutritionFacts(item)
       .subscribe(res => {
         this.currentNutrition = res;
@@ -200,10 +159,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   showCardRecipes(id:any, item:string) {
     const target_menu = document.getElementById(`card-menu-${id}`);
     target_menu.style.display = 'none';
-
     const target_recipes = document.getElementById(`card-recipes-${id}`);
     target_recipes.style.display = 'flex';
-
     this.getRecipes(item);
   }
 
@@ -222,16 +179,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
   resetCard(id:any) {
     const target_menu = document.getElementById(`card-menu-${id}`);
     target_menu.style.display = 'none';
-
     const target_nutrition = document.getElementById(`card-nutrition-${id}`);
     target_nutrition.style.display = 'none';
-
     const target_recipes = document.getElementById(`card-recipes-${id}`);
     target_recipes.style.display = 'none';
-
     const target_reset_btn = document.getElementById(`card-reset-button-${id}`);
     target_reset_btn.style.display = 'none';
-
     const target_menu_btn = document.getElementById(`card-menu-button-${id}`);
     target_menu_btn.style.display = 'flex';
   }
@@ -240,15 +193,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
   closeAllOtherCardModals() {
     const allOtherModels = Array.from(document.getElementsByClassName('card-menu') as HTMLCollectionOf<HTMLElement>);
     allOtherModels.forEach(el => el.style.display = 'none');
-
     const allOtherBacks = Array.from(document.getElementsByClassName('reset') as HTMLCollectionOf<HTMLElement>);
     allOtherBacks.forEach(el => el.style.display = 'none');
-
     const allOtherOptions = Array.from(document.getElementsByClassName('options') as HTMLCollectionOf<HTMLElement>);
     allOtherOptions.forEach(el => el.style.display = 'flex');
   }
   // end card modals
-
 
   // CAN CONVERT TO  PIPES | pipe 
   trimUnderscore(word: string): string {
@@ -258,10 +208,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
     return Math.ceil(num);
   }
 
-
   // will not need after full store implementation 
   ngOnDestroy() {
     // this.subscription.unsubscribe();
-    this.subscription2.unsubscribe();
+    this.subscriptionCart.unsubscribe();
   }
 }

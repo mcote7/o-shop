@@ -17,7 +17,7 @@ export class ProductService {
   }
 
   // used from store  
-  getAll(): Observable<any> {
+  getAll() {
     return this.db.list('/products').valueChanges(undefined, {idField: 'key'});
   }
   // 
