@@ -4,18 +4,15 @@
     <div
       class="list-group">
       <a 
+        @popin 
         class="list-group-item"
+        *ngIf="(categories$|async).length"
         [class.activeLink]="!category"
         routerLink="/">
         All items
       </a>
-      <!-- loading -->
-      <!-- <div *ngIf="categoriesLoading$|async" class="loading-cats">
-        <i class="fa fa-spinner" aria-hidden="true"></i>
-      </div> -->
       <a 
-        @fadeIn 
-        (@fadeIn.done)="isAnimeDone = true" 
+        @popin 
         *ngFor="let cat of categories$|async"
         routerLink="/"
         [queryParams]="{category: cat.key}"
@@ -37,8 +34,7 @@
   <!-- products section -->
   <div class="col">
     <div
-      *ngIf="isAnimeDone && (products$|async)"
-      [@listAnimationWrapCard]="(products$|async)"
+      [@listAnimationWrapCard]="(products$|async).length"
       class="row"
       style="margin-top: 3rem;">
       

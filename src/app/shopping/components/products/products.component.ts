@@ -1,27 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-
 import { Category } from 'src/app/shared/models/category';
 import { Product } from 'src/app/shared/models/product';
-
 // category|product store 
 import { Store } from '@ngrx/store';
 import * as fromStore from 'src/app/shared/store';
-
 // working on removing services from component 
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
-
 // new 3rdp api services 
 import { NutritionService } from 'src/app/shared/services/nutrition.service';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
-
 import { 
   popin, 
-  fadeIn, 
   slideInTop, 
-  listAnimationWrap, 
-  listAnimationItem, 
   listAnimationWrapCard, 
   listAnimationItemCard } from 'src/animations/anime';
 
@@ -32,28 +24,23 @@ import {
   styleUrls: ['./products.component.scss'],
   animations: [
     popin,
-    fadeIn,
     slideInTop,
-    listAnimationWrap,
-    listAnimationItem,
     listAnimationWrapCard,
     listAnimationItemCard,
   ]
 })
 
 export class ProductsComponent implements OnInit, OnDestroy {
-  public isAnimeDone = false; // remove plz 
-  
-  public subscriptionCart: Subscription; // cart 
+  public subscriptionCart: Subscription; // cart to be removed by store 
   public cart: any;
-
+  // 
   public category: string;
   // 🏪 store // 
   public categories$: Observable<Category[]>;
   public products$: Observable<Product[]>;
   // end store //
 
-  // new card options 
+  // new card api options 
   public isNutritionLoading: boolean;
   public currentNutrition: any = {};
   public isRecipesLoading: boolean;
@@ -86,7 +73,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ngOnInit() {}
 
 
-// cart services 
+  // shopping cart services 
   addToCart(product: Product, i?: string) {
     this.cartService.addToCart(product);
     // console.log("",i)
@@ -98,6 +85,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       duration: 150
     });
   }
+  
   removeFromCart(product: Product, i: string) {
     this.cartService.removeFromCart(product);
     // console.log("",i)
@@ -118,7 +106,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     // console.log("", this.cart)
     return item ? item.quantity : 0;
   }
-// end cart
+  // end cart
 
 
   // new ... card modals //
@@ -194,7 +182,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
   // end card modals
 
-  // CAN CONVERT TO  PIPES | pipe 
+  // 👉 TODO: CONVERT TO  PIPES | pipe 
   trimUnderscore(word: string): string {
     return word.split('_').join(' ').toLowerCase();
   }
@@ -204,7 +192,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   // will not need after full store implementation 
   ngOnDestroy() {
-    // this.subscription.unsubscribe();
-    this.subscriptionCart.unsubscribe();
+    this.subscriptionCart.unsubscribe(); // cart 
   }
 }

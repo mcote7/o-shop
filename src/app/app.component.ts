@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { AuthService } from './shared/services/auth.service';
 import { UserService } from './shared/services/user.service';
 
+import { fadeOutLong } from 'src/animations/anime';
+
 import { Store } from '@ngrx/store';
 import * as fromStore from 'src/app/shared/store';
 
@@ -12,7 +14,8 @@ import * as fromStore from 'src/app/shared/store';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [fadeOutLong]
 })
 export class AppComponent {
   

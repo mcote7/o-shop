@@ -54,6 +54,25 @@ export const fadeInOut = trigger('fadeInOut', [
     ])
 ]);
 
+export const fadeOutLong = trigger('fadeOutLong', [
+    transition(':enter', [
+        style({
+            opacity: 0
+        }),
+        animate(10, style({
+            opacity: 1
+        }))
+    ]),
+    transition(':leave', [
+        style({
+            opacity: 1
+        }),
+        animate(1882, style({
+            opacity: 0
+        }))
+    ])
+]);
+
 // 
 
 export const slideInTop = trigger('slideInTop', [
