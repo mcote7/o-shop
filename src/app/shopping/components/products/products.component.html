@@ -27,7 +27,7 @@
         
         <div 
           @popin
-          *ngIf="category === cat.key && !productsLoading$"
+          *ngIf="category === cat.key"
           title=" 🍃&nbsp;{{(products$|async).length}} fresh varieties to choose from in - {{cat.name}}"
           class="float-right cat-item-len">
           (&nbsp;<strong>{{(products$|async).length}}</strong>&nbsp;)

@@ -75,8 +75,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
     ) { 
     
     this.categoriesLoading$ = this.store.select(fromStore.getCategoriesLoading);
-    this.categories$ = this.store.select(fromStore.getAllCategories);
     this.productsLoading$ = this.store.select(fromStore.getProductsLoading);
+    
+    this.categories$ = this.store.select(fromStore.getAllCategories);
     
     this.router.queryParamMap.subscribe(params => {
       this.category = params.get('category');

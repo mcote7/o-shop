@@ -11,7 +11,7 @@ export const getProductsByCategory = ({category}) => createSelector(getAllProduc
   if(category) {
     return prod.filter(p => {
       return p.category === category;
-    })
+    });
   } else {
     return prod;
   }
