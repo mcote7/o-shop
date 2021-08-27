@@ -22,6 +22,8 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { reducers } from 'src/app/shared/store/reducers/router.reducer';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +40,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     AdminModule,
     ShoppingModule,
     CoreModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(reducers),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
   ],

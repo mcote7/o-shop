@@ -2,21 +2,17 @@
   <div class="col-md-2">
     <!-- category selector -->
     <div
-      class="list-group"
-      [class.no-box]="categoriesLoading$|async">
+      class="list-group">
       <a 
+        @popin 
         class="list-group-item"
+        *ngIf="(categories$|async).length"
         [class.activeLink]="!category"
         routerLink="/">
         All items
       </a>
-      <!-- loading -->
-      <div *ngIf="categoriesLoading$|async" class="loading-cats">
-        <i class="fa fa-spinner" aria-hidden="true"></i>
-      </div>
       <a 
-        @fadeIn 
-        (@fadeIn.done)="isAnimeDone = true" 
+        @popin 
         *ngFor="let cat of categories$|async"
         routerLink="/"
         [queryParams]="{category: cat.key}"
@@ -28,9 +24,9 @@
         <div 
           @popin
           *ngIf="category === cat.key"
-          title=" 🍃&nbsp;{{filteredProducts.length}} fresh varieties to choose from in - {{cat.name}}"
+          title=" 🍃&nbsp;{{(products$|async).length}} fresh varieties to choose from in - {{cat.name}}"
           class="float-right cat-item-len">
-          (&nbsp;<strong>{{filteredProducts.length}}</strong>&nbsp;)
+          (&nbsp;<strong>{{(products$|async).length}}</strong>&nbsp;)
         </div>
       </a>
     </div>
@@ -38,13 +34,12 @@
   <!-- products section -->
   <div class="col">
     <div
-      *ngIf="isAnimeDone && filteredProducts"
-      [@listAnimationWrapCard]="filteredProducts"
+      [@listAnimationWrapCard]="(products$|async).length"
       class="row"
       style="margin-top: 3rem;">
       
       <ng-container
-        *ngFor="let p of filteredProducts;
+        *ngFor="let p of products$|async;
         let i = index;
         let e = even;
         let l = last">

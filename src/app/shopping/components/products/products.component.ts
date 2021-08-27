@@ -1,26 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-
-// category store
-import { Store } from '@ngrx/store';
-import * as fromStore from 'src/app/shared/store';
+import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/shared/models/category';
 import { Product } from 'src/app/shared/models/product';
-
+// category|product store 
+import { Store } from '@ngrx/store';
+import * as fromStore from 'src/app/shared/store';
 // working on removing services from component 
-import { ProductService } from 'src/app/shared/services/product.service';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
-// new services 
+// new 3rdp api services 
 import { NutritionService } from 'src/app/shared/services/nutrition.service';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
-
 import { 
   popin, 
-  fadeIn, 
   slideInTop, 
-  listAnimationWrap, 
-  listAnimationItem, 
   listAnimationWrapCard, 
   listAnimationItemCard } from 'src/animations/anime';
 
@@ -31,43 +24,25 @@ import {
   styleUrls: ['./products.component.scss'],
   animations: [
     popin,
-    fadeIn,
     slideInTop,
-    listAnimationWrap,
-    listAnimationItem,
     listAnimationWrapCard,
     listAnimationItemCard,
   ]
 })
 
 export class ProductsComponent implements OnInit, OnDestroy {
-  public isAnimeDone = false;
-
-  public subscription: Subscription;
-  public subscription2: Subscription;
-
-  public products: any[] = [];
-  public filteredProducts: any[] = [];
-
+  public subscriptionCart: Subscription; // cart to be removed by store 
   public cart: any;
-  public totItemsInCat: number = 0;
-
-  // 🏪 store // 
-
-  // category 
-  public categories$: Observable<Category[]>;
-  public categoriesLoaded$: Observable<boolean>;
-  public categoriesLoading$: Observable<boolean>;
   // 
-  public category: string; // this can be used in products effect to filter return 
-  // products 
-
+  public category: string;
+  // 🏪 store // 
+  public categories$: Observable<Category[]>;
+  public products$: Observable<Product[]>;
   // end store //
 
-  // new card options 
+  // new card api options 
   public isNutritionLoading: boolean;
   public currentNutrition: any = {};
-  
   public isRecipesLoading: boolean;
   public currentRecipes: any = {};
   // 
@@ -75,40 +50,30 @@ export class ProductsComponent implements OnInit, OnDestroy {
   constructor( 
     private store: Store<fromStore.ShoppingState>, 
     // 
-    private productService: ProductService, // next to go, he he he
     private cartService: ShoppingCartService, 
     // 
     private nutritionService: NutritionService, 
     private recipeService: RecipeService, 
-    // 
-    public route: ActivatedRoute, 
+    private router: ActivatedRoute, 
     ) { 
     
-    // get all products & filter by category from route params 
-    this.subscription = this.productService.getAll().subscribe(prod => {
-      this.products = prod;
-      route.queryParamMap.subscribe( params => {
-        this.category = params.get('category');
-        this.filteredProducts = (this.category) ? 
-          this.products.filter( p => p.category === this.category ) : 
-          this.products;
-      })
-    });
-    
-    // get cart from local storage 
-    let cartId = localStorage.getItem('cartId');
-    this.subscription2 = this.cartService.getCart(cartId).subscribe(cart => this.cart = cart);
-  }
-
-  // dispactch load products in app.ts & select state here
-
-  ngOnInit() {
-    // this.store.dispatch(fromStore.loadCategories()); in app.ts as to call only once. 
-    this.categoriesLoading$ = this.store.select(fromStore.getCategoriesLoading);
     this.categories$ = this.store.select(fromStore.getAllCategories);
+    
+    this.router.queryParamMap.subscribe(params => {
+      this.category = params.get('category');
+      this.products$ = this.store.select(fromStore.getProductsByCategory({category: this.category}));
+    });
+
+    // get cart from local storage 
+    let cartId = localStorage.getItem('cartId'); // pass to select 
+    this.subscriptionCart = this.cartService.getCart(cartId).subscribe(cart => this.cart = cart);
   }
 
-// cart services
+  // dispactch load actions in app.ts^ & select state where needed 
+  ngOnInit() {}
+
+
+  // shopping cart services 
   addToCart(product: Product, i?: string) {
     this.cartService.addToCart(product);
     // console.log("",i)
@@ -120,6 +85,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       duration: 150
     });
   }
+  
   removeFromCart(product: Product, i: string) {
     this.cartService.removeFromCart(product);
     // console.log("",i)
@@ -140,22 +106,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
     // console.log("", this.cart)
     return item ? item.quantity : 0;
   }
-// end cart
+  // end cart
 
 
-
-  // new card modals (needs re-factor)
-
+  // new ... card modals //
+  
   // display main menu 
   showCardMenu(id:any) {
     this.closeAllOtherCardModals();
-    
     const target_menu = document.getElementById(`card-menu-${id}`);
     target_menu.style.display = 'flex';
-
     const target_menu_btn = document.getElementById(`card-menu-button-${id}`);
     target_menu_btn.style.display = 'none';
-
     const target_reset_btn = document.getElementById(`card-reset-button-${id}`);
     target_reset_btn.style.display = 'flex';
   }
@@ -164,12 +126,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
   showCardNutrition(id:any, item:string) {
     const target_menu = document.getElementById(`card-menu-${id}`);
     target_menu.style.display = 'none';
-
     const target_nutrition = document.getElementById(`card-nutrition-${id}`);
     target_nutrition.style.display = 'flex';
-
     this.isNutritionLoading = true;
-
     this.nutritionService.getNutritionFacts(item)
       .subscribe(res => {
         this.currentNutrition = res;
@@ -182,10 +141,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   showCardRecipes(id:any, item:string) {
     const target_menu = document.getElementById(`card-menu-${id}`);
     target_menu.style.display = 'none';
-
     const target_recipes = document.getElementById(`card-recipes-${id}`);
     target_recipes.style.display = 'flex';
-
     this.getRecipes(item);
   }
 
@@ -204,16 +161,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
   resetCard(id:any) {
     const target_menu = document.getElementById(`card-menu-${id}`);
     target_menu.style.display = 'none';
-
     const target_nutrition = document.getElementById(`card-nutrition-${id}`);
     target_nutrition.style.display = 'none';
-
     const target_recipes = document.getElementById(`card-recipes-${id}`);
     target_recipes.style.display = 'none';
-
     const target_reset_btn = document.getElementById(`card-reset-button-${id}`);
     target_reset_btn.style.display = 'none';
-
     const target_menu_btn = document.getElementById(`card-menu-button-${id}`);
     target_menu_btn.style.display = 'flex';
   }
@@ -222,17 +175,14 @@ export class ProductsComponent implements OnInit, OnDestroy {
   closeAllOtherCardModals() {
     const allOtherModels = Array.from(document.getElementsByClassName('card-menu') as HTMLCollectionOf<HTMLElement>);
     allOtherModels.forEach(el => el.style.display = 'none');
-
     const allOtherBacks = Array.from(document.getElementsByClassName('reset') as HTMLCollectionOf<HTMLElement>);
     allOtherBacks.forEach(el => el.style.display = 'none');
-
     const allOtherOptions = Array.from(document.getElementsByClassName('options') as HTMLCollectionOf<HTMLElement>);
     allOtherOptions.forEach(el => el.style.display = 'flex');
   }
   // end card modals
 
-
-  // CAN CONVERT TO  PIPES | pipe 
+  // 👉 TODO: CONVERT TO  PIPES | pipe 
   trimUnderscore(word: string): string {
     return word.split('_').join(' ').toLowerCase();
   }
@@ -240,10 +190,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     return Math.ceil(num);
   }
 
-
   // will not need after full store implementation 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
-    this.subscription2.unsubscribe();
+    this.subscriptionCart.unsubscribe(); // cart 
   }
 }
