@@ -15,6 +15,15 @@
   </div>
 
   <scroll-progress-read></scroll-progress-read>
+
+  <!--  -->
+  <div class="main-loading" *ngIf="(categoriesLoading$|async)||(productsLoading$|async)">
+    <!-- loading nutrients animated -->
+    <div class="loadingio-spinner-spinner-66dq5hz7hr">
+      <div class="ldio-rm0bvq5jb0n">
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
   
 </div>
 <!-- scroll-progress-read on line 15  v-->

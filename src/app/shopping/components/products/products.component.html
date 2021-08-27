@@ -2,8 +2,7 @@
   <div class="col-md-2">
     <!-- category selector -->
     <div
-      class="list-group"
-      [class.no-box]="categoriesLoading$|async">
+      class="list-group">
       <a 
         class="list-group-item"
         [class.activeLink]="!category"
@@ -11,9 +10,9 @@
         All items
       </a>
       <!-- loading -->
-      <div *ngIf="categoriesLoading$|async" class="loading-cats">
+      <!-- <div *ngIf="categoriesLoading$|async" class="loading-cats">
         <i class="fa fa-spinner" aria-hidden="true"></i>
-      </div>
+      </div> -->
       <a 
         @fadeIn 
         (@fadeIn.done)="isAnimeDone = true" 

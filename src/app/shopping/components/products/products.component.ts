@@ -47,14 +47,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public subscriptionCart: Subscription; // cart 
   public cart: any;
 
-  // 🏪 store // 
-  // category 
-  public categories$: Observable<Category[]>;
-  public categoriesLoading$: Observable<boolean>;
   public category: string;
-  // products 
+  // 🏪 store // 
+  public categories$: Observable<Category[]>;
   public products$: Observable<Product[]>;
-  public productsLoading$: Observable<boolean>;
   // end store //
 
   // new card options 
@@ -74,9 +70,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private router: ActivatedRoute, 
     ) { 
     
-    this.categoriesLoading$ = this.store.select(fromStore.getCategoriesLoading);
-    this.productsLoading$ = this.store.select(fromStore.getProductsLoading);
-    
     this.categories$ = this.store.select(fromStore.getAllCategories);
     
     this.router.queryParamMap.subscribe(params => {
@@ -93,7 +86,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ngOnInit() {}
 
 
-// cart services
+// cart services 
   addToCart(product: Product, i?: string) {
     this.cartService.addToCart(product);
     // console.log("",i)

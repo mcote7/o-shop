@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
 import { AuthService } from './shared/services/auth.service';
 import { UserService } from './shared/services/user.service';
 
 import { Store } from '@ngrx/store';
 import * as fromStore from 'src/app/shared/store';
+
 
 @Component({
   selector: 'app-root',
@@ -14,12 +17,15 @@ import * as fromStore from 'src/app/shared/store';
 export class AppComponent {
   
   title = 'o-shop';
+
+  public categoriesLoading$: Observable<boolean>;
+  public productsLoading$: Observable<boolean>;
   
   constructor(
-    private userService: UserService, 
-    private auth: AuthService, 
     public router: Router, 
-    private store: Store<fromStore.ShoppingState>,
+    private auth: AuthService, 
+    private userService: UserService, 
+    private store: Store<fromStore.ShoppingState>, 
     ) {
     
     this.auth.user$.subscribe( user => {
@@ -36,6 +42,8 @@ export class AppComponent {
     
     this.store.dispatch(fromStore.loadCategories());
     this.store.dispatch(fromStore.loadProducts());
+    this.categoriesLoading$ = this.store.select(fromStore.getCategoriesLoading);
+    this.productsLoading$ = this.store.select(fromStore.getProductsLoading);
   }
 }
 // 
