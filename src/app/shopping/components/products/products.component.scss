@@ -490,13 +490,13 @@
       align-items: center;
       cursor: default;
       font-weight: bold;
-      background-color: $tanish;
+      background-color: $white;
       color: $bluegrey;
       border-radius: 50%;
       height: 2.75rem;
       width: 2.75rem;
       font-size: 1.5rem;
-      border: 4px solid $carrot;
+      border: 2px solid $carrot;
       transition: $transition;
       
       &:focus, :active {
@@ -530,7 +530,7 @@
       align-items: center;
       background-color: $white;
       color: $carrot-hov;
-      border: 0.25rem solid $carrot;
+      border: 2px solid $carrot;
       border-radius: 50%;
       height: 2rem;
       width: 2rem;
