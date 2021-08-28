@@ -1,13 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component } from '@angular/core';
+import { Observable, } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/shared/models/category';
 import { Product } from 'src/app/shared/models/product';
-// category|product store 
+// category|product|cart store 
 import { Store } from '@ngrx/store';
 import * as fromStore from 'src/app/shared/store';
-// working on removing services from component 
-import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 // new 3rdp api services 
 import { NutritionService } from 'src/app/shared/services/nutrition.service';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
@@ -30,81 +28,43 @@ import {
   ]
 })
 
-export class ProductsComponent implements OnInit, OnDestroy {
-  public subscriptionCart: Subscription; // cart to be removed by store 
-  public cart: any;
-  // 
+export class ProductsComponent {
   public category: string;
-  // 🏪 store // 
+  // store // 
   public categories$: Observable<Category[]>;
   public products$: Observable<Product[]>;
-  // end store //
-
   // new card api options 
   public isNutritionLoading: boolean;
   public currentNutrition: any = {};
   public isRecipesLoading: boolean;
   public currentRecipes: any = {};
   // 
-
   constructor( 
+    private router: ActivatedRoute, 
     private store: Store<fromStore.ShoppingState>, 
-    // 
-    private cartService: ShoppingCartService, 
     // 
     private nutritionService: NutritionService, 
     private recipeService: RecipeService, 
-    private router: ActivatedRoute, 
     ) { 
-    
     this.categories$ = this.store.select(fromStore.getAllCategories);
     
     this.router.queryParamMap.subscribe(params => {
       this.category = params.get('category');
       this.products$ = this.store.select(fromStore.getProductsByCategory({category: this.category}));
     });
-
-    // get cart from local storage 
-    let cartId = localStorage.getItem('cartId'); // pass to select 
-    this.subscriptionCart = this.cartService.getCart(cartId).subscribe(cart => this.cart = cart);
   }
 
-  // dispactch load actions in app.ts^ & select state where needed 
-  ngOnInit() {}
-
-
-  // shopping cart services 
-  addToCart(product: Product, i?: string) {
-    this.cartService.addToCart(product);
-    // console.log("",i)
-    let btn = document.getElementById(i);
-    btn.animate([
-      {boxShadow: '0 0 0 0 hsla(29, 79%, 56%, 1)', transform: 'scale(1.025)'},
-      {boxShadow: '0 0 10px 20px rgba(255,150,44,0)', transform: 'scale(1)'}
-    ], {
-      duration: 150
-    });
+  // shopping cart store actions
+  addToCart(product: Product) {
+    this.store.dispatch(fromStore.addToCart({product}));
   }
   
-  removeFromCart(product: Product, i: string) {
-    this.cartService.removeFromCart(product);
-    // console.log("",i)
-    let btn = document.getElementById(i);
-    btn.animate([
-      {transform: 'rotateX(360deg)', backgroundColor: 'hsla(29, 79%, 56%, 1)'},
-      {transform: 'rotateX(0deg)', backgroundColor: 'hsla(29, 79%, 56%, 1)'}
-    ], {
-      duration: 150
-    });
+  removeFromCart(product: Product) {
+    this.store.dispatch(fromStore.removeFromCart({product}));
   }
   
-  getQuantity(product: Product): number {
-    if(!this.cart) {
-      return 0;
-    }
-    let item = this.cart.items[product.key];
-    // console.log("", this.cart)
-    return item ? item.quantity : 0;
+  getQuantity(product: Product): Observable<number> {
+    return this.store.select(fromStore.getProductInCartQuantity({product: product.key}));
   }
   // end cart
 
@@ -188,10 +148,5 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
   roundUpPercent(num: number): number {
     return Math.ceil(num);
-  }
-
-  // will not need after full store implementation 
-  ngOnDestroy() {
-    this.subscriptionCart.unsubscribe(); // cart 
   }
 }

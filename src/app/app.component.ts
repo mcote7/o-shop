@@ -23,6 +23,7 @@ export class AppComponent {
 
   public categoriesLoading$: Observable<boolean>;
   public productsLoading$: Observable<boolean>;
+  public cartLoading$: Observable<boolean>;
   
   constructor(
     public router: Router, 
@@ -45,8 +46,10 @@ export class AppComponent {
     
     this.store.dispatch(fromStore.loadCategories());
     this.store.dispatch(fromStore.loadProducts());
+    this.store.dispatch(fromStore.loadCart());
     this.categoriesLoading$ = this.store.select(fromStore.getCategoriesLoading);
     this.productsLoading$ = this.store.select(fromStore.getProductsLoading);
+    this.cartLoading$ = this.store.select(fromStore.getCartLoading);
   }
 }
 // 

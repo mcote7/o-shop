@@ -218,7 +218,7 @@
               <p class="card-text"><strong>{{ p.price | currency:'USD':'symbol' }}</strong></p>
               <div class="btm-btns-wrp">
                 <button 
-                  *ngIf="getQuantity(p) === 0; else updateQuantity"
+                  *ngIf="(getQuantity(p)|async) === 0; else updateQuantity"
                   @popin
                   (click)="addToCart(p)" 
                   class="btn btn-card">
@@ -227,7 +227,7 @@
                 <ng-template #updateQuantity>
                   <button 
                     @slideInTop 
-                    (click)="removeFromCart(p, i.toString())"
+                    (click)="removeFromCart(p)"
                     class="btn btn-paddle pad-left">
                     <i class="fa fa-minus" aria-hidden="true"></i>
                   </button>
@@ -236,12 +236,12 @@
                     @slideInTop 
                     id="{{i}}"
                     class="btn btn-card-cart">
-                    <strong>{{getQuantity(p)}}</strong>
+                    <strong>{{getQuantity(p)|async}}</strong>
                   </button>
                   <div @slideInTop class="handle-right"></div>
                   <button 
                     @slideInTop 
-                    (click)="addToCart(p, i.toString())"
+                    (click)="addToCart(p)"
                     class="btn btn-paddle pad-right">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                   </button>
