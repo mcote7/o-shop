@@ -7,5 +7,14 @@ export const getCartState = createSelector(fromFeature.getShoppingState, (state:
 
 export const getCart = createSelector(getCartState, fromCart.getCart);
 
+export const getProductInCartQuantity = ({product}) => createSelector(getCart, (cart) => {
+  if(!cart) {
+    return 0;
+  } else {
+    let item = cart.items[product];
+    return item ? item.quantity : 0;
+  }
+});
+
 export const getCartLoaded = createSelector(getCartState, fromCart.getCartLoaded);
 export const getCartLoading = createSelector(getCartState, fromCart.getCartLoading);

@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable, } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/shared/models/category';
 import { Product } from 'src/app/shared/models/product';
@@ -30,9 +30,9 @@ import {
   ]
 })
 
-export class ProductsComponent implements OnInit, OnDestroy {
-  public subscriptionCart: Subscription; // cart to be removed by store 
-  public cart: any;
+export class ProductsComponent implements OnInit {
+  // public subscriptionCart: Subscription; // cart to be removed by store 
+  // public cart: any;
   // 
   public category: string;
   // 🏪 store // 
@@ -65,8 +65,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
 
     // get cart from local storage 
-    let cartId = localStorage.getItem('cartId'); // pass to select 
-    this.subscriptionCart = this.cartService.getCart(cartId).subscribe(cart => this.cart = cart);
+    // let cartId = localStorage.getItem('cartId'); // pass to select 
+    // this.subscriptionCart = this.cartService.getCart(cartId).subscribe(cart => this.cart = cart);
   }
 
   // dispactch load actions in app.ts^ & select state where needed 
@@ -98,13 +98,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
   }
   
-  getQuantity(product: Product): number {
-    if(!this.cart) {
-      return 0;
-    }
-    let item = this.cart.items[product.key];
-    // console.log("", this.cart)
-    return item ? item.quantity : 0;
+  getQuantity(product: Product): Observable<number> {
+    return this.store.select(fromStore.getProductInCartQuantity({product: product.key}));
   }
   // end cart
 
@@ -188,10 +183,5 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
   roundUpPercent(num: number): number {
     return Math.ceil(num);
-  }
-
-  // will not need after full store implementation 
-  ngOnDestroy() {
-    this.subscriptionCart.unsubscribe(); // cart 
   }
 }
