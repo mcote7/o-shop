@@ -8,3 +8,4 @@ export interface Product {
   quantity?: number
 }
 
+// dont know why i had to make all fields optional... firebase
