@@ -35,4 +35,6 @@ export class CartEffects {
     map(prod => fromActions.removeFromCartSuccess(prod)),
     catchError(error => of(fromActions.removeFromCartFail({errorMessage: error})))
   ));
+
+  // TODO: clear cart 
 }

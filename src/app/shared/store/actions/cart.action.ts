@@ -15,3 +15,5 @@ export const addToCartSuccess = createAction('[shopping] Add to Cart Success', p
 export const removeFromCart = createAction('[shopping] Remove from Cart', props<{product: Product}>());
 export const removeFromCartFail = createAction('[shopping] Remove from Cart Fail', props<{errorMessage: string}>());
 export const removeFromCartSuccess = createAction('[shopping] Remove from Cart Success', props<{product: Product}>());
+
+// TODO: clear cart 

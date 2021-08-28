@@ -227,7 +227,7 @@
                 <ng-template #updateQuantity>
                   <button 
                     @slideInTop 
-                    (click)="removeFromCart(p, i.toString())"
+                    (click)="removeFromCart(p)"
                     class="btn btn-paddle pad-left">
                     <i class="fa fa-minus" aria-hidden="true"></i>
                   </button>
@@ -241,7 +241,7 @@
                   <div @slideInTop class="handle-right"></div>
                   <button 
                     @slideInTop 
-                    (click)="addToCart(p, i.toString())"
+                    (click)="addToCart(p)"
                     class="btn btn-paddle pad-right">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                   </button>

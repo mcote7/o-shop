@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable, } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/shared/models/category';
@@ -6,8 +6,6 @@ import { Product } from 'src/app/shared/models/product';
 // category|product|cart store 
 import { Store } from '@ngrx/store';
 import * as fromStore from 'src/app/shared/store';
-// working on removing services from component 
-import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 // new 3rdp api services 
 import { NutritionService } from 'src/app/shared/services/nutrition.service';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
@@ -30,29 +28,24 @@ import {
   ]
 })
 
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   public category: string;
   // store // 
   public categories$: Observable<Category[]>;
   public products$: Observable<Product[]>;
-
   // new card api options 
   public isNutritionLoading: boolean;
   public currentNutrition: any = {};
   public isRecipesLoading: boolean;
   public currentRecipes: any = {};
   // 
-
   constructor( 
+    private router: ActivatedRoute, 
     private store: Store<fromStore.ShoppingState>, 
-    // 
-    private cartService: ShoppingCartService, // to be removed 
     // 
     private nutritionService: NutritionService, 
     private recipeService: RecipeService, 
-    private router: ActivatedRoute, 
     ) { 
-    
     this.categories$ = this.store.select(fromStore.getAllCategories);
     
     this.router.queryParamMap.subscribe(params => {
@@ -61,33 +54,13 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  // dispactch load state actions in app.ts^ & select state where needed 
-  ngOnInit() {}
-
-
-  // shopping cart services to be converted to store 
-  addToCart(product: Product, i?: string) {
-    this.cartService.addToCart(product);
-    // console.log("",i)
-    let btn = document.getElementById(i);
-    btn.animate([
-      {boxShadow: '0 0 0 0 hsla(29, 79%, 56%, 1)', transform: 'scale(1.025)'},
-      {boxShadow: '0 0 10px 20px rgba(255,150,44,0)', transform: 'scale(1)'}
-    ], {
-      duration: 150
-    });
+  // shopping cart store actions
+  addToCart(product: Product) {
+    this.store.dispatch(fromStore.addToCart({product}));
   }
   
-  removeFromCart(product: Product, i: string) {
-    this.cartService.removeFromCart(product);
-    // console.log("",i)
-    let btn = document.getElementById(i);
-    btn.animate([
-      {transform: 'rotateX(360deg)', backgroundColor: 'hsla(29, 79%, 56%, 1)'},
-      {transform: 'rotateX(0deg)', backgroundColor: 'hsla(29, 79%, 56%, 1)'}
-    ], {
-      duration: 150
-    });
+  removeFromCart(product: Product) {
+    this.store.dispatch(fromStore.removeFromCart({product}));
   }
   
   getQuantity(product: Product): Observable<number> {

@@ -16,14 +16,6 @@
     box-shadow: none;
   }
   
-  .loading-cats {
-    color: $bluegrey;
-    font-size: 3rem;
-    font-weight: bold;
-    margin: 0.5rem auto;
-    animation: spin-it 0.5s infinite linear;
-  }
-  
   .list-group-item {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -493,11 +485,17 @@
     }
     
     .btn-card-cart {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       cursor: default;
       font-weight: bold;
-      background-color: $white;
-      color: $carrot;
-      border-radius: $borderRad;
+      background-color: $tanish;
+      color: $bluegrey;
+      border-radius: 50%;
+      height: 2.75rem;
+      width: 2.75rem;
+      font-size: 1.5rem;
       border: 4px solid $carrot;
       transition: $transition;
       
@@ -513,7 +511,7 @@
       position: relative;
       left: -1px;
       margin: 0rem -4px;
-      z-index: 999;
+      z-index: -1;
     }
     
     .handle-right {
@@ -523,44 +521,29 @@
       position: relative;
       left: 1px;
       margin: 0rem -4px;
-      z-index: 999;
+      z-index: -1;
     }
     
     .btn-paddle {
-      background-color: $carrot;
-      color: $white;
-      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $white;
+      color: $carrot-hov;
+      border: 0.25rem solid $carrot;
       border-radius: 50%;
-      height: 2.5rem;
-      width: 2.5rem;
+      height: 2rem;
+      width: 2rem;
+      margin-right: 0rem;
       transition: $transition;
       
-      &:focus, :active {
+      &:focus, &:active, &:hover {
         box-shadow: none;
-      }
-      
-      &.pad-left {
-        margin-right: 0rem;
-        
-        &:active {
-          transform: scale(0.9) translateX(0.5rem);
-        }
-      }
-      
-      &.pad-right {
-        margin-left: 0rem;
-        
-        &:active {
-          transform: scale(0.9) translateX(-0.5rem);
-        }
+        background-color: $carrot;
+        color: $white;
       }
     }
   }
-}
-
-@keyframes spin-it {
-  from {transform: rotate(0deg);}
-  to {transform: rotate(360deg);}
 }
 
 @media only screen and (max-width: 768px) {
@@ -578,7 +561,7 @@
 
 // 🍇 
 
-// spinner animated (nutrition card only right now)
+// spinner animated 
 @keyframes ldio-rm0bvq5jb0n {
   0% { opacity: 1 }
   100% { opacity: 0 }
