@@ -3,7 +3,7 @@ import { Observable, } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/shared/models/category';
 import { Product } from 'src/app/shared/models/product';
-// category|product store 
+// category|product|cart store 
 import { Store } from '@ngrx/store';
 import * as fromStore from 'src/app/shared/store';
 // working on removing services from component 
@@ -31,14 +31,10 @@ import {
 })
 
 export class ProductsComponent implements OnInit {
-  // public subscriptionCart: Subscription; // cart to be removed by store 
-  // public cart: any;
-  // 
   public category: string;
-  // 🏪 store // 
+  // store // 
   public categories$: Observable<Category[]>;
   public products$: Observable<Product[]>;
-  // end store //
 
   // new card api options 
   public isNutritionLoading: boolean;
@@ -50,7 +46,7 @@ export class ProductsComponent implements OnInit {
   constructor( 
     private store: Store<fromStore.ShoppingState>, 
     // 
-    private cartService: ShoppingCartService, 
+    private cartService: ShoppingCartService, // to be removed 
     // 
     private nutritionService: NutritionService, 
     private recipeService: RecipeService, 
@@ -63,17 +59,13 @@ export class ProductsComponent implements OnInit {
       this.category = params.get('category');
       this.products$ = this.store.select(fromStore.getProductsByCategory({category: this.category}));
     });
-
-    // get cart from local storage 
-    // let cartId = localStorage.getItem('cartId'); // pass to select 
-    // this.subscriptionCart = this.cartService.getCart(cartId).subscribe(cart => this.cart = cart);
   }
 
-  // dispactch load actions in app.ts^ & select state where needed 
+  // dispactch load state actions in app.ts^ & select state where needed 
   ngOnInit() {}
 
 
-  // shopping cart services 
+  // shopping cart services to be converted to store 
   addToCart(product: Product, i?: string) {
     this.cartService.addToCart(product);
     // console.log("",i)
