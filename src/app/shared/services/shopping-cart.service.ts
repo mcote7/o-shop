@@ -9,7 +9,6 @@ import { Product } from '../models/product';
 @Injectable({
   providedIn: 'root'
 })
-
 export class ShoppingCartService {
 
   constructor(private db: AngularFireDatabase) { }

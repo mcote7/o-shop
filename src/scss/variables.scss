@@ -1,4 +1,3 @@
-// colors 
 $darkGreen: hsl(129, 30%, 18%);
 $darkGreen-hov: hsl(129, 30%, 8%);
 
@@ -14,22 +13,29 @@ $bluegrey-hov: hsl(185, 29%, 31%);
 $carrot: hsl(29, 79%, 56%);
 $carrot-hov: hsl(29, 79%, 46%);
 
-$highlight-blue: hsla(182deg,88%,49%,0.1);
-$highlight-caution: hsla(347, 100%, 48%, 0.2);
-$highlight-tanish: hsla(47, 80%, 80%, 0.2);
-
 $caution: hsl(347, 100%, 48%);
 
 $black: #000;
 
 $white: #fff;
 
-// borders 
+$highlight-blue: hsla(182deg,88%,49%,0.1);
+$highlight-caution: hsla(347, 100%, 48%, 0.2);
+$highlight-tanish: hsla(47, 80%, 80%, 0.2);
 
 $borderRad: 0.5rem;
 
+$buttonShadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
+$buttonShadow-hov: 1px 1px 1px 0px rgba(0,0,0,0.33);
+
 $transition: 150ms;
 $transitionFast: 75ms;
+
+@mixin centerAllFlex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 * {
   user-select: none;

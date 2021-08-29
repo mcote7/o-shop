@@ -1,4 +1,3 @@
-// 
 @import '../../../../scss/variables.scss';
 
 .o-login-btn {
@@ -6,11 +5,14 @@
   color: $white;
   margin: 1rem 0rem 0rem 1rem;
   border-radius: $borderRad;
-  transition: $transitionFast;
+  transition: $transition;
   backface-visibility: hidden;
+  box-shadow: $buttonShadow;
   
   &:hover {
     background-color: $carrot;
+    box-shadow: $buttonShadow-hov;
+    transform: translateY(0.125rem);
   }
   
   &:focus, :active {
@@ -24,7 +26,7 @@
 
 @media only screen and (max-width: 576px) {
   .o-login-btn {
-    margin: 1rem 0rem 0rem 0rem;
+    margin: 2rem auto;
   }
 }
 
@@ -41,7 +43,6 @@
   transform: rotate(-60deg);
   animation: carrot-time 1s ease-out infinite;
 }
-
 @keyframes carrot-time {
   from {opacity: 0; transform: translateY(-10rem);}
   to {opacity: 1; transform: translateY(0rem) rotate(-60deg)}
@@ -57,7 +58,6 @@
   perspective-origin: top left;
   animation: sign 1s ease-out infinite;
 }
-
 @keyframes sign {
   from {opacity: 0; transform: translateX(10rem);}
   to {opacity: 1; transform: translateX(0rem);}

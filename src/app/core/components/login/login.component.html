@@ -1,4 +1,3 @@
-<!--  -->
 <button 
   @slideInTop
   *ngIf="!isLoggingIn"
@@ -6,14 +5,11 @@
   class="btn o-login-btn">
   Login With Google
 </button>
-
-<div class="row mt-5">
-  <div 
-    *ngIf="isLoggingIn"
-    class="carrot"></div>
-  <div 
-    *ngIf="isLoggingIn"
-    class="loggingIn mt-3 ml-4">
+<div 
+  *ngIf="isLoggingIn"
+  class="row mt-5">
+  <div class="carrot"></div>
+  <div class="loggingIn mt-3 ml-4">
       Signing in with Google . . .
   </div>
 </div>

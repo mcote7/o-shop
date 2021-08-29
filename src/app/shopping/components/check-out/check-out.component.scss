@@ -12,7 +12,7 @@
   border-radius: $borderRad;
   transition: background-color 0.6s, transform 0.2s;
   backface-visibility: hidden;
-  box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
+  box-shadow: $buttonShadow;
   
   &::after {
     content: '';
@@ -66,7 +66,7 @@
   &:disabled {
     &:hover {
       background-color: $carrot-hov;
-      box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
+      box-shadow: $buttonShadow;
       transform: none;
       &::before {
         content: '';
@@ -89,7 +89,7 @@
   transition: $transition;
   backface-visibility: hidden;
   width: 100%;
-  box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
+  box-shadow: $buttonShadow;
 
   &:hover {
     background-color: $bluegrey;
@@ -111,7 +111,7 @@ form {
 
 .form-control {
   border-radius: $borderRad;
-  box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
+  box-shadow: $buttonShadow;
   
   &:focus {
     border-color: $tanish-hov;

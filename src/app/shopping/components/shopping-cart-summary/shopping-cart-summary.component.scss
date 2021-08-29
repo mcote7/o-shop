@@ -1,7 +1,7 @@
 @import '../../../../scss/variables.scss';
 .card {
   border-radius: $borderRad;
-  box-shadow: 2px 2px 2px 0px rgb(0 0 0 / 15%);
+  box-shadow: $buttonShadow;
   .total-group {
     border-radius: $borderRad;
   }

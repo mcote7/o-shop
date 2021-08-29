@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { AngularFireAuth } from '@angular/fire/auth';
-
 import * as firebase from 'firebase';
 
 import { EMPTY, Observable } from 'rxjs';
@@ -22,14 +21,14 @@ export class AuthService {
   constructor(
     private userService: UserService, 
     private afAuth: AngularFireAuth, 
-    private route: ActivatedRoute ) {
+    private route: ActivatedRoute, 
+    ) {
     this.user$ = afAuth.authState;
   }
 
   login() {
     let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
     localStorage.setItem('returnUrl', returnUrl);
-
     this.afAuth.signInWithPopup( new firebase.default.auth.GoogleAuthProvider() );
   }
 
@@ -37,7 +36,7 @@ export class AuthService {
     this.afAuth.signOut();
   }
 
-  get appUser$() : Observable<AppUser> {
+  get appUser$(): Observable<AppUser> {
     return this.user$
     .pipe(switchMap( user => {
       if(user) {
@@ -47,5 +46,4 @@ export class AuthService {
       }
     }));
   }
-
 }
