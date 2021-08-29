@@ -67,8 +67,10 @@
       font-size: 1.5rem;
       margin-right: 1rem;
       float: left;
+      
       &:hover {
         color: $tanish;
+        
         .cart-count {
           transform: scale(1.1) translateY(2px) rotateY(180deg);
         }
@@ -77,6 +79,7 @@
         float: none;
         margin-left: 1rem;
       }
+      
       .cart-count {
         display: inline-flex;
         height: 20px;
@@ -128,7 +131,7 @@
     backface-visibility: hidden;
     transform-origin: 0% 0%;
     border-color: transparent;
-    box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.15);
+    box-shadow: $buttonShadow;
     
     .dropdown-item {
       cursor: pointer;
@@ -142,7 +145,7 @@
       &.active-dropdown-link {
         background-color: $tanish-hov;
       }
-
+      
       &.not-admin {
         cursor: not-allowed;
         background-color: $tanish;
@@ -169,7 +172,6 @@
     top: 0.75rem;
     filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.4));
   }
-  
 }
 // 
 @keyframes show-drop {

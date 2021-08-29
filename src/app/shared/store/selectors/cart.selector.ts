@@ -8,7 +8,7 @@ export const getCartState = createSelector(fromFeature.getShoppingState, (state:
 export const getCart = createSelector(getCartState, fromCart.getCart);
 
 export const getProductCartQuantity = ({product}) => createSelector(getCart, (cart) => {
-  if(cart.items) {
+  if(cart && cart.items) {
     let item = cart.items[product];
     return item ? item.quantity : 0;
   } else {
@@ -17,7 +17,7 @@ export const getProductCartQuantity = ({product}) => createSelector(getCart, (ca
 });
 
 export const getTotalCartQuantity = createSelector(getCart, (cart) => {
-  if(cart.items) {
+  if(cart && cart.items) {
     let count = 0;
     for(let productId in cart.items) {
       count += cart.items[productId].quantity;

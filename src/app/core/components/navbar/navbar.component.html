@@ -1,7 +1,5 @@
-<!--  -->
 <nav class="navbar navbar-expand-sm fixed-top o-navbar">
   <div class="container-fluid">
-    
     <a 
       title="Home"
       class="navbar-brand"
@@ -9,7 +7,6 @@
       routerLink="/">
       🍂shop
     </a>
-    
     <button 
       (click)="handleMenuCollapse()"
       class="o-navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -18,14 +15,12 @@
       <span *ngIf="isMenuCollapsed"><i class="fa fa-bars burger" aria-hidden="true"></i></span>
       <span *ngIf="!isMenuCollapsed"><i class="fa fa-times burger" aria-hidden="true"></i></span>
     </button>
-    
     <div 
       class="collapse navbar-collapse"
       [class.show]="!isMenuCollapsed"
       id="navbarNavDropdown">
       
       <ul class="navbar-nav">
-        
         <li class="nav-item">
           <a 
             title="Shopping Cart"
@@ -33,15 +28,15 @@
             (click)="closeMenus()"
             routerLink="/shopping-cart"
             routerLinkActive="active-link">
+            
             🛒 <div 
                   @fadeInOut
-                  *ngIf="isItems && shoppingCartCount !== 0" 
+                  *ngIf="(shoppingCartCount$|async) !== 0" 
                   class="cart-count">
-                  {{shoppingCartCount}}
+                  {{shoppingCartCount$|async}}
                 </div>
           </a>
         </li>
-        
         <ng-template #anonymousUser>
           <li class="nav-item login-btn">
             <a 
@@ -53,11 +48,9 @@
             </a>
           </li>
         </ng-template>
-        
         <li 
           *ngIf="appUser; else anonymousUser"
           class="nav-item dropdown">
-          
           <a 
             class="nav-link dropdown-toggle"
             [class.active-link]="!isDropdownCollapsed"
@@ -69,23 +62,19 @@
             <span @fadeIn class="nav-toggle-icon" *ngIf="isDropdownCollapsed">&#x25B2;</span>
             <span @fadeIn class="nav-toggle-icon" *ngIf="!isDropdownCollapsed">&#x25BC;</span>
           </a>
-          
           <ul 
             class="dropdown-menu"
             id="drop-d"
             (mouseleave)="handleDropdownCollapse()"
             [class.show]="!isDropdownCollapsed"
             aria-labelledby="navbarDropdownMenuLink">
-            
             <li>
               <a 
-                
                 class="dropdown-item" routerLink="/my/orders"
                 routerLinkActive="active-dropdown-link">
                 My Orders
               </a>
             </li>
-            
             <li>
               <a 
                 (click)="logout()"
@@ -93,22 +82,18 @@
                 Log Out
               </a>
             </li>
-            
             <!-- admin only -->
             <ng-container *ngIf="appUser.isAdmin">
               <li style="border-top: 1px solid rgba(0,0,0,0.15);padding-top: 1.25rem;">
                 <a 
-                  
                   class="dropdown-item" routerLink="/admin/orders"
                   title="&nbsp;Admin access.&nbsp;✔"
                   routerLinkActive="active-dropdown-link">
                     Manage Orders 🛡
                 </a>
               </li>
-              
               <li>
                 <a 
-                  
                   class="dropdown-item" routerLink="/admin/products"
                   title="&nbsp;Admin access.&nbsp;✔"
                   routerLinkActive="active-dropdown-link">
@@ -125,7 +110,6 @@
                     Manage Orders 🛡
                 </a>
               </li>
-              
               <li>
                 <a 
                   class="dropdown-item not-admin"
@@ -134,7 +118,6 @@
                 </a>
               </li>
             </ng-container>
-            
           </ul>
         </li>
       </ul>

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { AppUser } from 'src/app/shared/models/app-user';
-
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
+
+import { Store } from '@ngrx/store';
+import * as fromStore from 'src/app/shared/store';
 
 import { fadeInOut, fadeIn, toastNotification } from 'src/animations/anime';
 
@@ -16,38 +17,18 @@ import { fadeInOut, fadeIn, toastNotification } from 'src/animations/anime';
   animations: [fadeInOut, fadeIn, toastNotification]
 })
 export class NavbarComponent implements OnInit {
-
   public appUser: AppUser;
 
-  // public cart: any;
-  public subscription: Subscription;
-  public shoppingCartCount: number;
-  public isItems = false;
+  public shoppingCartCount$: Observable<number>;
 
   public isMenuCollapsed = true;
   public isDropdownCollapsed = true;
 
-  constructor( private auth: AuthService, private cartService: ShoppingCartService ) {
-  }
+  constructor( private auth: AuthService, private store: Store<fromStore.ShoppingState> ) {}
 
   ngOnInit() {
-    this.auth.appUser$.subscribe( appUser => this.appUser = appUser );
-    
-    let cartId = localStorage.getItem('cartId');
-    this.subscription = this.cartService.getCart(cartId).subscribe(cart => {
-      // console.log("this cart 1", cart)
-      this.shoppingCartCount = 0;
-      if(cart && cart.items) {
-        for(let productId in cart.items) {
-            this.shoppingCartCount += cart.items[productId].quantity;
-            this.isItems = true;
-            // console.log("this cart 2", cart.items)
-        }
-      } else {
-        this.isItems = false;
-        // console.log("this cart 3", cart.items)
-      }
-    });
+    this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
+    this.shoppingCartCount$ = this.store.select(fromStore.getTotalCartQuantity);
   }
 
   logout() {
