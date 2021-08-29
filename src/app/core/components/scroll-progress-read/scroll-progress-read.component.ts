@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { popin, toastNotification } from '../../../../animations/anime';
+import { Component } from '@angular/core';
+import { popin, toastNotification } from 'src/animations/anime';
+import * as _ from 'lodash';
+
+// SCROLL PROGRESS 🍋 
 
 @Component({
   selector: 'scroll-progress-read',
@@ -7,26 +10,20 @@ import { popin, toastNotification } from '../../../../animations/anime';
   styleUrls: ['./scroll-progress-read.component.scss'],
   animations: [popin, toastNotification]
 })
-// SCROLL PROGRESS 🍋🍋🍋 
-export class ScrollProgressReadComponent implements OnInit {
+export class ScrollProgressReadComponent {
 
   public isScrollBar: boolean = false;
   public scrollPos: number = 0;
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
   scrollTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      })
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
   }
 
-  isNaN(el: any): boolean {
-    return Number.isNaN(el);
+  isNaN(nan: any): boolean {
+    return Number.isNaN(nan);
   }
 
   scrollCheck() {
@@ -37,5 +34,6 @@ export class ScrollProgressReadComponent implements OnInit {
     this.scrollPos = (winScroll / height) * 100;
     scrollObject.style.transform = `rotate(${scrollSpeed + 30}deg)`;
     this.scrollPos === 0 ? this.isScrollBar = false : this.isScrollBar = true;
+    console.log(this.scrollPos)
   }
 }

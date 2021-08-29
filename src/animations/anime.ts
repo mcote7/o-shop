@@ -34,7 +34,7 @@ export const fadeInFast = trigger('fadeInFast', [
 // <someEl *ngIf="!isAnimationRunning && ect. "> </>  
 // 
 // THIS APPLYS TO ANY ANIME WITH A :leave transition <-----<<<|) 
-//
+
 export const fadeInOut = trigger('fadeInOut', [
     transition(':enter', [
         style({

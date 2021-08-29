@@ -1,11 +1,8 @@
-
-
 <div 
   (window:scroll)="scrollCheck()"
   id="scrollContainer"
   class="wrap"
   title="&nbsp;☝&nbsp;">
-  
   <div 
     [class.isScroll]="isScrollBar && !isNaN(scrollPos)">
     <div 
@@ -14,12 +11,10 @@
       class="lemon">
       🍋
     </div>
-    
     <div 
       *ngIf="!isNaN(scrollPos)"
       class="badge">
       {{scrollPos?.toFixed()}}%
     </div>
   </div>
-  
 </div>
