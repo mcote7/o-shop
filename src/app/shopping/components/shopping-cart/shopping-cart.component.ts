@@ -14,13 +14,14 @@ import { listAnimationWrap, listAnimationItem, slideInTop, fadeIn, slideInLeft }
   animations: [listAnimationItem,listAnimationWrap,slideInTop,fadeIn,slideInLeft]
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
-
   public subscription: Subscription;
-  public shoppingCartCount: number;
+
+  public cart: any; // make $|async
+  public itemKeys: any[]; // needs selector
+  public totalPrice: number; // needs selector similar to got total q
+  public shoppingCartCount: number; // same as navbar state
+
   public isItems = false;
-  public cart: any;
-  public itemKeys: any[];
-  public totalPrice: number;
   public isStaggDone = false;
 
   constructor( private cartService: ShoppingCartService, private router: Router ) { }
