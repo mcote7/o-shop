@@ -32,6 +32,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.auth.appUser$.subscribe( appUser => this.appUser = appUser );
+    
     let cartId = localStorage.getItem('cartId');
     this.subscription = this.cartService.getCart(cartId).subscribe(cart => {
       // console.log("this cart 1", cart)
@@ -88,7 +89,7 @@ export class NavbarComponent implements OnInit {
 
   scrollDown() {
     window.scrollTo({
-      top: 999999,
+      top: document.body.scrollHeight,
       behavior: 'smooth'
     })
   }

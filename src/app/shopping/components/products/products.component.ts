@@ -63,8 +63,8 @@ export class ProductsComponent {
     this.store.dispatch(fromStore.removeFromCart({product}));
   }
   
-  getQuantity(product: Product): Observable<number> {
-    return this.store.select(fromStore.getProductInCartQuantity({product: product.key}));
+  getProductCartQuantity(product: Product): Observable<number> {
+    return this.store.select(fromStore.getProductCartQuantity({product: product.key}));
   }
   // end cart
 
