@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 
+import { Store } from '@ngrx/store';
+import * as fromStore from 'src/app/shared/store';
+
 import { take } from 'rxjs/operators';
 import { ShoppingCart } from '../models/shopping-cart';
 
@@ -11,7 +14,7 @@ import { Product } from '../models/product';
 })
 export class ShoppingCartService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase, private store: Store<fromStore.ShoppingState>, ) { }
 
   getCart(cartId: string) {
     return this.db.object<ShoppingCart>('/shopping-carts/' + cartId).valueChanges();
@@ -54,6 +57,7 @@ export class ShoppingCartService {
     if(!cartId) {
       let result = await this.create()
       localStorage.setItem('cartId', result.key);
+      this.store.dispatch(fromStore.loadCart);
       return result.key;
     }
     return cartId;
