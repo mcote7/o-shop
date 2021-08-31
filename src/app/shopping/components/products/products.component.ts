@@ -11,7 +11,9 @@ import { NutritionService } from 'src/app/shared/services/nutrition.service';
 import { RecipeService } from 'src/app/shared/services/recipe.service';
 import { 
   popin, 
+  popinDelay, 
   slideInTop, 
+  popinDelayLong, 
   listAnimationWrapCard, 
   listAnimationItemCard } from 'src/animations/anime';
 
@@ -22,7 +24,9 @@ import {
   styleUrls: ['./products.component.scss'],
   animations: [
     popin,
+    popinDelay,
     slideInTop,
+    popinDelayLong,
     listAnimationWrapCard,
     listAnimationItemCard,
   ]

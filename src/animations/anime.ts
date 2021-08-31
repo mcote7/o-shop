@@ -220,8 +220,7 @@ export const toastNotification = trigger('toastNotification', [
     ])
 ]);
 
-// pop in
-
+// pop in & popin delays
 export const popin = trigger('popin', [
   transition(':enter', [
     style({
@@ -239,7 +238,55 @@ export const popin = trigger('popin', [
             transform: 'scale3d(1, 1, 1)'
         })
     ]))
-])
+  ])
+]);
+export const popinDelay = trigger('popinDelay', [
+  transition(':enter', [
+    style({
+        opacity: 0,
+        transform: 'scale3d(0.8, 0.8, 1)'
+    }),
+    animate('400ms ease-in-out', keyframes([
+        style({
+          offset: .3,
+          opacity: 0,
+          transform: 'scale3d(0.8, 0.8, 1)'
+        }),
+        style({
+            offset: .5,
+            opacity: 0.9,
+            transform: 'scale3d(1.1, 1.1, 1)'
+        }),
+        style({
+            offset: 1,
+            transform: 'scale3d(1, 1, 1)'
+        })
+    ]))
+  ])
+]);
+export const popinDelayLong = trigger('popinDelayLong', [
+  transition(':enter', [
+    style({
+        opacity: 0,
+        transform: 'scale3d(0.8, 0.8, 1)'
+    }),
+    animate('400ms ease-in-out', keyframes([
+        style({
+          offset: .4,
+          opacity: 0,
+          transform: 'scale3d(0.8, 0.8, 1)'
+        }),
+        style({
+            offset: .5,
+            opacity: 0.9,
+            transform: 'scale3d(1.1, 1.1, 1)'
+        }),
+        style({
+            offset: 1,
+            transform: 'scale3d(1, 1, 1)'
+        })
+    ]))
+  ])
 ]);
 
 // stagger for cards 🍇 
