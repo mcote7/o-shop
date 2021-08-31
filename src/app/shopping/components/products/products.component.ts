@@ -13,7 +13,9 @@ import {
   popin, 
   popinDelay, 
   slideInTop, 
-  popinDelayLong, 
+  popinDelayIncrement, 
+  popinDelayDecrement, 
+  popinDelayHandleBars, 
   listAnimationWrapCard, 
   listAnimationItemCard } from 'src/animations/anime';
 
@@ -26,7 +28,9 @@ import {
     popin,
     popinDelay,
     slideInTop,
-    popinDelayLong,
+    popinDelayIncrement,
+    popinDelayDecrement,
+    popinDelayHandleBars,
     listAnimationWrapCard,
     listAnimationItemCard,
   ]

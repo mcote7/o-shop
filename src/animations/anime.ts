@@ -289,6 +289,88 @@ export const popinDelayLong = trigger('popinDelayLong', [
   ])
 ]);
 
+// special popin for increment button 
+export const popinDelayIncrement = trigger('popinDelayIncrement', [
+  transition(':enter', [
+    style({
+        opacity: 0,
+        transform: 'scale3d(0.8, 0.8, 1)'
+    }),
+    animate('400ms ease-in-out', keyframes([
+        style({
+          offset: .1,
+          opacity: 0,
+          backgroundColor: '#e78c36',
+          transform: 'scale3d(0.8, 0.8, 1) translateX(-4rem)'
+        }),
+        style({
+            offset: .5,
+            opacity: 0.9,
+            backgroundColor: '#e78c36',
+            transform: 'scale3d(1.1, 1.1, 1)'
+        }),
+        style({
+            offset: 1,
+            backgroundColor: '#fff',
+            transform: 'scale3d(1, 1, 1) translateX(0rem)'
+        })
+    ]))
+  ])
+]);
+// special popin for decrement button 
+export const popinDelayDecrement = trigger('popinDelayDecrement', [
+  transition(':enter', [
+    style({
+        opacity: 0,
+        transform: 'scale3d(0.8, 0.8, 1)'
+    }),
+    animate('400ms ease-in-out', keyframes([
+        style({
+          offset: .1,
+          opacity: 0,
+          backgroundColor: '#e78c36',
+          transform: 'scale3d(0.8, 0.8, 1) translateX(4rem)'
+        }),
+        style({
+            offset: .5,
+            opacity: 0.9,
+            backgroundColor: '#e78c36',
+            transform: 'scale3d(1.1, 1.1, 1)'
+        }),
+        style({
+            offset: 1,
+            backgroundColor: '#fff',
+            transform: 'scale3d(1, 1, 1) translateX(0rem)'
+        })
+    ]))
+  ])
+]);
+// special popin for handlebars 
+export const popinDelayHandleBars = trigger('popinDelayHandleBars', [
+  transition(':enter', [
+    style({
+        opacity: 0,
+        transform: 'scale3d(0.8, 0.8, 1)'
+    }),
+    animate('400ms ease-in-out', keyframes([
+        style({
+          offset: .4,
+          opacity: 0,
+          transform: 'scale3d(0.8, 0.8, 1)'
+        }),
+        style({
+            offset: .5,
+            opacity: 0.9,
+            transform: 'scale3d(1.1, 1.1, 1)'
+        }),
+        style({
+            offset: 1,
+            transform: 'scale3d(1, 1, 1)'
+        })
+    ]))
+  ])
+]);
+
 // stagger for cards 🍇 
 
 export const listAnimationWrapCard = trigger('listAnimationWrapCard', [
