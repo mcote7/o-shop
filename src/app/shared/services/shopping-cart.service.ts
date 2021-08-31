@@ -57,7 +57,7 @@ export class ShoppingCartService {
     if(!cartId) {
       let result = await this.create()
       localStorage.setItem('cartId', result.key);
-      this.store.dispatch(fromStore.loadCart);
+      this.store.dispatch(fromStore.loadCart());
       return result.key;
     }
     return cartId;
