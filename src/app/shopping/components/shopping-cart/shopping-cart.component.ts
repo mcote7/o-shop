@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+
+import { ShoppingCart } from 'src/app/shared/models/shopping-cart';
 import { Product } from 'src/app/shared/models/product';
 
 import { Store } from '@ngrx/store';
@@ -40,6 +42,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   public shoppingCartCount$: Observable<number>;
   public totalPrice$: Observable<number>;
   public itemKeys$: Observable<any[]>;
+  public cart$: Observable<ShoppingCart>;
   // 
 
   constructor( 
@@ -67,6 +70,8 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     this.shoppingCartCount$ = this.store.select(fromStore.getTotalCartQuantity);
     this.totalPrice$ = this.store.select(fromStore.getTotalCartprice);
     this.itemKeys$ = this.store.select(fromStore.getCartItemKeys);
+    this.cart$ = this.store.select(fromStore.getCart);
+    
   }
 
 
