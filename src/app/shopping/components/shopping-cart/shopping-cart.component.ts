@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { ShoppingCart } from 'src/app/shared/models/shopping-cart';
 import { Product } from 'src/app/shared/models/product';
@@ -31,12 +31,11 @@ import {
   ]
 })
 
-export class ShoppingCartComponent implements OnInit, OnDestroy {
+export class ShoppingCartComponent implements OnInit {
   public isStaggDone = false;
-  public subscription: Subscription;
 
   public cart: any; // make $|async 
-  public isItems = false; // can remove at end 
+  public isItems = false; // can remove at end ? 
 
   // store 
   public shoppingCartCount$: Observable<number>;
@@ -51,29 +50,22 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     private router: Router ) {}
 
   ngOnInit() {
-    let cartId = localStorage.getItem('cartId');
-    this.subscription = this.cartService.getCart(cartId).subscribe(cart => {
-      // console.log("this cart", cart.items)
-      if(cart && cart.items) {
-        this.isItems = true;
-        this.cart = cart;
-        // console.log("this cart 2", this.cart)
-      } else {
-        this.isItems = false;
-        this.router.navigate(['/']);
-        // console.log("this cart 3", cart.items)
-      }
-      // console.log("🍗", this.cart);
-    });
-
     // 🏪 new store 
     this.shoppingCartCount$ = this.store.select(fromStore.getTotalCartQuantity);
     this.totalPrice$ = this.store.select(fromStore.getTotalCartprice);
     this.itemKeys$ = this.store.select(fromStore.getCartItemKeys);
     this.cart$ = this.store.select(fromStore.getCart);
-    
+    // need to re-factor 
+    this.cart$.subscribe(cart => {
+      if(cart && cart.items) {
+        this.cart = cart;
+        this.isItems = true;
+      } else {
+        this.router.navigate(['/']);
+        this.isItems = false;
+      }
+    });
   }
-
 
   addToCart(product: Product) {
     this.store.dispatch(fromStore.addToCart({product}));
@@ -103,11 +95,5 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     } else {
       return;
     }
-  }
-
-
-// to be removed ... 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 }
