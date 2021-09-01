@@ -21,7 +21,7 @@
         (@listAnimationWrap.done)="isStaggDone = true">
         <tr @listAnimationItem *ngFor="let productId of itemKeys">
           
-          <td class="prod-img-td">
+          <td class="prod-img-td" title="{{cart?.items[productId].product.title}}">
             <div class="prod-img-wrap">
               <img class="cart-img" [src]="cart?.items[productId].product.imageUrl" alt="&nbsp; 🤷‍♂️ image not found">
               <div class="badge prod-badge mt-auto">
@@ -33,7 +33,7 @@
           <td>
             <div class="btm-btns-wrp">
               <button 
-              (click)="removeFromCart(cart?.items[productId].product, cart?.items[productId].product.title)"
+              (click)="removeFromCart(cart?.items[productId].product)"
                 class="btn btn-paddle pad-left">
                 <i class="fa fa-minus" aria-hidden="true"></i>
               </button>
@@ -45,7 +45,7 @@
               </button>
               <div class="handle-right"></div>
               <button 
-                (click)="addToCart(cart?.items[productId].product, cart?.items[productId].product.title)"
+                (click)="addToCart(cart?.items[productId].product)"
                 class="btn btn-paddle pad-right">
                 <i class="fa fa-plus" aria-hidden="true"></i>
               </button>

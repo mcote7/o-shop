@@ -53,39 +53,16 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     });
   }
 
-  addToCart(product: Product, i: string) {
+  addToCart(product: Product) {
     this.cartService.addToCart(product);
-    let btn = document.getElementById(i);
-    btn.animate([
-      {boxShadow: '0 0 0 0 hsla(185, 29%, 41%, 1)', transform: 'scale(1.5)'},
-      {boxShadow: '0 0 10px 20px rgba(255,150,44,0)', transform: 'scale(1)'}
-    ], {
-      duration: 150
-    });
   }
 
-  removeFromCart(product: Product, i: string) {
+  removeFromCart(product: Product) {
     if(this.shoppingCartCount > 1) {
       this.cartService.removeFromCart(product);
-      // console.log("heyheyhey",i)
-      let btn = document.getElementById(i);
-      btn.animate([
-        {transform: 'rotateX(360deg)', backgroundColor: 'hsl(185, 29%, 41%)'},
-        {transform: 'rotateX(0deg)', backgroundColor: 'hsl(185, 29%, 41%)'}
-      ], {
-        duration: 150
-      });
     } else {
       if(confirm('🤔 are you sure ?')) {
         this.cartService.removeFromCart(product);
-        // console.log("heyheyhey",i)
-        let btn = document.getElementById(i);
-        btn.animate([
-          {transform: 'rotateX(360deg)', backgroundColor: 'hsl(185, 29%, 41%)'},
-          {transform: 'rotateX(0deg)', backgroundColor: 'hsl(185, 29%, 41%)'}
-        ], {
-          duration: 150
-        });
       } else {
         return;
       }

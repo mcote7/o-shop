@@ -45,17 +45,28 @@
   }
   
   .btm-btns-wrp {
-    display: flex;
+    @include centerAllFlex();
     flex-direction: row;
-    align-items: center;
+    background-color: $white;
+    width: fit-content;
+    border-radius: 1.5rem;
+    padding: 0.25rem 0.5rem;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      height: 3.5rem;
+      width: 3.5rem;
+      background-color: $white;
+      border-radius: 50%;
+      z-index: 0;
+    }
     
     .btn-card-cart {
-      display: flex;
+      @include centerAllFlex();
       position: relative;
       z-index: 1982;
-      justify-content: center;
-      align-items: center;
-      padding: 0rem 0rem 2px 0rem;
       cursor: default;
       font-weight: bold;
       font-size: 1.2rem;
@@ -64,35 +75,42 @@
       border-radius: 50%;
       height: 2.25rem;
       width: 2.25rem;
-      border: 3.5px solid $bluegrey;
+      border: 2px solid $bluegrey;
+      box-shadow: 0px 0px 0px 2px $bluegrey;
       transition: $transition;
+    }
+    
+    .handle-left, .handle-right {
+      height: 1rem;
+      width: 1rem;
+      background-color: $bluegrey;
+      position: relative;
+      margin: 0rem -1px;
+      z-index: 999;
       
-      &:focus, :active {
-        box-shadow: none;
+      &::before {
+        content: "";
+        position: absolute;
+        height: 1rem;
+        width: 1rem;
+        background-color: $white;
+        top: -0.25rem;
+        clip-path: circle(50% at 50% 0);
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        height: 1rem;
+        width: 1rem;
+        top: 0.25rem;
+        background-color: $white;
+        clip-path: circle(50% at 50% 100%);
       }
     }
     
-    .handle-left {
-      height: 0.25rem;
-      width: 1rem;
-      background-color: $bluegrey;
-      position: relative;
-      left: -1px;
-      margin: 0rem -1px;
-      z-index: 999;
-    }
-    
-    .handle-right {
-      height: 0.25rem;
-      width: 1rem;
-      background-color: $bluegrey;
-      position: relative;
-      left: 1px;
-      margin: 0rem -1px;
-      z-index: 999;
-    }
-    
     .btn-paddle {
+      position: relative;
+      z-index: 1982;
       padding: 0rem;
       background-color: $bluegrey;
       color: $white;
@@ -101,23 +119,11 @@
       height: 1.5rem;
       width: 1.5rem;
       transition: $transition;
+      box-shadow: 0px 0px 0px 2px $bluegrey;
       
-      &:focus, :active {
-        box-shadow: none;
-      }
-      
-      &.pad-left {
-        margin-right: 0rem;
-        &:active {
-          transform: scale(0.95) translateX(0.25rem);
-        }
-      }
-      
-      &.pad-right {
-        margin-left: 0rem;
-        &:active {
-          transform: scale(0.95) translateX(-0.25rem);
-        }
+      &:hover {
+        color: $bluegrey;
+        background-color: $white;
       }
     }
   }
