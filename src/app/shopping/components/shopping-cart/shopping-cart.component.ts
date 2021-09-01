@@ -5,13 +5,24 @@ import { Product } from 'src/app/shared/models/product';
 
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 
-import { listAnimationWrap, listAnimationItem, slideInTop, fadeIn, slideInLeft } from 'src/animations/anime';
+import { 
+  fadeIn, 
+  slideInTop, 
+  listAnimationWrap, 
+  listAnimationItem, 
+  slideInLeft } from 'src/animations/anime';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss'],
-  animations: [listAnimationItem,listAnimationWrap,slideInTop,fadeIn,slideInLeft]
+  animations: [
+    fadeIn,
+    slideInTop,
+    slideInLeft,
+    listAnimationItem,
+    listAnimationWrap
+  ]
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
   public subscription: Subscription;
