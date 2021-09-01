@@ -19,7 +19,7 @@
       <tbody 
         [@listAnimationWrap]="cart?.items"
         (@listAnimationWrap.done)="isStaggDone = true">
-        <tr @listAnimationItem *ngFor="let productId of itemKeys">
+        <tr @listAnimationItem *ngFor="let productId of itemKeys$|async">
           
           <td class="prod-img-td" title="{{cart?.items[productId].product.title}}">
             <div class="prod-img-wrap">
@@ -80,7 +80,7 @@
           </th>
           <th>
             <strong>Total</strong><br>
-            {{ totalPrice | currency:'USD':'symbol' }}
+            {{ (totalPrice$|async) | currency:'USD':'symbol' }}
           </th>
         </tr>
       </tfoot>

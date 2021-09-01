@@ -34,12 +34,12 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   public subscription: Subscription;
 
   public cart: any; // make $|async 
-  public itemKeys: any[]; // needs selector 
-  public totalPrice: number; // needs selector similar to got total q 
   public isItems = false; // can remove at end 
 
   // store 
   public shoppingCartCount$: Observable<number>;
+  public totalPrice$: Observable<number>;
+  public itemKeys$: Observable<any[]>;
   // 
 
   constructor( 
@@ -51,29 +51,22 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     let cartId = localStorage.getItem('cartId');
     this.subscription = this.cartService.getCart(cartId).subscribe(cart => {
       // console.log("this cart", cart.items)
-      // this.shoppingCartCount = 0;
-      this.totalPrice = 0;
       if(cart && cart.items) {
-        for(let productId in cart.items) {
-            // this.shoppingCartCount += cart.items[productId].quantity;
-            this.totalPrice += cart.items[productId].product.price * cart.items[productId].quantity;
-            this.isItems = true;
-            this.cart = cart;
-            // console.log("this cart 2", this.cart)
-        }
-        this.itemKeys = Object.keys(cart.items);
+        this.isItems = true;
+        this.cart = cart;
+        // console.log("this cart 2", this.cart)
       } else {
         this.isItems = false;
-        this.itemKeys = [];
         this.router.navigate(['/']);
         // console.log("this cart 3", cart.items)
       }
-      
-      // console.log("🌮", this.itemKeys);
       // console.log("🍗", this.cart);
     });
+
     // 🏪 new store 
     this.shoppingCartCount$ = this.store.select(fromStore.getTotalCartQuantity);
+    this.totalPrice$ = this.store.select(fromStore.getTotalCartprice);
+    this.itemKeys$ = this.store.select(fromStore.getCartItemKeys);
   }
 
 
