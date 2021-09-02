@@ -34,27 +34,28 @@ import {
 export class ShoppingCartComponent implements OnInit {
   public isStaggDone = false;
 
-  public cart: any; // make $|async 
-  public isItems = false; // can remove at end ? 
+  public cart: any; 
+  public isItems = false; 
 
   // store 
-  public shoppingCartCount$: Observable<number>;
-  public totalPrice$: Observable<number>;
   public itemKeys$: Observable<any[]>;
   public cart$: Observable<ShoppingCart>;
+  public totalPrice$: Observable<number>;
+  public shoppingCartCount$: Observable<number>;
   // 
 
   constructor( 
-    private store: Store<fromStore.ShoppingState>, 
+    private router: Router, 
     private cartService: ShoppingCartService, 
-    private router: Router ) {}
+    private store: Store<fromStore.ShoppingState>, 
+  ) {}
 
   ngOnInit() {
     // 🏪 new store 
-    this.shoppingCartCount$ = this.store.select(fromStore.getTotalCartQuantity);
-    this.totalPrice$ = this.store.select(fromStore.getTotalCartprice);
-    this.itemKeys$ = this.store.select(fromStore.getCartItemKeys);
     this.cart$ = this.store.select(fromStore.getCart);
+    this.itemKeys$ = this.store.select(fromStore.getCartItemKeys);
+    this.totalPrice$ = this.store.select(fromStore.getTotalCartprice);
+    this.shoppingCartCount$ = this.store.select(fromStore.getTotalCartQuantity);
     // need to re-factor 
     this.cart$.subscribe(cart => {
       if(cart && cart.items) {
@@ -88,7 +89,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
 
-  // needs new action ... 
+  // needs new action, reducer, effect, selector arghhh! ... 
   clearCart() {
     if(confirm('🤔 are you sure you want an empty 🛒?')) {
       this.cartService.clearCart();

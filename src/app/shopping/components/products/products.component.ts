@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable, } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/shared/models/category';
@@ -33,7 +33,8 @@ import {
     popinDelayHandleBars,
     listAnimationWrapCard,
     listAnimationItemCard,
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class ProductsComponent {
@@ -51,9 +52,10 @@ export class ProductsComponent {
     private router: ActivatedRoute, 
     private store: Store<fromStore.ShoppingState>, 
     // 
-    private nutritionService: NutritionService, 
     private recipeService: RecipeService, 
+    private nutritionService: NutritionService, 
     ) { 
+    
     this.categories$ = this.store.select(fromStore.getAllCategories);
     
     this.router.queryParamMap.subscribe(params => {
