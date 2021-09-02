@@ -2,8 +2,8 @@
 <div class="row justify-content-center mt-4">
   <div @slideInLeft class="col-xl-8 col-lg-9 col-md-10 col-sm-11 col-xs-12">
     <h4>Shopping Cart</h4>
-    <p *ngIf="shoppingCartCount === 1">You have {{shoppingCartCount}} item in your cart</p>
-    <p *ngIf="shoppingCartCount > 1">You have {{shoppingCartCount}} items in your cart</p>
+    <p *ngIf="(shoppingCartCount$|async) === 1">You have {{shoppingCartCount$|async}} item in your cart</p>
+    <p *ngIf="(shoppingCartCount$|async) > 1">You have {{shoppingCartCount$|async}} items in your cart</p>
   </div>
 </div>
 <div *ngIf="isItems" class="row mb-5 justify-content-center">
@@ -17,15 +17,15 @@
         </tr>
       </thead>
       <tbody 
-        [@listAnimationWrap]="cart?.length"
+        [@listAnimationWrap]="cart.items"
         (@listAnimationWrap.done)="isStaggDone = true">
-        <tr @listAnimationItem *ngFor="let productId of itemKeys">
+        <tr @listAnimationItem *ngFor="let productId of itemKeys$|async">
           
-          <td class="prod-img-td" title="{{cart?.items[productId].product.title}}">
+          <td class="prod-img-td" title="{{cart.items[productId].product.title}}">
             <div class="prod-img-wrap">
-              <img class="cart-img" [src]="cart?.items[productId].product.imageUrl" alt="&nbsp; 🤷‍♂️ image not found">
+              <img class="cart-img" [src]="cart.items[productId].product.imageUrl" alt="&nbsp; 🤷‍♂️ image not found">
               <div class="badge prod-badge mt-auto">
-                {{cart?.items[productId].product.title}}
+                {{cart.items[productId].product.title}}
               </div>
             </div>
           </td>
@@ -33,26 +33,33 @@
           <td>
             <div class="btm-btns-wrp">
               <button 
-              (click)="removeFromCart(cart?.items[productId].product)"
+                *ngIf="(shoppingCartCount$|async) > 1"
+                (click)="removeFromCart(cart.items[productId].product, false)"
+                class="btn btn-paddle pad-left">
+                <i class="fa fa-minus" aria-hidden="true"></i>
+              </button>
+              <button 
+                *ngIf="(shoppingCartCount$|async) === 1"
+                (click)="removeFromCart(cart.items[productId].product, true)"
                 class="btn btn-paddle pad-left">
                 <i class="fa fa-minus" aria-hidden="true"></i>
               </button>
               <div class="handle-left"></div>
-              <button  
-                id="{{cart?.items[productId].product.title}}"
+              <button 
+                id="{{cart.items[productId].product.title}}"
                 class="btn btn-card-cart">
-                {{getQuantity(cart?.items[productId].product)}}
+                {{getProductCartQuantity(cart.items[productId].product)|async}}
               </button>
               <div class="handle-right"></div>
               <button 
-                (click)="addToCart(cart?.items[productId].product)"
+                (click)="addToCart(cart.items[productId].product)"
                 class="btn btn-paddle pad-right">
                 <i class="fa fa-plus" aria-hidden="true"></i>
               </button>
             </div>
           </td>
           
-          <td>{{cart?.items[productId].product.price * cart?.items[productId].quantity | currency:'USD':'symbol' }}</td>
+          <td>{{cart.items[productId].product.price * cart.items[productId].quantity | currency:'USD':'symbol' }}</td>
         </tr>
       </tbody>
       <tfoot @fadeIn *ngIf="isStaggDone">
@@ -73,7 +80,7 @@
           </th>
           <th>
             <strong>Total</strong><br>
-            {{ totalPrice | currency:'USD':'symbol' }}
+            {{ (totalPrice$|async) | currency:'USD':'symbol' }}
           </th>
         </tr>
       </tfoot>

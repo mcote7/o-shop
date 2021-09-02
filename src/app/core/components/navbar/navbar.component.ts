@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { AppUser } from 'src/app/shared/models/app-user';
@@ -14,8 +14,10 @@ import { fadeInOut, fadeIn, toastNotification } from 'src/animations/anime';
   selector: 'navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  animations: [fadeInOut, fadeIn, toastNotification]
+  animations: [fadeInOut, fadeIn, toastNotification],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 export class NavbarComponent implements OnInit {
   public appUser: AppUser;
 
