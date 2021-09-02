@@ -14,8 +14,7 @@ import { fadeInOut, fadeIn, toastNotification } from 'src/animations/anime';
   selector: 'navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  animations: [fadeInOut, fadeIn, toastNotification],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [fadeInOut, fadeIn, toastNotification]
 })
 
 export class NavbarComponent implements OnInit {

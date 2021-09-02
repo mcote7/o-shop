@@ -33,8 +33,7 @@ import {
     popinDelayHandleBars,
     listAnimationWrapCard,
     listAnimationItemCard,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  ]
 })
 
 export class ProductsComponent {
